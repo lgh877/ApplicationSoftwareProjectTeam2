@@ -35,6 +35,7 @@
             // logicTick
             // 
             logicTick.Interval = 17;
+            logicTick.Tick += logicTick_Tick;
             // 
             // Form1
             // 
@@ -43,6 +44,7 @@
             ClientSize = new Size(800, 450);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
         }
 
