@@ -9,6 +9,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class LivingEntity : Entity
     {
-        public LivingEntity(Form1 level) : base(level) { }
+        public LivingEntity(GamePanel level) : base(level) { }
     }
 }
