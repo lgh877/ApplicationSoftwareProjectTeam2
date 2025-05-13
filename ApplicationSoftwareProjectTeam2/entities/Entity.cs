@@ -12,9 +12,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         int tickCount, sharedFlags;
         float x, xold, y, yold, z, zold;
         Vector3 deltaMovement;
-        Form1 level;
+        GamePanel level;
 
-        public Entity(Form1 level, float x, float y, float z, Vector3 vec3)
+        public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
         {
             tickCount = 0;
             this.level = level;
@@ -24,7 +24,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             deltaMovement = vec3;
         }
 
-        public Entity(Form1 level) 
+        public Entity(GamePanel level) 
         {
             tickCount = 0;
             this.level = level;

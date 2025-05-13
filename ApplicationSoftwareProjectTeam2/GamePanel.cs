@@ -2,12 +2,12 @@ using ApplicationSoftwareProjectTeam2.entities;
 
 namespace ApplicationSoftwareProjectTeam2
 {
-    public partial class Form1 : Form
+    public partial class GamePanel : Form
     {
         List<LivingEntity> livingentities;
         LinkedList<Entity> entities;
         int levelTickCount;
-        public Form1()
+        public GamePanel()
         {
             InitializeComponent();
         }
