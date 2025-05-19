@@ -8,19 +8,19 @@ using System.Windows.Forms;
 
 namespace ApplicationSoftwareProjectTeam2.entities
 {
-    public class Entity : PictureBox
+    public class Entity
     {
         public int tickCount, sharedFlags;
         public float x, xold, y, yold, z, zold;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
+        public Image Image;
+
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
         {
-            BackgroundImage = Properties.Resources._2;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            Width = 50; Height = 50;
+            Image = Properties.Resources._2;
             tickCount = 0;
             this.level = level;
             this.x = this.xold = x;
@@ -31,9 +31,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public Entity(GamePanel level) 
         {
-            BackgroundImage = Properties.Resources._2;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            Width = 50; Height = 50;
+            Image = Properties.Resources._2;
             tickCount = 0;
             this.level = level;
             this.x = this.xold = 0;
@@ -61,41 +59,41 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public void moveTo(float x, float y, float z)
         {
             xold = this.x; yold = this.y; zold = this.z;
-            if(x < 1000 && x > 0)
-            { 
+            if (x < 500 && x > -500)
+            {
                 this.x = x;
             }
             else
             {
-                this.x = x >= 1000 ? 1000 : 0;
+                this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
             }
             this.y = y;
-            if (z > 0)
+            if (z < 500 && z > 0)
                 this.z = z;
             else
             {
-                this.z = 0;
+                this.z = z <= 0 ? 0 : 500;
                 deltaMovement.Z *= -1;
             }
         }
         public void moveTo(float x, float z)
         {
             xold = this.x; yold = this.y; zold = this.z;
-            if (x < 1000 && x > 0)
+            if (x < 500 && x > -500)
             {
                 this.x = x;
             }
             else
             {
-                this.x = x >= 1000 ? 1000 : 0;
+                this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
             }
-            if (z > 0)
+            if (z < 500 && z > 0)
                 this.z = z;
             else
             {
-                this.z = 0;
+                this.z = z <= 0 ? 0 : 500;
                 deltaMovement.Z *= -1;
             }
         }

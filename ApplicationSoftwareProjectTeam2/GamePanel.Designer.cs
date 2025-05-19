@@ -46,7 +46,6 @@
             panelPlayScreen.Name = "panelPlayScreen";
             panelPlayScreen.Size = new Size(776, 426);
             panelPlayScreen.TabIndex = 0;
-            panelPlayScreen.Paint += panelPlayScreen_Paint;
             // 
             // GamePanel
             // 

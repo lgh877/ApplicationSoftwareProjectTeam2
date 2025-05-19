@@ -15,26 +15,32 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tick()
         {
             base.tick();
-            float a, b;
-            level.random.setSeed(level.randomSeed++);
-            a = level.random.Next(10) - 5;
-            level.random.setSeed(level.randomSeed++);
-            b = level.random.Next(10) - 5;
-            push(a, 0, b);
-            /*
             if (tickCount % 10 == 0)
             {
                 if(target != null)
                 {
                     Vector3 direction = Vector3.Normalize(new Vector3(target.x - x, target.y - y, target.z - z));
                     push(direction.X, direction.Y, direction.Z);
-                }else if(detectTarget() == null)
+                }else
                 {
-                    level.random.setSeed(level.randomSeed++);
-                    push((float)level.random.NextDouble() * 3, 0, (float)level.random.NextDouble() * 3);
+                    LivingEntity foundTarget = detectTarget();
+                    if (foundTarget != null && 50 > Math.Abs(foundTarget.x - x) + Math.Abs(foundTarget.z - z))
+                    {
+                        target = foundTarget;
+                    }
+                    else
+                    {
+                        float a, b;
+                        level.random.setSeed(level.randomSeed++);
+                        a = level.random.Next(5) - 2;
+                        level.random.setSeed(level.randomSeed++);
+                        b = level.random.Next(5) - 2;
+                        push(a, 0, b);
+                    }
                 }
+                
             }
-            */
+            
         }
 
         public LivingEntity detectTarget()
