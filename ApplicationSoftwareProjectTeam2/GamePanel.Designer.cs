@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             logicTick = new System.Windows.Forms.Timer(components);
             panelPlayScreen = new Panel();
+            button1 = new Button();
+            panelPlayScreen.SuspendLayout();
             SuspendLayout();
             // 
             // logicTick
@@ -42,10 +44,21 @@
             // panelPlayScreen
             // 
             panelPlayScreen.BackColor = SystemColors.ButtonShadow;
+            panelPlayScreen.Controls.Add(button1);
             panelPlayScreen.Location = new Point(12, 12);
             panelPlayScreen.Name = "panelPlayScreen";
             panelPlayScreen.Size = new Size(776, 426);
             panelPlayScreen.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(623, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(150, 46);
+            button1.TabIndex = 1;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // GamePanel
             // 
@@ -58,6 +71,7 @@
             Text = "Form1";
             Load += Form1_Load;
             Resize += GamePanel_Resize;
+            panelPlayScreen.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -65,5 +79,6 @@
 
         private System.Windows.Forms.Timer logicTick;
         private Panel panelPlayScreen;
+        private Button button1;
     }
 }

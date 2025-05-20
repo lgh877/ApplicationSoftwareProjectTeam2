@@ -10,7 +10,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public int tickCount, sharedFlags;
+        public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40;
         public float x, xold, y, yold, z, zold;
         public Vector3 deltaMovement;
         public GamePanel level;
@@ -40,23 +40,23 @@ namespace ApplicationSoftwareProjectTeam2.entities
             deltaMovement = Vector3.Zero;
         }
 
-        public void setPosition(float x, float y, float z)
+        public virtual void setPosition(float x, float y, float z)
         {
             this.x = this.xold = x;
             this.y = this.yold = y;
             this.z = this.zold = z;
         }
-        public void setPosition(float x, float z)
+        public virtual void setPosition(float x, float z)
         {
             this.x = this.xold = x;
             this.z = this.zold = z;
         }
-        public void setPosition(float y)
+        public virtual void setPosition(float y)
         {
             this.y = this.yold = y;
         }
 
-        public void moveTo(float x, float y, float z)
+        public virtual void moveTo(float x, float y, float z)
         {
             xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
@@ -77,7 +77,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 deltaMovement.Z *= -1;
             }
         }
-        public void moveTo(float x, float z)
+        public virtual void moveTo(float x, float z)
         {
             xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
@@ -98,31 +98,51 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
         }
 
-        public void setDeltaMovement(Vector3 vec)
+        public virtual void setDeltaMovement(Vector3 vec)
         {
             this.deltaMovement = vec;
         }
 
-        public void setDeltaMovement(float x, float y, float z)
+        public virtual void setDeltaMovement(float x, float y, float z)
         {
             this.deltaMovement = new Vector3(x, y, z);
         }
 
-        public void push(Vector3 vec)
+        public virtual void push(Vector3 vec)
         {
             this.deltaMovement += vec;
         }
 
-        public void push(float x, float y, float z)
+        public virtual void push(float x, float y, float z)
         {
             this.deltaMovement = new Vector3(this.deltaMovement.X + x
                 , this.deltaMovement.Y + y
                 , this.deltaMovement.Z + z);
         }
 
+        public virtual void checkCollisionsLiving()
+        {
+            foreach (var item in level.getAllLivingEntities<LivingEntity>())
+            {
+                if (!item.Equals(this) 
+                    && (width + item.width) * 0.5 > Math.Abs(item.x - x) + Math.Abs(item.z - z)
+                    && height > item.y - y
+                    && item.height > y - item.y)
+                {
+                    applyCollisionLiving(item);
+                }
+            };
+        }
+        public virtual void applyCollisionLiving(LivingEntity entity)
+        {
+            Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
+            entity.push(direction.X * 10, direction.Y * 10, direction.Z * 10);
+            push(direction.X * -10, direction.Y * -10, direction.Z * -10);
+        }
         public virtual void tick()
         {
             tickCount++;
+            checkCollisionsLiving();
 
             if (deltaMovement != Vector3.Zero)
                 if (deltaMovement.Y == 0)

@@ -4,10 +4,14 @@ namespace ApplicationSoftwareProjectTeam2
 {
     public partial class GamePanel : Form
     {
+        //캐릭터 객체들을 관리하는 리스트로, 업데이트가 비교적 드물어 그냥 리스트로 선언함
         List<LivingEntity> livingentities;
-        List<Entity> allentities;
+        //투사체, 기술 등에 쓰이는 객체들을 관리하는 리스트로, 리스트에 삽입 / 삭제가 자주 발생하므로 링크드 리스트 사용
         LinkedList<Entity> entities;
-        int levelTickCount, worldWidth, worldHeight, currentWidth, currentHeight;
+        //객체 업데이트 및 렌더링에 사용되는 리스트
+        List<Entity> allentities;
+        int levelTickCount, currentWidth, currentHeight;
+        const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
         private BufferedGraphicsContext bufferContext;
@@ -20,7 +24,6 @@ namespace ApplicationSoftwareProjectTeam2
             bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
             this.DoubleBuffered = true;
-            //this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,17 +34,16 @@ namespace ApplicationSoftwareProjectTeam2
             livingentities = new List<LivingEntity>();
             allentities = new List<Entity>();
             entities = new LinkedList<Entity>();
-            worldWidth = 1000; worldHeight = 500;
+
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.5);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 20; i++)
             {
-                random.setSeed(randomSeed++);
                 LivingEntity test = new LivingEntity(this);
-                test.setPosition(random.Next(1000) - 500, random.Next(450));
-                test.team = "tets";
+                test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450));
+                test.team = getRandomInteger(4).ToString();
                 addFreshLivingEntity(ref test);
             }
         }
@@ -70,6 +72,12 @@ namespace ApplicationSoftwareProjectTeam2
             renderEntities();
         }
 
+        public int getRandomInteger(int max)
+        {
+            random.setSeed(randomSeed++);
+            return random.Next(max);
+        }
+
         private void renderEntities()
         {
             Graphics g = buffer.Graphics;
@@ -85,12 +93,13 @@ namespace ApplicationSoftwareProjectTeam2
                 {
                     float x = Lerp(entity.xold, entity.x);
                     float z = Lerp(entity.zold, entity.z);
+                    double scale2 = 6.184 / Math.Cbrt(z + 250);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
-                    int screenX = panelPlayScreen.Width / 2 + (int)(x * scale * 6.184 / Math.Cbrt(z + 250));
-                    int screenY = (int)(currentHeight - z * scale * 6.184 / Math.Cbrt(z + 250));
+                    int screenX = panelPlayScreen.Width / 2 + (int)(x * scale * scale2);
+                    int screenY = (int)(currentHeight - z * scale * scale2);
 
                     // 예시로 엔티티를 원으로 표현 (50% 중심 정렬)
-                    int size = (int)(40 * scale * 6.184 / Math.Cbrt(z + 250)); // 엔티티 크기 (픽셀)
+                    int size = (int)(entity.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
 
                     g.DrawImage(entity.Image, screenX - size / 2, screenY - size, size, size);
 
@@ -155,6 +164,11 @@ namespace ApplicationSoftwareProjectTeam2
             }
 
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            logicTick.Enabled = !logicTick.Enabled;
         }
 
         public List<T> getAllLivingEntities<T>() where T : LivingEntity
