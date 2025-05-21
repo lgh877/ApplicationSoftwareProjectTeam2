@@ -1,15 +1,16 @@
 using ApplicationSoftwareProjectTeam2.entities;
+using System.Xml.Linq;
 
 namespace ApplicationSoftwareProjectTeam2
 {
     public partial class GamePanel : Form
     {
         //캐릭터 객체들을 관리하는 리스트로, 업데이트가 비교적 드물어 그냥 리스트로 선언함
-        public List<LivingEntity?> livingentities;
+        public List<LivingEntity?> livingentities = new List<LivingEntity?> ();
         //투사체, 기술 등에 쓰이는 객체들을 관리하는 리스트로, 리스트에 삽입 / 삭제가 자주 발생하므로 링크드 리스트 사용
-        public LinkedList<Entity?> entities;
+        public LinkedList<Entity?> entities = new LinkedList<Entity?> ();
         //객체 업데이트 및 렌더링에 사용되는 리스트
-        List<Entity?> allentities;
+        List<Entity?> allentities = new List<Entity?> ();
         int levelTickCount, currentWidth, currentHeight;
         const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
@@ -22,19 +23,22 @@ namespace ApplicationSoftwareProjectTeam2
         public GamePanel()
         {
             InitializeComponent();
+            bufferContext = BufferedGraphicsManager.Current;
+            buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
+            this.DoubleBuffered = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bufferContext = BufferedGraphicsManager.Current;
-            buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
+            //bufferContext = BufferedGraphicsManager.Current;
+            //buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
             //this.DoubleBuffered = true;
             random = new CrossPlatformRandom();
             randomSeed = 0;
             levelTickCount = 0;
-            livingentities = new List<LivingEntity?>();
-            allentities = new List<Entity?>();
-            entities = new LinkedList<Entity?>();
+            //livingentities = new List<LivingEntity?>();
+            //allentities = new List<Entity?>();
+            //entities = new LinkedList<Entity?>();
 
             for (int i = 0; i < 200; i++)
             {
@@ -153,6 +157,7 @@ namespace ApplicationSoftwareProjectTeam2
                 buffer.Dispose(); // 기존 버퍼 제거
             }
 
+            bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
         }
 
