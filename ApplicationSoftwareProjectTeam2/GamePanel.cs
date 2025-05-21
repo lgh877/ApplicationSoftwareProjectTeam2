@@ -40,6 +40,8 @@ namespace ApplicationSoftwareProjectTeam2
             //allentities = new List<Entity?>();
             //entities = new LinkedList<Entity?>();
 
+            this.Width += 1;
+
             for (int i = 0; i < 200; i++)
             {
                 LivingEntity test = new LivingEntity(this);
