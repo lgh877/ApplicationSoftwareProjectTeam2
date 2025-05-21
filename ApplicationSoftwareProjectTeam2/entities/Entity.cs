@@ -16,6 +16,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public GamePanel level;
         public string team;
         public Image Image;
+        public bool shouldRemove = false;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -124,7 +125,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             foreach (var item in level.getAllLivingEntities<LivingEntity>())
             {
-                if (!item.Equals(this) 
+                if (!item.Equals(this)
                     && (width + item.width) * 0.5 > Math.Abs(item.x - x) + Math.Abs(item.z - z)
                     && height > item.y - y
                     && item.height > y - item.y)
@@ -133,16 +134,27 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 }
             };
         }
+
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
-            entity.push(direction.X * 10, direction.Y * 10, direction.Z * 10);
-            push(direction.X * -10, direction.Y * -10, direction.Z * -10);
+            entity.push(direction.X * 2, direction.Y * 2, direction.Z * 2);
+            push(direction.X * -2, direction.Y * -2, direction.Z * -2);
         }
+
+        public virtual bool doHurtTarget(LivingEntity entity)
+        {
+            return false;
+        }
+
+        public virtual bool hurt(LivingEntity attacker, int damage)
+        {
+            return false;
+        }
+
         public virtual void tick()
         {
             tickCount++;
-            checkCollisionsLiving();
 
             if (deltaMovement != Vector3.Zero)
                 if (deltaMovement.Y == 0)
