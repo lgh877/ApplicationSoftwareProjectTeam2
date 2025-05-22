@@ -42,16 +42,16 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 LivingEntity test = new LivingEntity(this);
-                test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450));
+                test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
                 test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);
             }
 
             currentWidth = this.Width - 50;
-            this.currentHeight = (int)(currentWidth * 0.5);
+            this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
         }
 
@@ -102,13 +102,13 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void renderEntities()
         {
-            Graphics g = buffer.Graphics;
-            g.Clear(panelPlayScreen.BackColor);
+            //Graphics g = buffer.Graphics;
+            buffer.Graphics.Clear(panelPlayScreen.BackColor);
 
             if (allentities.Count > 0)
             {
                 // renderPanel의 ClientSize를 기준으로 스케일 계산
-                float scale = (float)panelPlayScreen.Width / (float)worldWidth;
+                float scale = (float)currentWidth / (float)worldWidth;
 
                 // 각 엔티티를 화면에 그립니다.
                 for (int i = allentities.Count - 1; i != -1; i--)
@@ -117,13 +117,13 @@ namespace ApplicationSoftwareProjectTeam2
                     float z = Lerp(allentities[i].zold, allentities[i].z);
                     double scale2 = 6.184 / Math.Cbrt(z + 250);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
-                    int screenX = panelPlayScreen.Width / 2 + (int)(x * scale * scale2);
+                    int screenX = currentWidth / 2 + (int)(x * scale * scale2);
                     int screenY = (int)(currentHeight - z * scale * scale2);
 
                     // 예시로 엔티티를 원으로 표현 (50% 중심 정렬)
                     int size = (int)(allentities[i].visualSize * scale * scale2); // 엔티티 크기 (픽셀)
 
-                    g.DrawImage(allentities[i].Image, screenX - size / 2, screenY - size, size, size);
+                    buffer.Graphics.DrawImage(allentities[i].Image, screenX - size / 2, screenY - size, size, size);
 
                     //entity.Width = size; entity.Height = size;
                     //entity.Location = new Point(screenX - size / 2, screenY - size);
@@ -147,7 +147,7 @@ namespace ApplicationSoftwareProjectTeam2
         private void GamePanel_Resize(object sender, EventArgs e)
         {
             currentWidth = this.Width - 50;
-            this.currentHeight = (int)(currentWidth * 0.5);
+            this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
             AllocateBuffer(); // 크기 변경 시 버퍼 재할당
             renderEntities(); // 화면 다시 그리기

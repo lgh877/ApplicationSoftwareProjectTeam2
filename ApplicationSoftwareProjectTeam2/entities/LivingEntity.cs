@@ -16,8 +16,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public LivingEntity(GamePanel level) : base(level) 
         {
             hadTarget = false;
-            currentHealth = 100;
-            attackDamage = 50;
         }
 
         public override void tick()
@@ -69,9 +67,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
         }
 
-        public void tickDeath()
+        public virtual void tickDeath()
         {
-            Image = Properties.Resources._1024;
             if (++deathTime == maxDeathTime)
             {
                 shouldRemove = true;
@@ -85,7 +82,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             push(direction.X * -10, direction.Y * -10, direction.Z * -10);
             return entity.hurt(this, attackDamage);
         }
-        public LivingEntity? getTarget()
+        public virtual LivingEntity? getTarget()
         {
             if (target != null && !target.isAlive()) target = null;
             return target;
@@ -107,7 +104,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             return currentHealth > 0;
         }
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드
-        public LivingEntity detectTargetManhattan(int range)
+        public virtual LivingEntity detectTargetManhattan(int range)
         {
             foreach (var item in level.getAllLivingEntities<LivingEntity?>())
             {

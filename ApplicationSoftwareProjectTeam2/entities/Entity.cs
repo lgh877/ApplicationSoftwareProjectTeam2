@@ -70,11 +70,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 deltaMovement.X *= -1;
             }
             this.y = y;
-            if (z < 500 && z > 0)
+            if (z < 700 && z > 200)
                 this.z = z;
             else
             {
-                this.z = z <= 0 ? 0 : 500;
+                this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
             }
         }
@@ -90,11 +90,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
             }
-            if (z < 500 && z > 0)
+            if (z < 700 && z > 200)
                 this.z = z;
             else
             {
-                this.z = z <= 0 ? 0 : 500;
+                this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
             }
         }
@@ -152,6 +152,24 @@ namespace ApplicationSoftwareProjectTeam2.entities
             return false;
         }
 
+        public void setSharedFlag(int input, bool enable)
+        {
+            if (enable)
+            {
+                sharedFlags |= 1 << input; // 플래그 설정
+            }
+            else
+            {
+                sharedFlags &= ~1 << input; // 플래그 해제
+            }
+        }
+
+        // 비트 플래그 확인 함수
+        public bool getSharedFlag(int input)
+        {
+            return (sharedFlags & 1 << input) != 0;
+        }
+        
         public virtual void tick()
         {
             tickCount++;

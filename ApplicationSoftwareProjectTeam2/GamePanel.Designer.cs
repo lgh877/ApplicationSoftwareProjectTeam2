@@ -38,7 +38,7 @@
             // logicTick
             // 
             logicTick.Enabled = true;
-            logicTick.Interval = 32;
+            logicTick.Interval = 16;
             logicTick.Tick += logicTick_Tick;
             // 
             // panelPlayScreen
