@@ -21,7 +21,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
         {
-            Image = Properties.Resources._2;
             tickCount = 0;
             this.level = level;
             this.x = this.xold = x;
@@ -32,7 +31,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public Entity(GamePanel level) 
         {
-            Image = Properties.Resources._2;
             tickCount = 0;
             this.level = level;
             this.x = this.xold = 0;

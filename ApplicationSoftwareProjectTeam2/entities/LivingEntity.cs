@@ -10,8 +10,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {    
     public class LivingEntity : Entity
     {
-        public int currentHealth, attackDamage, deathTime = 0, maxDeathTime = 30;
-        public bool hadTarget;
+        public int currentHealth, attackDamage, deathTime = 0, maxDeathTime = 30, moveSpeed;
+        public Direction direction = Direction.Right;
+        public bool hadTarget, isMoving, isActuallyMoving;
         public LivingEntity? target;
         public LivingEntity(GamePanel level) : base(level) 
         {
@@ -25,13 +26,12 @@ namespace ApplicationSoftwareProjectTeam2.entities
             if (isAlive())
             {
                 checkCollisionsLiving();
-
+                /*
                 if (getTarget() == null)
                 {
                     if (hadTarget)
                     {
                         hadTarget = false;
-                        Image = Properties.Resources._2;
                     }
                     float a, b;
                     a = level.getRandomInteger(11) - 5;
@@ -60,6 +60,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                         doHurtTarget(target);
                     }
                 }
+                */
             }
             else
             {
