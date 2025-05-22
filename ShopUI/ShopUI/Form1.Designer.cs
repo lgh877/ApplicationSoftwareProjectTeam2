@@ -28,13 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.flowItems = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblGold = new System.Windows.Forms.Label();
+            this.flowItems.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // flowItems
+            // 
+            this.flowItems.Controls.Add(this.lblGold);
+            this.flowItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowItems.Location = new System.Drawing.Point(0, 0);
+            this.flowItems.Name = "flowItems";
+            this.flowItems.Size = new System.Drawing.Size(800, 450);
+            this.flowItems.TabIndex = 0;
+            // 
+            // lblGold
+            // 
+            this.lblGold.AutoSize = true;
+            this.lblGold.Location = new System.Drawing.Point(3, 0);
+            this.lblGold.Name = "lblGold";
+            this.lblGold.Size = new System.Drawing.Size(58, 12);
+            this.lblGold.TabIndex = 0;
+            this.lblGold.Text = "골드: 15G";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.flowItems);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.flowItems.ResumeLayout(false);
+            this.flowItems.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.FlowLayoutPanel flowItems;
+        private System.Windows.Forms.Label lblGold;
     }
 }
 
