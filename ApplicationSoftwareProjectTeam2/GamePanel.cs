@@ -1,5 +1,6 @@
 using ApplicationSoftwareProjectTeam2.entities;
 using System;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Xml.Linq;
 
@@ -26,7 +27,7 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> entities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        int levelTickCount, currentWidth, currentHeight;
+        int currentWidth, currentHeight;
         const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
@@ -51,11 +52,10 @@ namespace ApplicationSoftwareProjectTeam2
         {
             random = new CrossPlatformRandom();
             randomSeed = 0;
-            levelTickCount = 0;
 
             this.Width += 1;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
@@ -78,33 +78,29 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
-            if (++levelTickCount == 2)
+            for (int i = livingentities.Count - 1; i != -1; i--)
             {
-                levelTickCount = 0;
-                for (int i = livingentities.Count - 1; i != -1; i--)
+                LivingEntity livingentity = livingentities[i];
+                livingentity.tick();
+                if (livingentity.shouldRemove)
                 {
-                    LivingEntity livingentity = livingentities[i];
-                    livingentity.tick();
-                    if (livingentity.shouldRemove)
-                    {
-                        livingentity = null;
-                        livingentities.RemoveAt(i);
-                    }
+                    livingentity = null;
+                    livingentities.RemoveAt(i);
                 }
-                var node = entities.First;
-                while (node != null)
+            }
+            var node = entities.First;
+            while (node != null)
+            {
+                var nextNode2 = node.Next;
+                node.Value.tick();
+
+                if (node.Value.shouldRemove)
                 {
-                    var nextNode2 = node.Next;
-                    node.Value.tick();
-
-                    if (node.Value.shouldRemove)
-                    {
-                        node.Value = null;
-                        entities.Remove(node);
-                    }
-
-                    node = nextNode2;
+                    node.Value = null;
+                    entities.Remove(node);
                 }
+
+                node = nextNode2;
             }
             allentities.Clear();
             allentities.Capacity = livingentities.Count + entities.Count;
@@ -114,8 +110,12 @@ namespace ApplicationSoftwareProjectTeam2
             renderEntities();
         }
 
-        private async void renderEntities()
+
+
+        private Stopwatch _renderWatch = new Stopwatch();
+        private void renderEntities()
         {
+            _renderWatch.Restart();
             Graphics g = buffer.Graphics;
             g.Clear(panelPlayScreen.BackColor);
 
@@ -124,53 +124,17 @@ namespace ApplicationSoftwareProjectTeam2
 
             if (allentities.Count > 0)
             {
-                /*
-                float maxZ = 500;
-                float third = maxZ / 3f;
-
-                var farGroup = allentities.Where(e => e.z >= 2 * third + 200).ToList();
-                var midGroup = allentities.Where(e => e.z >= third && e.z < 2 * third + 200).ToList();
-                var nearGroup = allentities.Where(e => e.z < third + 200).ToList();
-
-                Bitmap bmpFar = new Bitmap(currentWidth, currentHeight);
-                Bitmap bmpMid = new Bitmap(currentWidth, currentHeight);
-                Bitmap bmpNear = new Bitmap(currentWidth, currentHeight);
-
-                // 4) 비동기 병렬 렌더링 작업
-                Task taskFar = Task.Run(() => DrawGroup(farGroup, bmpFar, scale));
-                Task taskMid = Task.Run(() => DrawGroup(midGroup, bmpMid, scale));
-                Task taskNear = Task.Run(() => DrawGroup(nearGroup, bmpNear, scale));
-
-                await Task.WhenAll(taskFar, taskMid, taskNear);
-
-                // 5) 순서대로 메인 버퍼에 그리기 (가장 먼 → 가까운)
-                g.DrawImage(bmpNear, 0, 0);
-
-                g.DrawImage(bmpMid, 0, 0);
-
-                g.DrawImage(bmpFar, 0, 0);
-
-                buffer.Render(panelGraphics);
-
-                bmpFar.Dispose();
-                bmpMid.Dispose();
-                bmpNear.Dispose();
-                */
-                // 각 엔티티를 화면에 그립니다.
-                
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
-                    float x = Lerp(e.xold, e.x);
-                    float y = Lerp(e.yold, e.y);
-                    float z = Lerp(e.zold, e.z);
+                    float x = e.x;
+                    float y = e.y;
+                    float z = e.z;
                     double scale2 = 6.184 / Math.Cbrt(z + 250);
                     double scale3 = 3.6363 / Math.Cbrt(y + 50);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
                     int screenX = currentWidth / 2 + (int)(x * scale * scale2);
                     int screenY = (int)(currentHeight - z * scale * scale2);
-
-                    // 예시로 엔티티를 원으로 표현 (50% 중심 정렬)
                     int size = (int)(e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
                     int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
                     using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
@@ -189,40 +153,18 @@ namespace ApplicationSoftwareProjectTeam2
                 }
             }
             buffer.Render(panelGraphics);
-        }
-        private void DrawGroup(List<Entity> group, Bitmap bmp, float baseScale)
-        {
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.Transparent);
-                g.InterpolationMode = InterpolationMode.Low;
-                g.PixelOffsetMode = PixelOffsetMode.HighSpeed;
-                g.SmoothingMode = SmoothingMode.None;
+            _renderWatch.Stop();
+            int elapsed = (int)_renderWatch.ElapsedMilliseconds;
 
-                for (int i = group.Count - 1; i != -1; i--)
-                {
-                    Entity e = group[i];
-                    float x = Lerp(e.xold, e.x);
-                    float z = Lerp(e.zold, e.z);
-                    double scale3d = 6.184 / Math.Cbrt(z + 250);
+            // 3) 다음 인터벌 계산
+            int nextInterval = 32 - elapsed;
+            if (nextInterval < 1)
+                nextInterval = 1;               // 최소 1ms
+            else if (nextInterval > 32)
+                nextInterval = 32; // 최대 16ms
 
-                    int screenX = currentWidth / 2 + (int)(x * baseScale * scale3d);
-                    int screenY = (int)(currentHeight - z * baseScale * scale3d);
-                    int size = (int)(e.visualSize * baseScale * scale3d);
-
-                    if (e.Image == null || size <= 0)
-                        continue;
-
-                    Bitmap bmpCopy;
-                    lock (e.Image)
-                    {
-                        bmpCopy = new Bitmap(e.Image);
-                    }
-
-                    g.DrawImage(bmpCopy, screenX - size / 2, screenY - size, size, size);
-                    bmpCopy.Dispose();
-                }
-            }
+            // 4) 타이머에 반영
+            logicTick.Interval = nextInterval;
         }
         public int getRandomInteger(int max)
         {
@@ -230,9 +172,9 @@ namespace ApplicationSoftwareProjectTeam2
             return random.Next(max);
         }
 
-        public float Lerp(float f1, float f2)
+        public float Lerp(float f1, float f2, float f3)
         {
-            return f1 + (f2 - f1) * (float)levelTickCount * 0.5f;
+            return f1 + (f2 - f1) * f3;
         }
 
         private void GamePanel_Resize(object sender, EventArgs e)

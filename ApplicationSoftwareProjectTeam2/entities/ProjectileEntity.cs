@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +12,18 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         public LivingEntity Owner;
         public int damage;
+        public bool canDamage;
         public ProjectileEntity(GamePanel level) : base(level)
         {
             Image = Properties.Resources._2;
-            damage = 100;
+            canDamage = true;
             visualSize = 10;
-            width = 10; height = 10; pushPower = 60;
+            width = 10; height = 10; pushPower = 30;
+        }
+        public override void landed()
+        {
+            base.landed();
+            canDamage = false;
         }
         public override void tick()
         {
@@ -24,12 +31,17 @@ namespace ApplicationSoftwareProjectTeam2.entities
             checkCollisionsLiving();
             if (tickCount > 100) shouldRemove = true;
         }
+        public override void checkCollisionsLiving()
+        {
+            if(!canDamage) return;
+            base.checkCollisionsLiving();
+        }
         public override void applyCollisionLiving(LivingEntity entity)
         {
             if (entity.team.Equals(team)) return;
             base.applyCollisionLiving(entity);
             entity.hurt(Owner != null ? Owner : null, damage);
-            shouldRemove = true;
+            //canDamage = false;
         }
     }
 }

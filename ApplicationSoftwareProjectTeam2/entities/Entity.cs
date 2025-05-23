@@ -11,7 +11,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
     public class Entity
     {
         public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40, pushPower = 2;
-        public float x, xold, y, yold, z, zold;
+        public float x, y, z;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
@@ -23,9 +23,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             tickCount = 0;
             this.level = level;
-            this.x = this.xold = x;
-            this.y = this.yold = y;
-            this.z = this.zold = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
             deltaMovement = vec3;
         }
 
@@ -33,31 +33,30 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             tickCount = 0;
             this.level = level;
-            this.x = this.xold = 0;
-            this.y = this.yold = 0;
-            this.z = this.zold = 0;
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
             deltaMovement = Vector3.Zero;
         }
 
         public virtual void setPosition(float x, float y, float z)
         {
-            this.x = this.xold = x;
-            this.y = this.yold = y;
-            this.z = this.zold = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
         public virtual void setPosition(float x, float z)
         {
-            this.x = this.xold = x;
-            this.z = this.zold = z;
+            this.x = x;
+            this.z = z;
         }
         public virtual void setPosition(float y)
         {
-            this.y = this.yold = y;
+            this.y = y;
         }
 
         public virtual void moveTo(float x, float y, float z)
         {
-            xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
             {
                 this.x = x;
@@ -66,8 +65,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
+                collisionOccurred();
             }
-            if(y>0)
+            if (y>0)
             {
                 this.y = y;
             }
@@ -75,6 +75,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.y = 0;
                 deltaMovement.Y *= -0.5f;
+                landed();
             }
             if (z < 700 && z > 200)
                 this.z = z;
@@ -82,11 +83,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
+                collisionOccurred();
             }
         }
         public virtual void moveTo(float x, float z)
         {
-            xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
             {
                 this.x = x;
@@ -95,6 +96,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
+                collisionOccurred();
             }
             if (z < 700 && z > 200)
                 this.z = z;
@@ -102,9 +104,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
+                collisionOccurred();
             }
         }
-
+        public virtual void collisionOccurred()
+        {
+        }
+        public virtual void landed()
+        {
+        }
         public virtual void setDeltaMovement(Vector3 vec)
         {
             this.deltaMovement = vec;

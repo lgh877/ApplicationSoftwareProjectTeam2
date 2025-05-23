@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.utils;
@@ -25,7 +26,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         };
         public WeirdGuy(GamePanel level) : base(level)
         {
-            visualSize = 44; width = 20; height = 44;
+            visualSize = 64; width = 20; height = 44;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             currentHealth = 100;
@@ -38,13 +39,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
             base.tickAlive();
             if(level.getRandomInteger(10) == 0)
             {
-                isMoving = !isMoving;
+                isMoving = !isMoving || getTarget() != null;
                 if(tickCount % 16 == 0)
                 {
                     ProjectileEntity test = new ProjectileEntity(level);
                     test.setPosition(x, y + height, z);
+                    test.damage = attackDamage;
                     test.team = team;
-                    test.push(deltaMovement.X * 50, 30, deltaMovement.Z * 50);
+                    Vector3 vec = Vector3.Normalize(new Vector3(deltaMovement.X, 0, deltaMovement.Z));
+                    test.push(vec.X * 40, 5, vec.Z * 40);
                     level.addFreshEntity(test);
                 }
             }
@@ -134,7 +137,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tickDeath()
         {
             base.tickDeath();
-            if (deathTime == 1) { width = 40; Image = (int)direction < 5 ? images[8] : images[9]; }
+            if (deathTime == 1) { width *= 2; height /= 2; Image = (int)direction < 5 ? images[8] : images[9]; }
         }
     }
 }
