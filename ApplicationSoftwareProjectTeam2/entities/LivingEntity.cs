@@ -22,10 +22,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tick()
         {
             base.tick();
-            deltaMovement = deltaMovement * 0.7f;
             if (isAlive())
             {
-                checkCollisionsLiving();
+                tickAlive();
                 /*
                 if (getTarget() == null)
                 {
@@ -67,7 +66,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 tickDeath();
             }
         }
-
+        public virtual void tickAlive() 
+        {
+            checkCollisionsLiving();
+        }
         public virtual void tickDeath()
         {
             if (++deathTime == maxDeathTime)
@@ -90,7 +92,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
 
 
-        public override bool hurt(LivingEntity attacker, int damage)
+        public override bool hurt(LivingEntity? attacker, int damage)
         {
             currentHealth -= damage;
             return true;

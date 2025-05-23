@@ -33,12 +33,20 @@ namespace ApplicationSoftwareProjectTeam2.entities
             moveSpeed = 3;
         }
 
-        public override void tick()
+        public override void tickAlive()
         {
-            base.tick();
+            base.tickAlive();
             if(level.getRandomInteger(10) == 0)
             {
                 isMoving = !isMoving;
+                if(tickCount % 16 == 0)
+                {
+                    ProjectileEntity test = new ProjectileEntity(level);
+                    test.setPosition(x, y + height, z);
+                    test.team = team;
+                    test.push(deltaMovement.X * 50, 30, deltaMovement.Z * 50);
+                    level.addFreshEntity(test);
+                }
             }
             if (isMoving)
             {
@@ -122,6 +130,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
                         break;
                 }
             }
+        }
+        public override void tickDeath()
+        {
+            base.tickDeath();
+            if (deathTime == 1) { width = 40; Image = (int)direction < 5 ? images[8] : images[9]; }
         }
     }
 }

@@ -40,28 +40,22 @@ namespace ApplicationSoftwareProjectTeam2
             InitializeComponent();
             bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
-            buffer.Graphics.InterpolationMode = InterpolationMode.Low;         // 가장 빠른 스케일링
-            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+            buffer.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            buffer.Graphics.SmoothingMode = SmoothingMode.None;
             buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
-            buffer.Graphics.SmoothingMode = SmoothingMode.None;          //this.DoubleBuffered = true;
             panelGraphics = panelPlayScreen.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //bufferContext = BufferedGraphicsManager.Current;
-            //buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
-            //this.DoubleBuffered = true;
             random = new CrossPlatformRandom();
             randomSeed = 0;
             levelTickCount = 0;
-            //livingentities = new List<LivingEntity?>();
-            //allentities = new List<Entity?>();
-            //entities = new LinkedList<Entity?>();
 
             this.Width += 1;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
@@ -120,7 +114,7 @@ namespace ApplicationSoftwareProjectTeam2
             renderEntities();
         }
 
-        private void renderEntities()
+        private async void renderEntities()
         {
             Graphics g = buffer.Graphics;
             g.Clear(panelPlayScreen.BackColor);
@@ -130,30 +124,106 @@ namespace ApplicationSoftwareProjectTeam2
 
             if (allentities.Count > 0)
             {
+                /*
+                float maxZ = 500;
+                float third = maxZ / 3f;
+
+                var farGroup = allentities.Where(e => e.z >= 2 * third + 200).ToList();
+                var midGroup = allentities.Where(e => e.z >= third && e.z < 2 * third + 200).ToList();
+                var nearGroup = allentities.Where(e => e.z < third + 200).ToList();
+
+                Bitmap bmpFar = new Bitmap(currentWidth, currentHeight);
+                Bitmap bmpMid = new Bitmap(currentWidth, currentHeight);
+                Bitmap bmpNear = new Bitmap(currentWidth, currentHeight);
+
+                // 4) 비동기 병렬 렌더링 작업
+                Task taskFar = Task.Run(() => DrawGroup(farGroup, bmpFar, scale));
+                Task taskMid = Task.Run(() => DrawGroup(midGroup, bmpMid, scale));
+                Task taskNear = Task.Run(() => DrawGroup(nearGroup, bmpNear, scale));
+
+                await Task.WhenAll(taskFar, taskMid, taskNear);
+
+                // 5) 순서대로 메인 버퍼에 그리기 (가장 먼 → 가까운)
+                g.DrawImage(bmpNear, 0, 0);
+
+                g.DrawImage(bmpMid, 0, 0);
+
+                g.DrawImage(bmpFar, 0, 0);
+
+                buffer.Render(panelGraphics);
+
+                bmpFar.Dispose();
+                bmpMid.Dispose();
+                bmpNear.Dispose();
+                */
                 // 각 엔티티를 화면에 그립니다.
+                
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
                     float x = Lerp(e.xold, e.x);
+                    float y = Lerp(e.yold, e.y);
                     float z = Lerp(e.zold, e.z);
                     double scale2 = 6.184 / Math.Cbrt(z + 250);
+                    double scale3 = 3.6363 / Math.Cbrt(y + 50);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
                     int screenX = currentWidth / 2 + (int)(x * scale * scale2);
                     int screenY = (int)(currentHeight - z * scale * scale2);
 
                     // 예시로 엔티티를 원으로 표현 (50% 중심 정렬)
                     int size = (int)(e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                    int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
+                    using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
+                    {
+                        int shadowWidth = (int)(shadowSize * 1.2 / scale3);
+                        int shadowHeight = (int)(shadowSize * 0.4 / scale3);
+                        int shadowX = screenX - shadowWidth / 2;
+                        int shadowY = screenY - (int)(shadowHeight * 0.75); // 약간 위로 올림
 
-                    g.DrawImage(e.Image, screenX - size / 2, screenY - size, size, size);
-
-                    //entity.Width = size; entity.Height = size;
-                    //entity.Location = new Point(screenX - size / 2, screenY - size);
-                    //e.Graphics.FillEllipse(Brushes.White, screenX - (size / 2), screenY - (size / 2), size, size);
+                        g.FillEllipse(shadowBrush, shadowX, shadowY, shadowWidth, shadowHeight);
+                    }
+                    screenY -= (int)(y * scale * scale2);
+                    g.DrawImage(e.Image,
+                        screenX - size / 2, screenY - size,
+                        size, size);
                 }
             }
             buffer.Render(panelGraphics);
         }
+        private void DrawGroup(List<Entity> group, Bitmap bmp, float baseScale)
+        {
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.Transparent);
+                g.InterpolationMode = InterpolationMode.Low;
+                g.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+                g.SmoothingMode = SmoothingMode.None;
 
+                for (int i = group.Count - 1; i != -1; i--)
+                {
+                    Entity e = group[i];
+                    float x = Lerp(e.xold, e.x);
+                    float z = Lerp(e.zold, e.z);
+                    double scale3d = 6.184 / Math.Cbrt(z + 250);
+
+                    int screenX = currentWidth / 2 + (int)(x * baseScale * scale3d);
+                    int screenY = (int)(currentHeight - z * baseScale * scale3d);
+                    int size = (int)(e.visualSize * baseScale * scale3d);
+
+                    if (e.Image == null || size <= 0)
+                        continue;
+
+                    Bitmap bmpCopy;
+                    lock (e.Image)
+                    {
+                        bmpCopy = new Bitmap(e.Image);
+                    }
+
+                    g.DrawImage(bmpCopy, screenX - size / 2, screenY - size, size, size);
+                    bmpCopy.Dispose();
+                }
+            }
+        }
         public int getRandomInteger(int max)
         {
             random.setSeed(randomSeed++);

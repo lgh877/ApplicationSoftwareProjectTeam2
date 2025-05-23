@@ -10,13 +10,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40;
+        public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40, pushPower = 2;
         public float x, xold, y, yold, z, zold;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false;
+        public bool shouldRemove = false, hasGravity = true;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -67,7 +67,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
             }
-            this.y = y;
+            if(y>0)
+            {
+                this.y = y;
+            }
+            else
+            {
+                this.y = 0;
+                deltaMovement.Y *= -0.5f;
+            }
             if (z < 700 && z > 200)
                 this.z = z;
             else
@@ -136,8 +144,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
-            entity.push(direction.X * 2, direction.Y * 2, direction.Z * 2);
-            push(direction.X * -2, direction.Y * -2, direction.Z * -2);
+            entity.push(direction.X * pushPower, direction.Y * pushPower, direction.Z * pushPower);
+            push(direction.X * -pushPower, direction.Y * -pushPower, direction.Z * -pushPower);
         }
 
         public virtual bool doHurtTarget(LivingEntity entity)
@@ -171,7 +179,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual void tick()
         {
             tickCount++;
-
+            if(y < 2)
+            {
+                deltaMovement = deltaMovement * 0.7f;
+            }
+            else
+            {
+                push(-deltaMovement.X * 0.1f, 0, -deltaMovement.Z * 0.1f);
+                push(0, -2f, 0);
+            }
             if (deltaMovement != Vector3.Zero)
                 if (deltaMovement.Y == 0)
                     this.moveTo(x + deltaMovement.X, z + deltaMovement.Z);
