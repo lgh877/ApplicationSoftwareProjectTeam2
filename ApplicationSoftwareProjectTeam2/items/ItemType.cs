@@ -1,7 +1,10 @@
-public enum ItemType
+namespace ApplicationSoftwareProjectTeam2.items
 {
-    Tank,
-    Ranged,
-    Special,
-    Universal
+    public enum ItemType
+    {
+        Tank,
+        Ranged,
+        Special,
+        Universal
+    }
 }

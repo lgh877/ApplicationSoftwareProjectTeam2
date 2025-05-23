@@ -1,28 +1,32 @@
-﻿public class Item
+﻿
+namespace ApplicationSoftwareProjectTeam2.items
 {
-    public string Name { get; set; }
-    public int Price { get; set; }
-    public ItemType Type { get; set; }
-    public string Description { get; set; }
-
-    public float AttackBonus { get; set; }
-    public float DefenseBonus { get; set; }
-    public float SpeedBonus { get; set; }
-    public float HealthBonus { get; set; }
-
-    public Item(string name, int price, ItemType type, string description)
+    public class Item
     {
-        Name = name;
-        Price = price;
-        Type = type;
-        Description = description;
-    }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public ItemType Type { get; set; }
+        public string Description { get; set; }
 
-    public void ApplyTo(Unit unit)
-    {
-        unit.Attack += AttackBonus;
-        unit.Defense += DefenseBonus;
-        unit.Speed += SpeedBonus;
-        unit.Health += HealthBonus;
+        public float AttackBonus { get; set; }
+        public float DefenseBonus { get; set; }
+        public float SpeedBonus { get; set; }
+        public float HealthBonus { get; set; }
+
+        public Item(string name, int price, ItemType type, string description)
+        {
+            Name = name;
+            Price = price;
+            Type = type;
+            Description = description;
+        }
+
+        public void ApplyTo(Unit unit)
+        {
+            unit.Attack += AttackBonus;
+            unit.Defense += DefenseBonus;
+            unit.Speed += SpeedBonus;
+            unit.Health += HealthBonus;
+        }
     }
 }

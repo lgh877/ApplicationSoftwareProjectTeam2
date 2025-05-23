@@ -1,18 +1,21 @@
-public class Player
+namespace ApplicationSoftwareProjectTeam2.items
 {
-    public int Gold { get; set; } = 15;
-
-    public bool PurchaseItem(Item item, Unit unit)
+    public class Player
     {
-        if (Gold < item.Price)
-            return false;
+        public int Gold { get; set; } = 15;
 
-        if (unit.EquipItem(item))
+        public bool PurchaseItem(Item item, Unit unit)
         {
-            Gold -= item.Price;
-            return true;
-        }
+            if (Gold < item.Price)
+                return false;
 
-        return false;
+            if (unit.EquipItem(item))
+            {
+                Gold -= item.Price;
+                return true;
+            }
+
+            return false;
+        }
     }
 }
