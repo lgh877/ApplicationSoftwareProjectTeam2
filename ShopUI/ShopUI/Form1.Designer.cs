@@ -32,12 +32,14 @@
             this.flowItems = new System.Windows.Forms.FlowLayoutPanel();
             this.lblGold = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.flowUnits = new System.Windows.Forms.FlowLayoutPanel();
             this.flowItems.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowItems
             // 
             this.flowItems.Controls.Add(this.lblGold);
+            this.flowItems.Controls.Add(this.flowUnits);
             this.flowItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowItems.Location = new System.Drawing.Point(0, 0);
             this.flowItems.Name = "flowItems";
@@ -52,6 +54,16 @@
             this.lblGold.Size = new System.Drawing.Size(58, 12);
             this.lblGold.TabIndex = 0;
             this.lblGold.Text = "골드: 15G";
+            // 
+            // flowUnits
+            // 
+            this.flowUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowUnits.Location = new System.Drawing.Point(67, 3);
+            this.flowUnits.Name = "flowUnits";
+            this.flowUnits.Size = new System.Drawing.Size(200, 6);
+            this.flowUnits.TabIndex = 1;
             // 
             // Form1
             // 
@@ -73,6 +85,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowItems;
         private System.Windows.Forms.Label lblGold;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.FlowLayoutPanel flowUnits;
     }
 }
 

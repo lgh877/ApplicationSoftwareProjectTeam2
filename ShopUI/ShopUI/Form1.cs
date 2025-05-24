@@ -15,6 +15,9 @@ namespace ShopUI
         private ItemStore store;
         private Player player;
 
+        private List<Unit> units = new List<Unit>();
+        private Unit selectedUnit = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -65,19 +68,52 @@ namespace ShopUI
 
             }
 
+            //유닛 선택 기능 추가
+            units.Add(new Unit { Name = "탱커 A" });
+            units.Add(new Unit { Name = "원딜 B" });
+            units.Add(new Unit { Name = "특수 C" });
+
+            foreach (var unit in units)
+            {
+                Button btnUnit = new Button();
+                btnUnit.Text = unit.Name;
+                btnUnit.Width = 100;
+                btnUnit.Height = 40;
+                btnUnit.Margin = new Padding(5);
+                btnUnit.Tag = unit;
+                btnUnit.Click += BtnUnit_Click;
+
+                flowUnits.Controls.Add(btnUnit);
+            }
 
         }
 
+
+        // 유닛 선택 버튼
+        private void BtnUnit_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            selectedUnit = btn.Tag as Unit;
+
+            MessageBox.Show($"{selectedUnit.Name} 선택됨");
+        }
+
+
+        // 장착 버튼
         private void BtnEquip_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
             var item = button.Tag as Item;
 
-            var unit = new Unit { Name = "기본 유닛" };
-
-            if (player.PurchaseItem(item, unit))
+            if (selectedUnit == null)
             {
-                MessageBox.Show($"{item.Name} 장착 성공!");
+                MessageBox.Show("유닛을 먼저 선택하세요!");
+                return;
+            }
+
+            if (player.PurchaseItem(item, selectedUnit))
+            {
+                MessageBox.Show($"{selectedUnit.Name}에게 {item.Name} 장착 완료!");
                 lblGold.Text = $"골드: {player.Gold}G";
             }
             else
@@ -85,7 +121,9 @@ namespace ShopUI
                 MessageBox.Show("장착 실패 (골드 부족 또는 슬롯 초과)");
             }
         }
-
-
     }
+
+
+    
+
 }
