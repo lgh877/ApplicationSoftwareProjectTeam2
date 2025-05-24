@@ -18,6 +18,20 @@ namespace ShopUI
         private List<Unit> units = new List<Unit>();
         private Unit selectedUnit = null;
 
+        //특정 유닛 아이템 장착 리스트 함수
+        private void UpdateEquippedList()
+        {
+            lstEquipped.Items.Clear();
+
+            if (selectedUnit != null)
+            {
+                foreach (var item in selectedUnit.EquippedItems)
+                {
+                    lstEquipped.Items.Add(item.Name);
+                }
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -96,6 +110,8 @@ namespace ShopUI
             selectedUnit = btn.Tag as Unit;
 
             MessageBox.Show($"{selectedUnit.Name} 선택됨");
+
+
         }
 
 
@@ -115,6 +131,7 @@ namespace ShopUI
             {
                 MessageBox.Show($"{selectedUnit.Name}에게 {item.Name} 장착 완료!");
                 lblGold.Text = $"골드: {player.Gold}G";
+                UpdateEquippedList();
             }
             else
             {

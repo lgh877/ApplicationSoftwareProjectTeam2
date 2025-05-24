@@ -33,6 +33,8 @@
             this.lblGold = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flowUnits = new System.Windows.Forms.FlowLayoutPanel();
+            this.lstEquipped = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowItems.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +42,8 @@
             // 
             this.flowItems.Controls.Add(this.lblGold);
             this.flowItems.Controls.Add(this.flowUnits);
+            this.flowItems.Controls.Add(this.label1);
+            this.flowItems.Controls.Add(this.lstEquipped);
             this.flowItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowItems.Location = new System.Drawing.Point(0, 0);
             this.flowItems.Name = "flowItems";
@@ -62,8 +66,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowUnits.Location = new System.Drawing.Point(67, 3);
             this.flowUnits.Name = "flowUnits";
-            this.flowUnits.Size = new System.Drawing.Size(200, 6);
+            this.flowUnits.Size = new System.Drawing.Size(200, 96);
             this.flowUnits.TabIndex = 1;
+            // 
+            // lstEquipped
+            // 
+            this.lstEquipped.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lstEquipped.FormattingEnabled = true;
+            this.lstEquipped.ItemHeight = 12;
+            this.lstEquipped.Location = new System.Drawing.Point(376, 3);
+            this.lstEquipped.Name = "lstEquipped";
+            this.lstEquipped.Size = new System.Drawing.Size(120, 88);
+            this.lstEquipped.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(273, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "장착 아이템 목록";
             // 
             // Form1
             // 
@@ -86,6 +109,8 @@
         private System.Windows.Forms.Label lblGold;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.FlowLayoutPanel flowUnits;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lstEquipped;
     }
 }
 
