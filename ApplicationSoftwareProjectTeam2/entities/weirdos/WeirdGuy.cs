@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.utils;
 
-namespace ApplicationSoftwareProjectTeam2.entities
+namespace ApplicationSoftwareProjectTeam2.entities.weirdos
 {
     public class WeirdGuy : LivingEntity
     {
@@ -37,10 +37,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tickAlive()
         {
             base.tickAlive();
-            if(level.getRandomInteger(10) == 0)
+            if (level.getRandomInteger(10) == 0)
             {
                 isMoving = !isMoving || getTarget() != null;
-                if(tickCount % 16 == 0)
+                if (tickCount % 16 == 0)
                 {
                     ProjectileEntity test = new ProjectileEntity(level);
                     test.setPosition(x, y + height, z);
@@ -93,7 +93,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                         break;
                 }
             }
-            if((deltaMovement.X * deltaMovement.X + deltaMovement.Z * deltaMovement.Z) > 4)
+            if (deltaMovement.X * deltaMovement.X + deltaMovement.Z * deltaMovement.Z > 4)
             {
                 walkTicks++;
                 isActuallyMoving = true;
