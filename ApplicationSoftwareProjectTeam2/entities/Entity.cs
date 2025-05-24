@@ -10,8 +10,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40, pushPower = 2;
-        public float x, y, z;
+        public int tickCount, sharedFlags, width = 40, height = 40, pushPower = 2, weight = 1;
+        public float x, y, z, visualSize;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
@@ -152,7 +152,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
-            entity.push(direction.X * pushPower, direction.Y * pushPower, direction.Z * pushPower);
+            float powerFactor = weight / entity.weight;
+            entity.push(direction.X * pushPower * powerFactor,
+                direction.Y * pushPower * powerFactor,
+                direction.Z * pushPower * powerFactor);
             push(direction.X * -pushPower, direction.Y * -pushPower, direction.Z * -pushPower);
         }
 

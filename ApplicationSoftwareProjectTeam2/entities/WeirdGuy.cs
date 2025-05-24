@@ -26,7 +26,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         };
         public WeirdGuy(GamePanel level) : base(level)
         {
-            visualSize = 64; width = 20; height = 44;
+            visualSize = 1; width = 40; height = 88; weight = 10;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             currentHealth = 100;

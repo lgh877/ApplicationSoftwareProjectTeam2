@@ -17,7 +17,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             Image = Properties.Resources._2;
             canDamage = true;
-            visualSize = 10;
+            visualSize = 0.05f;
             width = 10; height = 10; pushPower = 30;
         }
         public override void landed()

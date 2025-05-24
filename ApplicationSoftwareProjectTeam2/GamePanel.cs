@@ -55,7 +55,7 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 200; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
@@ -135,7 +135,8 @@ namespace ApplicationSoftwareProjectTeam2
                     // ¿£Æ¼Æ¼ÀÇ world ÁÂÇ¥(entity.x, entity.y)¸¦ renderPanel ÁÂÇ¥·Î º¯È¯
                     int screenX = currentWidth / 2 + (int)(x * scale * scale2);
                     int screenY = (int)(currentHeight - z * scale * scale2);
-                    int size = (int)(e.visualSize * scale * scale2); // ¿£Æ¼Æ¼ Å©±â (ÇÈ¼¿)
+                    int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // ¿£Æ¼Æ¼ Å©±â (ÇÈ¼¿)
+                    int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // ¿£Æ¼Æ¼ Å©±â (ÇÈ¼¿)
                     int shadowSize = (int)(e.width * scale * scale2); // ¿£Æ¼Æ¼ Å©±â (ÇÈ¼¿)
                     using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
                     {
@@ -148,8 +149,8 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     screenY -= (int)(y * scale * scale2);
                     g.DrawImage(e.Image,
-                        screenX - size / 2, screenY - size,
-                        size, size);
+                        screenX - width / 2, screenY - height,
+                        width, height);
                 }
             }
             buffer.Render(panelGraphics);

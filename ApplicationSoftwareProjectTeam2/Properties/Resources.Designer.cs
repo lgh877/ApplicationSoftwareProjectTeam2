@@ -203,6 +203,66 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack1 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack2 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack3 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack4 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack5 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap weirdGuy_meleeattack6 {
+            get {
+                object obj = ResourceManager.GetObject("weirdGuy_meleeattack6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap weirdGuy_walk1 {
             get {
                 object obj = ResourceManager.GetObject("weirdGuy_walk1", resourceCulture);
