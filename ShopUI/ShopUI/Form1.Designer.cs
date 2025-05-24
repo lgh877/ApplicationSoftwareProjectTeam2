@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flowItems = new System.Windows.Forms.FlowLayoutPanel();
             this.lblGold = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flowItems.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +61,7 @@
             this.Controls.Add(this.flowItems);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.flowItems.ResumeLayout(false);
             this.flowItems.PerformLayout();
             this.ResumeLayout(false);
@@ -69,6 +72,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowItems;
         private System.Windows.Forms.Label lblGold;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
