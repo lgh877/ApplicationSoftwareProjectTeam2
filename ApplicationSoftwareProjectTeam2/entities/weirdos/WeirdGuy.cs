@@ -39,6 +39,19 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             base.tickAlive();
             if (level.getRandomInteger(10) == 0)
             {
+                if (getTarget() == null)
+                {
+                    if (hadTarget)
+                    {
+                        hadTarget = false;
+                    }
+                    LivingEntity foundTarget = detectTargetManhattan(300);
+                    if (foundTarget != null)
+                    {
+                        target = foundTarget;
+                        hadTarget = true;
+                    }
+                }
                 isMoving = !isMoving || getTarget() != null;
                 if (tickCount % 16 == 0)
                 {
@@ -53,10 +66,39 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             }
             if (isMoving)
             {
-                int dir = (int)direction;
-                dir = dir + (level.getRandomInteger(2) == 0 ? 1 : -1);
-                dir = dir > 9 ? 0 : dir < 0 ? 9 : dir;
-                direction = (Direction)dir;
+                if (tickCount % 4 == 0)
+                {
+                    if (target == null)
+                    {
+                        int dir = (int)direction;
+                        dir = dir + (level.getRandomInteger(2) == 0 ? 1 : -1);
+                        dir = dir > 9 ? 0 : dir < 0 ? 9 : dir;
+                        direction = (Direction)dir;
+                    }
+                    else
+                    {
+                        int dir = (int)direction;
+                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
+
+                        if (targetVec.X > 0)
+                        {
+                            if (targetVec.Z > 0.9659) dir = 0;
+                            else if (targetVec.Z > 0.7071) dir = 1;
+                            else if (targetVec.Z > -0.7071) dir = 2;
+                            else if (targetVec.Z > -0.9659) dir = 3;
+                            else dir = 4;
+                        }
+                        else
+                        {
+                            if (targetVec.Z > 0.9659) dir = 9;
+                            else if (targetVec.Z > 0.7071) dir = 8;
+                            else if (targetVec.Z > -0.7071) dir = 7;
+                            else if (targetVec.Z > -0.9659) dir = 6;
+                            else dir = 5;
+                        }
+                        direction = (Direction)dir;
+                    }
+                }
 
                 //이동 코드
                 switch (direction)
@@ -134,6 +176,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                 }
             }
         }
+
         public override void tickDeath()
         {
             base.tickDeath();

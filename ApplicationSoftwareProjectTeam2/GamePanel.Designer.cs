@@ -37,6 +37,7 @@
             // 
             // logicTick
             // 
+            logicTick.Enabled = true;
             logicTick.Interval = 32;
             logicTick.Tick += logicTick_Tick;
             // 
