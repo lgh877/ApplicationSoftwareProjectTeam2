@@ -151,6 +151,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
+            if(entity.x == x && entity.y == y && entity.z == z)
+            {
+                return; // 충돌이 발생하지 않도록 동일한 위치에 있는 경우 무시
+            }
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = weight / entity.weight;
             entity.push(direction.X * pushPower * powerFactor,
