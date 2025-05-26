@@ -76,17 +76,22 @@ namespace ApplicationSoftwareProjectTeam2.entities
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드
         public virtual LivingEntity detectTargetManhattan(int range)
         {
+            float dist = float.MaxValue, currentDist;
+            LivingEntity found = null;
             foreach (var item in level.getAllLivingEntities<LivingEntity?>())
             {
+                currentDist = Math.Abs(item.x - x) + Math.Abs(item.z - z);
                 if (!item.Equals(this) 
                     && item.isAlive()
                     && !item.team.Equals(this.team) 
-                    && range > Math.Abs(item.x - x) + Math.Abs(item.z - z))
+                    && range > currentDist
+                    && currentDist < dist)
                 {
-                    return item;
+                    dist = currentDist;
+                    found = item;
                 }
             };
-            return null;
+            return found;
         }
     }
 }

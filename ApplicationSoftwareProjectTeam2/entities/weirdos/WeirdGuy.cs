@@ -64,12 +64,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                             {
                                 hadTarget = false;
                             }
-                            LivingEntity foundTarget = null;
-                            for (int i = 1; i < 6; i++)
-                            {
-                                foundTarget = detectTargetManhattan(i * 100);
-                                if (foundTarget != null) break;
-                            }
+                            LivingEntity foundTarget = detectTargetManhattan(1000);
                             if (foundTarget != null)
                             {
                                 target = foundTarget;
