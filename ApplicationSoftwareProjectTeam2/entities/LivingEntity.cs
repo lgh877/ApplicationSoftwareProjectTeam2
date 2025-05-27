@@ -9,6 +9,12 @@ using ApplicationSoftwareProjectTeam2.items;
 
 namespace ApplicationSoftwareProjectTeam2.entities
 {    
+    public enum EntityTypes
+    {
+        Nothing = 0,
+        Weirdos,
+        Skeletons,
+    }
     public class LivingEntity : Entity
     {
         public int currentHealth, attackDamage, deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0;
@@ -19,6 +25,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public LivingEntity(GamePanel level) : base(level) 
         {
             hadTarget = false;
+        }
+        public virtual EntityTypes getEntityType()
+        {
+            return EntityTypes.Nothing;
         }
 
         public override void tick()

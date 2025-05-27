@@ -49,7 +49,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             attackDamage = 50;
             moveSpeed = 3;
         }
-
+        public override EntityTypes getEntityType()
+        {
+            return EntityTypes.Weirdos;
+        }
         public override void tickAlive()
         {
             base.tickAlive();
