@@ -1,5 +1,7 @@
 using ApplicationSoftwareProjectTeam2.entities;
+using ApplicationSoftwareProjectTeam2.entities.weirdos;
 using System;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Xml.Linq;
 
@@ -26,7 +28,7 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> entities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        int levelTickCount, currentWidth, currentHeight;
+        int currentWidth, currentHeight;
         const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
@@ -40,24 +42,17 @@ namespace ApplicationSoftwareProjectTeam2
             InitializeComponent();
             bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
-            buffer.Graphics.InterpolationMode = InterpolationMode.Low;         // 가장 빠른 스케일링
-            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+            buffer.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            buffer.Graphics.SmoothingMode = SmoothingMode.None;
             buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
-            buffer.Graphics.SmoothingMode = SmoothingMode.None;          //this.DoubleBuffered = true;
             panelGraphics = panelPlayScreen.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //bufferContext = BufferedGraphicsManager.Current;
-            //buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
-            //this.DoubleBuffered = true;
             random = new CrossPlatformRandom();
             randomSeed = 0;
-            levelTickCount = 0;
-            //livingentities = new List<LivingEntity?>();
-            //allentities = new List<Entity?>();
-            //entities = new LinkedList<Entity?>();
 
             this.Width += 1;
 
@@ -84,33 +79,29 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
-            if (++levelTickCount == 2)
+            for (int i = livingentities.Count - 1; i != -1; i--)
             {
-                levelTickCount = 0;
-                for (int i = livingentities.Count - 1; i != -1; i--)
+                LivingEntity livingentity = livingentities[i];
+                livingentity.tick();
+                if (livingentity.shouldRemove)
                 {
-                    LivingEntity livingentity = livingentities[i];
-                    livingentity.tick();
-                    if (livingentity.shouldRemove)
-                    {
-                        livingentity = null;
-                        livingentities.RemoveAt(i);
-                    }
+                    livingentity = null;
+                    livingentities.RemoveAt(i);
                 }
-                var node = entities.First;
-                while (node != null)
+            }
+            var node = entities.First;
+            while (node != null)
+            {
+                var nextNode2 = node.Next;
+                node.Value.tick();
+
+                if (node.Value.shouldRemove)
                 {
-                    var nextNode2 = node.Next;
-                    node.Value.tick();
-
-                    if (node.Value.shouldRemove)
-                    {
-                        node.Value = null;
-                        entities.Remove(node);
-                    }
-
-                    node = nextNode2;
+                    node.Value = null;
+                    entities.Remove(node);
                 }
+
+                node = nextNode2;
             }
             allentities.Clear();
             allentities.Capacity = livingentities.Count + entities.Count;
@@ -120,8 +111,12 @@ namespace ApplicationSoftwareProjectTeam2
             renderEntities();
         }
 
+
+
+        private Stopwatch _renderWatch = new Stopwatch();
         private void renderEntities()
         {
+            _renderWatch.Restart();
             Graphics g = buffer.Graphics;
             g.Clear(panelPlayScreen.BackColor);
 
@@ -130,39 +125,58 @@ namespace ApplicationSoftwareProjectTeam2
 
             if (allentities.Count > 0)
             {
-                // 각 엔티티를 화면에 그립니다.
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
-                    float x = Lerp(e.xold, e.x);
-                    float z = Lerp(e.zold, e.z);
+                    float x = e.x;
+                    float y = e.y;
+                    float z = e.z;
                     double scale2 = 6.184 / Math.Cbrt(z + 250);
+                    double scale3 = 3.6363 / Math.Cbrt(y + 50);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
                     int screenX = currentWidth / 2 + (int)(x * scale * scale2);
                     int screenY = (int)(currentHeight - z * scale * scale2);
+                    int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                    int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                    int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
+                    using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
+                    {
+                        int shadowWidth = (int)(shadowSize * 1.2 / scale3);
+                        int shadowHeight = (int)(shadowSize * 0.4 / scale3);
+                        int shadowX = screenX - shadowWidth / 2;
+                        int shadowY = screenY - (int)(shadowHeight * 0.75); // 약간 위로 올림
 
-                    // 예시로 엔티티를 원으로 표현 (50% 중심 정렬)
-                    int size = (int)(e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
-
-                    g.DrawImage(e.Image, screenX - size / 2, screenY - size, size, size);
-
-                    //entity.Width = size; entity.Height = size;
-                    //entity.Location = new Point(screenX - size / 2, screenY - size);
-                    //e.Graphics.FillEllipse(Brushes.White, screenX - (size / 2), screenY - (size / 2), size, size);
+                        g.FillEllipse(shadowBrush, shadowX, shadowY, shadowWidth, shadowHeight);
+                    }
+                    screenY -= (int)(y * scale * scale2);
+                    g.DrawImage(e.Image,
+                        screenX - width / 2, screenY - height,
+                        width, height);
                 }
             }
             buffer.Render(panelGraphics);
-        }
+            _renderWatch.Stop();
+            int elapsed = (int)_renderWatch.ElapsedMilliseconds;
 
+            // 3) 다음 인터벌 계산
+            int nextInterval = 32 - elapsed;
+            if (nextInterval < 1)
+                nextInterval = 1;               // 최소 1ms
+            else if (nextInterval > 32)
+                nextInterval = 32; // 최대 16ms
+
+            // 4) 타이머에 반영
+            logicTick.Interval = nextInterval;
+        }
         public int getRandomInteger(int max)
         {
             random.setSeed(randomSeed++);
             return random.Next(max);
         }
 
-        public float Lerp(float f1, float f2)
+        public float Lerp(float f1, float f2, float f3)
         {
-            return f1 + (f2 - f1) * (float)levelTickCount * 0.5f;
+            return f1 + (f2 - f1) * f3;
         }
 
         private void GamePanel_Resize(object sender, EventArgs e)
