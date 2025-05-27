@@ -1,4 +1,4 @@
-﻿namespace ApplicationSoftwareProjectTeam2.items
+namespace ApplicationSoftwareProjectTeam2.items
 {
     public class Item
     {

@@ -10,22 +10,22 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public int tickCount, sharedFlags, visualSize = 40, width = 40, height = 40;
-        public float x, xold, y, yold, z, zold;
+        public int tickCount, sharedFlags, width = 40, height = 40, pushPower = 2, weight = 1;
+        public float x, y, z, visualSize;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false;
+        public bool shouldRemove = false, hasGravity = true;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
         {
             tickCount = 0;
             this.level = level;
-            this.x = this.xold = x;
-            this.y = this.yold = y;
-            this.z = this.zold = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
             deltaMovement = vec3;
         }
 
@@ -33,31 +33,30 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             tickCount = 0;
             this.level = level;
-            this.x = this.xold = 0;
-            this.y = this.yold = 0;
-            this.z = this.zold = 0;
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
             deltaMovement = Vector3.Zero;
         }
 
         public virtual void setPosition(float x, float y, float z)
         {
-            this.x = this.xold = x;
-            this.y = this.yold = y;
-            this.z = this.zold = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
         public virtual void setPosition(float x, float z)
         {
-            this.x = this.xold = x;
-            this.z = this.zold = z;
+            this.x = x;
+            this.z = z;
         }
         public virtual void setPosition(float y)
         {
-            this.y = this.yold = y;
+            this.y = y;
         }
 
         public virtual void moveTo(float x, float y, float z)
         {
-            xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
             {
                 this.x = x;
@@ -66,19 +65,29 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
+                collisionOccurred();
             }
-            this.y = y;
+            if (y>0)
+            {
+                this.y = y;
+            }
+            else
+            {
+                this.y = 0;
+                deltaMovement.Y *= -0.5f;
+                landed();
+            }
             if (z < 700 && z > 200)
                 this.z = z;
             else
             {
                 this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
+                collisionOccurred();
             }
         }
         public virtual void moveTo(float x, float z)
         {
-            xold = this.x; yold = this.y; zold = this.z;
             if (x < 500 && x > -500)
             {
                 this.x = x;
@@ -87,6 +96,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.x = x >= 500 ? 500 : -500;
                 deltaMovement.X *= -1;
+                collisionOccurred();
             }
             if (z < 700 && z > 200)
                 this.z = z;
@@ -94,9 +104,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 this.z = z <= 200 ? 200 : 700;
                 deltaMovement.Z *= -1;
+                collisionOccurred();
             }
         }
-
+        public virtual void collisionOccurred()
+        {
+        }
+        public virtual void landed()
+        {
+        }
         public virtual void setDeltaMovement(Vector3 vec)
         {
             this.deltaMovement = vec;
@@ -135,9 +151,16 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
+            if(entity.x == x && entity.y == y && entity.z == z)
+            {
+                return; // 충돌이 발생하지 않도록 동일한 위치에 있는 경우 무시
+            }
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
-            entity.push(direction.X * 2, direction.Y * 2, direction.Z * 2);
-            push(direction.X * -2, direction.Y * -2, direction.Z * -2);
+            float powerFactor = weight / entity.weight;
+            entity.push(direction.X * pushPower * powerFactor,
+                direction.Y * pushPower * powerFactor,
+                direction.Z * pushPower * powerFactor);
+            push(direction.X * -pushPower, direction.Y * -pushPower, direction.Z * -pushPower);
         }
 
         public virtual bool doHurtTarget(LivingEntity entity)
@@ -171,7 +194,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual void tick()
         {
             tickCount++;
-
+            if(y < 2)
+            {
+                deltaMovement = deltaMovement * 0.7f;
+            }
+            else
+            {
+                push(-deltaMovement.X * 0.1f, 0, -deltaMovement.Z * 0.1f);
+                push(0, -2f, 0);
+            }
             if (deltaMovement != Vector3.Zero)
                 if (deltaMovement.Y == 0)
                     this.moveTo(x + deltaMovement.X, z + deltaMovement.Z);
