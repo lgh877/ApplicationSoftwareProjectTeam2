@@ -48,10 +48,11 @@ namespace ShopUI
             //아이템 목록 FlowLayoutPanel 동적 생성 + 장착 버튼 클릭시 골드 차감 및 메시지 출력
 
             store = new ItemStore();
-            player = new Player { Gold = 15 };
+            player = new Player { Gold = 100 };
 
             lblGold.Text = $"골드: {player.Gold}G";
 
+            // 아이템 카드 생성
             foreach (var item in store.AvailableItems)
             {
                 Panel card = new Panel();
@@ -76,7 +77,7 @@ namespace ShopUI
                 btnEquip.Tag = item;
                 btnEquip.Click += BtnEquip_Click;
 
-                //tooltip연결
+                // 마우스 올리면 생기는 기본 tooltip 연결
                 toolTip1.SetToolTip(lblName, item.Description);
                 toolTip1.SetToolTip(btnEquip, item.Description);
 
@@ -115,9 +116,7 @@ namespace ShopUI
             var btn = sender as Button;
             selectedUnit = btn.Tag as Unit;
 
-            MessageBox.Show($"{selectedUnit.Name} 선택됨");
-
-
+            UpdateEquippedList();
         }
 
 
@@ -135,7 +134,6 @@ namespace ShopUI
 
             if (player.PurchaseItem(item, selectedUnit))
             {
-                MessageBox.Show($"{selectedUnit.Name}에게 {item.Name} 장착 완료!");
                 lblGold.Text = $"골드: {player.Gold}G";
                 UpdateEquippedList();
             }
