@@ -13,6 +13,7 @@ namespace ApplicationSoftwareProjectTeam2.items
 
         private void LoadItems()
         {
+            //체력, 공격력, 방어력, 넉백파워, 무게(넉백 덜받게), 이동속도, 탄성력(착지/충돌에 의한 데미지발생)
             AvailableItems.Add(new Item("철갑 피부", 5, ItemType.Tank, "방어력 +n, 받는 피해 -n%"));
             AvailableItems.Add(new Item("전방 방패", 6, ItemType.Tank, "전방 피해 감소"));
             AvailableItems.Add(new Item("역반사 장치", 6, ItemType.Tank, "피해 반사"));
