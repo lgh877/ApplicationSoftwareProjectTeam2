@@ -29,6 +29,12 @@ namespace ShopUI
                 {
                     lstEquipped.Items.Add(item.Name);
                 }
+
+                lblSlotStatus.Text = $"슬롯: {selectedUnit.EquippedItems.Count} / {selectedUnit.MaxItemSlots}";
+            }
+            else
+            {
+                lblSlotStatus.Text = "유닛 미선택";
             }
         }
 
