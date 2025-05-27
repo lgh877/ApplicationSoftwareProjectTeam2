@@ -11,14 +11,14 @@ namespace ApplicationSoftwareProjectTeam2.entities
     public class ProjectileEntity : Entity
     {
         public LivingEntity Owner;
-        public int damage;
+        public float damage;
         public bool canDamage;
         public ProjectileEntity(GamePanel level) : base(level)
         {
             Image = Properties.Resources._2;
             canDamage = true;
             visualSize = 0.05f;
-            width = 10; height = 10; pushPower = 30;
+            width = 10; height = 10; weight = 30;
         }
         public override void landed()
         {

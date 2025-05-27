@@ -14,10 +14,12 @@ namespace ApplicationSoftwareProjectTeam2.entities
         Nothing = 0,
         Weirdos,
         Skeletons,
+        Avengers
     }
     public class LivingEntity : Entity
     {
-        public int currentHealth, attackDamage, deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0;
+        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0;
+        public float attackDamage, currentHealth;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving;
         public LivingEntity? target;
@@ -30,7 +32,42 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return EntityTypes.Nothing;
         }
-
+        public void move(int speed)
+        {
+            switch (direction)
+            {
+                case Direction.UpperRight:
+                    push(speed * 0.2588f, 0, speed * 0.9659f);
+                    break;
+                case Direction.UpRight:
+                    push(speed * 0.7071f, 0, speed * 0.7071f);
+                    break;
+                case Direction.Right:
+                    push(speed, 0, 0);
+                    break;
+                case Direction.DownRight:
+                    push(speed * 0.7071f, 0, -speed * 0.7071f);
+                    break;
+                case Direction.LowerRight:
+                    push(speed * 0.2588f, 0, -speed * 0.9659f);
+                    break;
+                case Direction.UpperLeft:
+                    push(-speed * 0.2588f, 0, speed * 0.9659f);
+                    break;
+                case Direction.UpLeft:
+                    push(-speed * 0.7071f, 0, speed * 0.7071f);
+                    break;
+                case Direction.Left:
+                    push(-speed, 0, 0);
+                    break;
+                case Direction.DownLeft:
+                    push(-speed * 0.7071f, 0, -speed * 0.7071f);
+                    break;
+                case Direction.LowerLeft:
+                    push(-speed * 0.2588f, 0, -speed * 0.9659f);
+                    break;
+            }
+        }
         public override void tick()
         {
             base.tick();
@@ -58,9 +95,16 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override bool doHurtTarget(LivingEntity entity)
         {
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
-            entity.push(direction.X * 30, direction.Y * 30, direction.Z * 30);
-            push(direction.X * -10, direction.Y * -10, direction.Z * -10);
+            float powerFactor = Math.Max(0, pushPower - entity.weight);
+            entity.push(direction.X * powerFactor, direction.Y * powerFactor, direction.Z * powerFactor);
             return entity.hurt(this, attackDamage);
+        }
+        public override bool doHurtTarget(LivingEntity entity, float damage)
+        {
+            Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
+            float powerFactor = Math.Max(0, pushPower - entity.weight);
+            entity.push(direction.X * powerFactor, direction.Y * powerFactor, direction.Z * powerFactor);
+            return entity.hurt(this, damage);
         }
         public virtual LivingEntity? getTarget()
         {
@@ -69,7 +113,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
 
 
-        public override bool hurt(LivingEntity? attacker, int damage)
+        public override bool hurt(LivingEntity? attacker, float damage)
         {
             currentHealth -= damage;
             return true;

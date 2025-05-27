@@ -10,8 +10,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public int tickCount, sharedFlags, width = 40, height = 40, pushPower = 2, weight = 1;
-        public float x, y, z, visualSize;
+        public int tickCount, sharedFlags, width = 40, height = 40, weight = 1, pushPower = 2;
+        public float x, y, z, visualSize, elasticForce = -0.1f;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
@@ -74,7 +74,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             else
             {
                 this.y = 0;
-                deltaMovement.Y *= -0.5f;
+                deltaMovement.Y *= elasticForce;
                 landed();
             }
             if (z < 700 && z > 200)
@@ -157,18 +157,25 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = weight / entity.weight;
-            entity.push(direction.X * pushPower * powerFactor,
-                direction.Y * pushPower * powerFactor,
-                direction.Z * pushPower * powerFactor);
-            push(direction.X * -pushPower, direction.Y * -pushPower, direction.Z * -pushPower);
+            entity.push(direction.X * 2 * powerFactor,
+                direction.Y * 2 * powerFactor,
+                direction.Z * 2 * powerFactor);
+            //push(direction.X * -2, direction.Y * -2, direction.Z * -2);
         }
 
         public virtual bool doHurtTarget(LivingEntity entity)
         {
             return false;
         }
-
-        public virtual bool hurt(LivingEntity attacker, int damage)
+        public virtual bool doHurtTarget(LivingEntity entity, float damage)
+        {
+            return false;
+        }
+        public virtual bool doHurtTarget(LivingEntity entity, float damage, int pushPower)
+        {
+            return false;
+        }
+        public virtual bool hurt(LivingEntity attacker, float damage)
         {
             return false;
         }
@@ -190,11 +197,14 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return (sharedFlags & 1 << input) != 0;
         }
-        
+        public virtual bool isOnGround()
+        {
+            return y < 2;
+        }
         public virtual void tick()
         {
             tickCount++;
-            if(y < 2)
+            if(isOnGround())
             {
                 deltaMovement = deltaMovement * 0.7f;
             }
