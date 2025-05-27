@@ -1,13 +1,5 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ApplicationSoftwareProjectTeam2.items;
+
 namespace ShopUI
 {
     public partial class Form1 : Form
@@ -18,7 +10,7 @@ namespace ShopUI
         private List<Unit> units = new List<Unit>();
         private Unit selectedUnit = null;
 
-        //íŠ¹ì • ìœ ë‹› ì•„ì´í…œ ì¥ì°© ë¦¬ìŠ¤íŠ¸ í•¨ìˆ˜
+        //Æ¯Á¤ À¯´Ö ¾ÆÀÌÅÛ ÀåÂø ¸®½ºÆ® ÇÔ¼ö
         private void UpdateEquippedList()
         {
             lstEquipped.Items.Clear();
@@ -39,38 +31,40 @@ namespace ShopUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //ì•„ì´í…œ ëª©ë¡ FlowLayoutPanel ë™ì  ìƒì„± + ì¥ì°© ë²„íŠ¼ í´ë¦­ì‹œ ê³¨ë“œ ì°¨ê° ë° ë©”ì‹œì§€ ì¶œë ¥
+            //¾ÆÀÌÅÛ ¸ñ·Ï FlowLayoutPanel µ¿Àû »ı¼º + ÀåÂø ¹öÆ° Å¬¸¯½Ã °ñµå Â÷°¨ ¹× ¸Ş½ÃÁö Ãâ·Â
 
             store = new ItemStore();
             player = new Player { Gold = 15 };
 
-            lblGold.Text = $"ê³¨ë“œ: {player.Gold}G";
+            lblGold.Text = $"°ñµå: {player.Gold}G";
 
             foreach (var item in store.AvailableItems)
             {
                 Panel card = new Panel();
-                card.Width = 150;
-                card.Height = 100;
+                card.Width = 300;
+                card.Height = 200;
                 card.Margin = new Padding(5);
                 card.BorderStyle = BorderStyle.FixedSingle;
 
                 Label lblName = new Label();
+                lblName.Height = 40;
                 lblName.Text = item.Name;
                 lblName.Dock = DockStyle.Top;
                 lblName.TextAlign = ContentAlignment.MiddleCenter;
 
                 Label lblPrice = new Label();
+                lblPrice.Height = 40;
                 lblPrice.Text = $"{item.Price}G";
                 lblPrice.Dock = DockStyle.Bottom;
                 lblPrice.TextAlign = ContentAlignment.MiddleCenter;
 
                 Button btnEquip = new Button();
-                btnEquip.Text = "ì¥ì°©";
+                btnEquip.Text = "ÀåÂø";
                 btnEquip.Dock = DockStyle.Fill;
                 btnEquip.Tag = item;
                 btnEquip.Click += BtnEquip_Click;
 
-                //tooltipì—°ê²°
+                //tooltip¿¬°á
                 toolTip1.SetToolTip(lblName, item.Description);
                 toolTip1.SetToolTip(btnEquip, item.Description);
 
@@ -82,10 +76,10 @@ namespace ShopUI
 
             }
 
-            //ìœ ë‹› ì„ íƒ ê¸°ëŠ¥ ì¶”ê°€
-            units.Add(new Unit { Name = "íƒ±ì»¤ A" });
-            units.Add(new Unit { Name = "ì›ë”œ B" });
-            units.Add(new Unit { Name = "íŠ¹ìˆ˜ C" });
+            //À¯´Ö ¼±ÅÃ ±â´É Ãß°¡
+            units.Add(new Unit { Name = "ÅÊÄ¿ A" });
+            units.Add(new Unit { Name = "¿øµô B" });
+            units.Add(new Unit { Name = "Æ¯¼ö C" });
 
             foreach (var unit in units)
             {
@@ -103,19 +97,19 @@ namespace ShopUI
         }
 
 
-        // ìœ ë‹› ì„ íƒ ë²„íŠ¼
+        // À¯´Ö ¼±ÅÃ ¹öÆ°
         private void BtnUnit_Click(object sender, EventArgs e)
         {
             var btn = sender as Button;
             selectedUnit = btn.Tag as Unit;
 
-            MessageBox.Show($"{selectedUnit.Name} ì„ íƒë¨");
+            MessageBox.Show($"{selectedUnit.Name} ¼±ÅÃµÊ");
 
 
         }
 
 
-        // ì¥ì°© ë²„íŠ¼
+        // ÀåÂø ¹öÆ°
         private void BtnEquip_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -123,24 +117,20 @@ namespace ShopUI
 
             if (selectedUnit == null)
             {
-                MessageBox.Show("ìœ ë‹›ì„ ë¨¼ì € ì„ íƒí•˜ì„¸ìš”!");
+                MessageBox.Show("À¯´ÖÀ» ¸ÕÀú ¼±ÅÃÇÏ¼¼¿ä!");
                 return;
             }
 
             if (player.PurchaseItem(item, selectedUnit))
             {
-                MessageBox.Show($"{selectedUnit.Name}ì—ê²Œ {item.Name} ì¥ì°© ì™„ë£Œ!");
-                lblGold.Text = $"ê³¨ë“œ: {player.Gold}G";
+                MessageBox.Show($"{selectedUnit.Name}¿¡°Ô {item.Name} ÀåÂø ¿Ï·á!");
+                lblGold.Text = $"°ñµå: {player.Gold}G";
                 UpdateEquippedList();
             }
             else
             {
-                MessageBox.Show("ì¥ì°© ì‹¤íŒ¨ (ê³¨ë“œ ë¶€ì¡± ë˜ëŠ” ìŠ¬ë¡¯ ì´ˆê³¼)");
+                MessageBox.Show("ÀåÂø ½ÇÆĞ (°ñµå ºÎÁ· ¶Ç´Â ½½·Ô ÃÊ°ú)");
             }
         }
     }
-
-
-    
-
 }
