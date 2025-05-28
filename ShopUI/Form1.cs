@@ -19,7 +19,7 @@ namespace ShopUI
             {
                 foreach (var item in selectedUnit.EquippedItems)
                 {
-                    lstEquipped.Items.Add(item.Name);
+                    lstEquipped.Items.Add(item);
                 }
 
                 lblSlotStatus.Text = $"슬롯: {selectedUnit.EquippedItems.Count} / {selectedUnit.MaxItemSlots}";
@@ -134,6 +134,34 @@ namespace ShopUI
             else
             {
                 MessageBox.Show("장착 실패 (골드 부족 또는 슬롯 초과)");
+            }
+        }
+
+        // 판매 버튼
+        private void btnSell_Click(object sender, EventArgs e)
+        {
+            if (selectedUnit == null)
+            {
+                MessageBox.Show("유닛을 먼저 선택하세요.");
+                return;
+            }
+
+            if (lstEquipped.SelectedItem == null)
+            {
+                MessageBox.Show("판매할 아이템을 선택하세요.");
+                return;
+            }
+
+            Item targetItem = lstEquipped.SelectedItem as Item;
+
+            if (targetItem != null)
+            {
+                selectedUnit.EquippedItems.Remove(targetItem);
+                player.Gold += targetItem.Price / 2;
+
+                MessageBox.Show($"{targetItem.Name} 판매 완료! (+{targetItem.Price / 2}G)");
+                lblGold.Text = $"골드: {player.Gold}G";
+                UpdateEquippedList();
             }
         }
     }

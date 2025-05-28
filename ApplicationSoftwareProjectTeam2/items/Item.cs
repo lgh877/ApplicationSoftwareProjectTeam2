@@ -27,5 +27,9 @@ namespace ApplicationSoftwareProjectTeam2.items
             unit.Speed += SpeedBonus;
             unit.Health += HealthBonus;
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

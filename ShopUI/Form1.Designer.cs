@@ -35,6 +35,7 @@
             label1 = new Label();
             lblSlotStatus = new Label();
             lstEquipped = new ListBox();
+            btnSell = new Button();
             toolTip1 = new ToolTip(components);
             flowItems.SuspendLayout();
             SuspendLayout();
@@ -46,49 +47,47 @@
             flowItems.Controls.Add(label1);
             flowItems.Controls.Add(lblSlotStatus);
             flowItems.Controls.Add(lstEquipped);
+            flowItems.Controls.Add(btnSell);
             flowItems.Dock = DockStyle.Fill;
             flowItems.Location = new Point(0, 0);
-            flowItems.Margin = new Padding(6, 8, 6, 8);
+            flowItems.Margin = new Padding(3, 4, 3, 4);
             flowItems.Name = "flowItems";
-            flowItems.Size = new Size(1324, 1200);
+            flowItems.Size = new Size(662, 542);
             flowItems.TabIndex = 0;
             // 
             // lblGold
             // 
             lblGold.AutoSize = true;
-            lblGold.Location = new Point(6, 0);
-            lblGold.Margin = new Padding(6, 0, 6, 0);
+            lblGold.Location = new Point(3, 0);
             lblGold.Name = "lblGold";
-            lblGold.Size = new Size(118, 32);
+            lblGold.Size = new Size(60, 15);
             lblGold.TabIndex = 0;
             lblGold.Text = "골드: 15G";
             // 
             // flowUnits
             // 
             flowUnits.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            flowUnits.Location = new Point(136, 8);
-            flowUnits.Margin = new Padding(6, 8, 6, 8);
+            flowUnits.Location = new Point(69, 4);
+            flowUnits.Margin = new Padding(3, 4, 3, 4);
             flowUnits.Name = "flowUnits";
-            flowUnits.Size = new Size(400, 228);
+            flowUnits.Size = new Size(200, 109);
             flowUnits.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(548, 0);
-            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Location = new Point(275, 0);
             label1.Name = "label1";
-            label1.Size = new Size(198, 32);
+            label1.Size = new Size(99, 15);
             label1.TabIndex = 3;
             label1.Text = "장착 아이템 목록";
             // 
             // lblSlotStatus
             // 
             lblSlotStatus.AutoSize = true;
-            lblSlotStatus.Location = new Point(758, 0);
-            lblSlotStatus.Margin = new Padding(6, 0, 6, 0);
+            lblSlotStatus.Location = new Point(380, 0);
             lblSlotStatus.Name = "lblSlotStatus";
-            lblSlotStatus.Size = new Size(127, 32);
+            lblSlotStatus.Size = new Size(65, 15);
             lblSlotStatus.TabIndex = 4;
             lblSlotStatus.Text = "슬롯: 0 / 3";
             // 
@@ -96,19 +95,29 @@
             // 
             lstEquipped.Anchor = AnchorStyles.Right;
             lstEquipped.FormattingEnabled = true;
-            lstEquipped.Location = new Point(897, 8);
-            lstEquipped.Margin = new Padding(6, 8, 6, 8);
+            lstEquipped.ItemHeight = 15;
+            lstEquipped.Location = new Point(451, 4);
+            lstEquipped.Margin = new Padding(3, 4, 3, 4);
             lstEquipped.Name = "lstEquipped";
-            lstEquipped.Size = new Size(236, 228);
+            lstEquipped.Size = new Size(120, 109);
             lstEquipped.TabIndex = 2;
+            // 
+            // btnSell
+            // 
+            btnSell.Location = new Point(577, 3);
+            btnSell.Name = "btnSell";
+            btnSell.Size = new Size(75, 23);
+            btnSell.TabIndex = 5;
+            btnSell.Text = "판매";
+            btnSell.UseVisualStyleBackColor = true;
             // 
             // ShopUI
             // 
-            AutoScaleDimensions = new SizeF(14F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1324, 1200);
+            ClientSize = new Size(662, 542);
             Controls.Add(flowItems);
-            Margin = new Padding(6, 8, 6, 8);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ShopUI";
             Text = "Form1";
             Load += Form1_Load;
@@ -126,5 +135,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lstEquipped;
         private System.Windows.Forms.Label lblSlotStatus;
+        private Button btnSell;
     }
 }
