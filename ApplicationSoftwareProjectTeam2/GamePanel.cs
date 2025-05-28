@@ -56,9 +56,11 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 32; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
+                test.attackDamage = 0;
+                test.scaleEntity((getRandomInteger(20) + 10) * 0.1f);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
                 test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);

@@ -32,6 +32,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return EntityTypes.Nothing;
         }
+        
         public void move(int speed)
         {
             switch (direction)

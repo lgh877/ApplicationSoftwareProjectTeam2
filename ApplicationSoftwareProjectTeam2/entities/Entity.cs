@@ -38,7 +38,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
             this.z = 0;
             deltaMovement = Vector3.Zero;
         }
-
+        public virtual void scaleEntity(float scale)
+        {
+            this.visualSize *= scale;
+            this.width = (int)(width * scale);
+            this.height = (int)(width * scale);
+            this.weight = (int)(weight * scale);
+        }
         public virtual void setPosition(float x, float y, float z)
         {
             this.x = x;

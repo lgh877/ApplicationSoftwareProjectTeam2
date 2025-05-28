@@ -227,7 +227,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                     switch (walkTicks)
                     {
                         case 1:
-                            Image = (int)direction < 5 ? images[14] : images[20];
+                            Image = (int)direction < 5 ? images[0] : images[2];
                             break;
                         case 3:
                             Image = (int)direction < 5 ? images[14] : images[20];
