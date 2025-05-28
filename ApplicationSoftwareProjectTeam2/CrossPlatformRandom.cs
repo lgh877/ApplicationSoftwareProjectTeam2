@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace ApplicationSoftwareProjectTeam2
     public class CrossPlatformRandom
     {
         // 128-bit state
+        private ulong seed;
         private ulong _s0, _s1;
 
         // 생성자: 하나의 64비트 시드로부터 상태 초기화 (splitmix64 사용)
