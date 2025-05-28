@@ -1,6 +1,6 @@
 ﻿namespace ShopUI
 {
-    partial class Form1
+    partial class ShopUI
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -102,14 +102,14 @@
             lstEquipped.Size = new Size(236, 228);
             lstEquipped.TabIndex = 2;
             // 
-            // Form1
+            // ShopUI
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1324, 1200);
             Controls.Add(flowItems);
             Margin = new Padding(6, 8, 6, 8);
-            Name = "Form1";
+            Name = "ShopUI";
             Text = "Form1";
             Load += Form1_Load;
             flowItems.ResumeLayout(false);

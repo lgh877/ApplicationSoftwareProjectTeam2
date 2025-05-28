@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace ApplicationSoftwareProjectTeam2.entities
 {
@@ -16,7 +17,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false, hasGravity = true;
+        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -164,7 +165,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = weight / entity.weight;
             entity.push(direction.X * 2 * powerFactor,
-                direction.Y * 2 * powerFactor,
+                0,//direction.Y * 2 * powerFactor,
                 direction.Z * 2 * powerFactor);
             //push(direction.X * -2, direction.Y * -2, direction.Z * -2);
         }
@@ -207,23 +208,45 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return y < 2;
         }
+        public virtual void releaseFromMouse()
+        {
+        }
         public virtual void tick()
         {
             tickCount++;
-            if(isOnGround())
+            if (grabbedByMouse)
             {
-                deltaMovement = deltaMovement * 0.7f;
+                float scale = (float)level.currentWidth / GamePanel.worldWidth;
+                double fixedScale2 = 6.184 / Math.Cbrt(z + 250);
+
+                // 화면 좌표 변환의 역변환을 적용합니다.
+                x = (level.mouseX - level.currentWidth / 2f) / (scale * (float)fixedScale2);
+                z = (level.currentHeight - level.mouseY) / (scale * (float)fixedScale2);
+                deltaMovement = Vector3.Zero;
+                setPosition(x, height / 2, Math.Max(z - height / 2, 0));
+                if (!level.grabbed)
+                {
+                    grabbedByMouse = false;
+                    releaseFromMouse();
+                }
             }
             else
             {
-                push(-deltaMovement.X * 0.1f, 0, -deltaMovement.Z * 0.1f);
-                push(0, -2f, 0);
-            }
-            if (deltaMovement != Vector3.Zero)
-                if (deltaMovement.Y == 0)
-                    this.moveTo(x + deltaMovement.X, z + deltaMovement.Z);
+                if (isOnGround())
+                {
+                    deltaMovement = deltaMovement * 0.7f;
+                }
                 else
-                    this.moveTo(x + deltaMovement.X, y + deltaMovement.Y, z + deltaMovement.Z);
+                {
+                    push(-deltaMovement.X * 0.1f, 0, -deltaMovement.Z * 0.1f);
+                    push(0, -2f, 0);
+                }
+                if (deltaMovement != Vector3.Zero)
+                    if (deltaMovement.Y == 0)
+                        this.moveTo(x + deltaMovement.X, z + deltaMovement.Z);
+                    else
+                        this.moveTo(x + deltaMovement.X, y + deltaMovement.Y, z + deltaMovement.Z);
+            }
         }
     }
 }

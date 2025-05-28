@@ -42,7 +42,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
         };
         public WeirdGuy(GamePanel level) : base(level)
         {
-            visualSize = 0.75f; width = 30; height = 66; weight = 10; pushPower = 30;
+            visualSize = 0.75f; width = 30; height = 55; weight = 10; pushPower = 30;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             currentHealth = 100;
@@ -266,9 +266,11 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                     }
                     break;
             }
-            
         }
+        public override void releaseFromMouse()
+        {
 
+        }
         public override void tickDeath()
         {
             base.tickDeath();

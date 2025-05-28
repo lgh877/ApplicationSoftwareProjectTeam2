@@ -2,7 +2,7 @@ using ApplicationSoftwareProjectTeam2.items;
 
 namespace ShopUI
 {
-    public partial class Form1 : Form
+    public partial class ShopUI : Form
     {
         private ItemStore store;
         private Player player;
@@ -30,7 +30,7 @@ namespace ShopUI
             }
         }
 
-        public Form1()
+        public ShopUI()
         {
             InitializeComponent();
         }

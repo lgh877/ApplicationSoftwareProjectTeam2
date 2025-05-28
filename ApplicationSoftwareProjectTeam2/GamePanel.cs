@@ -3,6 +3,7 @@ using ApplicationSoftwareProjectTeam2.entities.weirdos;
 using System;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace ApplicationSoftwareProjectTeam2
@@ -28,8 +29,9 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> entities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        int currentWidth, currentHeight;
-        const int worldWidth = 1000, worldHeight = 500;
+        public int currentWidth, currentHeight, mouseX, mouseY;
+        public bool handleMouseEvent, grabbed = false;
+        public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
         private BufferedGraphicsContext bufferContext;
@@ -110,6 +112,34 @@ namespace ApplicationSoftwareProjectTeam2
             allentities.AddRange(livingentities);
             foreach (var entity in entities) allentities.Add(entity);
             allentities.Sort((a, b) => a.z.CompareTo(b.z));
+            if (handleMouseEvent)
+            {
+                handleMouseEvent = false;
+                // 마우스 클릭 이벤트 처리
+                foreach (var entity in allentities)
+                {
+                    if (entity is LivingEntity livingEntity && livingEntity.isAlive())
+                    {
+                        float x = livingEntity.x;
+                        float y = livingEntity.y;
+                        float z = livingEntity.z;
+                        double scale2 = 6.184 / Math.Cbrt(z + 250);
+                        double scale3 = 3.6363 / Math.Cbrt(y + 50);
+                        int screenX = currentWidth / 2 + (int)(x * (currentWidth / (float)worldWidth) * scale2);
+                        int screenY = (int)(currentHeight - z * (currentHeight / (float)worldHeight) * scale2);
+                        screenY -= (int)(y * (currentHeight / (float)worldHeight) * scale2);
+                        int width = (int)(livingEntity.Image.Width * livingEntity.visualSize * (currentWidth / (float)worldWidth) * scale2);
+                        int height = (int)(livingEntity.Image.Height * livingEntity.visualSize * (currentHeight / (float)worldHeight) * scale2);
+                        if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
+                            mouseY >= screenY - height && mouseY <= screenY)
+                        {
+                            grabbed = true;
+                            livingEntity.grabbedByMouse = true;
+                            break; // 클릭된 엔티티를 찾으면 루프 종료
+                        }
+                    }
+                }
+            }
             renderEntities();
         }
 
@@ -120,11 +150,11 @@ namespace ApplicationSoftwareProjectTeam2
         {
             _renderWatch.Restart();
             Graphics g = buffer.Graphics;
-            g.Clear(panelPlayScreen.BackColor);
 
             // renderPanel의 ClientSize를 기준으로 스케일 계산
             float scale = (float)currentWidth / (float)worldWidth;
-
+            g.DrawImage(Properties.Resources.제목_없음2,
+            0, 0, currentWidth, currentHeight);
             if (allentities.Count > 0)
             {
                 for (int i = allentities.Count - 1; i != -1; i--)
@@ -203,6 +233,24 @@ namespace ApplicationSoftwareProjectTeam2
         private void button1_Click(object sender, EventArgs e)
         {
             logicTick.Enabled = !logicTick.Enabled;
+        }
+
+        private void panelPlayScreen_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(grabbed) 
+            {
+                grabbed = false; return; 
+            }
+            mouseX = e.X; mouseY = e.Y;
+            handleMouseEvent = true;
+        }
+
+        private void panelPlayScreen_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (grabbed)
+            {
+                mouseX = e.X; mouseY = e.Y;
+            }
         }
 
         public List<T> getAllLivingEntities<T>() where T : LivingEntity

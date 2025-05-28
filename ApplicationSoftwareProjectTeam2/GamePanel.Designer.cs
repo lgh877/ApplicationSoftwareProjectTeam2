@@ -49,6 +49,8 @@
             panelPlayScreen.Name = "panelPlayScreen";
             panelPlayScreen.Size = new Size(776, 426);
             panelPlayScreen.TabIndex = 0;
+            panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
+            panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
             // 
             // button1
             // 
