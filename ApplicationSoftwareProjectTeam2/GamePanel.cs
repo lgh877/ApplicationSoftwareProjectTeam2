@@ -38,6 +38,19 @@ namespace ApplicationSoftwareProjectTeam2
         private BufferedGraphics buffer;
         private Graphics panelGraphics;
 
+        public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
+        {
+            (-50, 5, false),
+            (-150, 5, false),
+            (-250, 5, false),
+            (-350, 5, false),
+            (-450, 5, false),
+            (-50, 105, false),
+            (-150, 105, false),
+            (-250, 105, false),
+            (-350, 105, false),
+            (-450, 105, false)
+        };
 
         public GamePanel()
         {

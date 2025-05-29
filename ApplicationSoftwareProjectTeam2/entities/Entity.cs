@@ -64,7 +64,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public virtual void moveTo(float x, float y, float z)
         {
-            if (x < 500 && x > -500)
+            if (!hasAi || x < 500 && x > -500)
             {
                 this.x = x;
             }
@@ -95,7 +95,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void moveTo(float x, float z)
         {
-            if (x < 500 && x > -500)
+            if (!hasAi || x < 500 && x > -500)
             {
                 this.x = x;
             }

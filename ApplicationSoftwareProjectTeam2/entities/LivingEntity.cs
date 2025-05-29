@@ -18,14 +18,16 @@ namespace ApplicationSoftwareProjectTeam2.entities
     }
     public class LivingEntity : Entity
     {
-        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0;
+        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex;
         public float attackDamage, currentHealth;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving;
         public LivingEntity? target;
         public List<Item> EquippedItems = new List<Item>(3);
+        public (int, int) deckPosition = (0, 0); // (x, z) 좌표로 표현되는 덱 위치
         public LivingEntity(GamePanel level) : base(level) 
         {
+            deckIndex = -1;
             hadTarget = false;
         }
         public virtual EntityTypes getEntityType()
@@ -83,6 +85,38 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void tickAlive() 
         {
+            if (!hasAi && isOnGround() && deckIndex != -1)
+            {
+                if (Math.Abs(x - deckPosition.Item1) + Math.Abs(z - deckPosition.Item2) > 3)
+                {
+                    int dir = (int)direction;
+                    Vector3 targetVec = Vector3.Normalize(new Vector3(deckPosition.Item1 - x, 0, deckPosition.Item2 - z));
+
+                    if (targetVec.X > 0)
+                    {
+                        if (targetVec.Z > 0.9659) dir = 0;
+                        else if (targetVec.Z > 0.7071) dir = 1;
+                        else if (targetVec.Z > -0.7071) dir = 2;
+                        else if (targetVec.Z > -0.9659) dir = 3;
+                        else dir = 4;
+                    }
+                    else
+                    {
+                        if (targetVec.Z > 0.9659) dir = 9;
+                        else if (targetVec.Z > 0.7071) dir = 8;
+                        else if (targetVec.Z > -0.7071) dir = 7;
+                        else if (targetVec.Z > -0.9659) dir = 6;
+                        else dir = 5;
+                    }
+                    direction = (Direction)dir;
+                    move(moveSpeed);
+                }
+                else
+                {
+                    deltaMovement = Vector3.Zero;
+                    direction = Direction.Right;
+                }
+            }
             checkCollisionsLiving();
         }
         public virtual void tickDeath()
@@ -112,7 +146,37 @@ namespace ApplicationSoftwareProjectTeam2.entities
             if (target != null && (!target.isAlive() || !target.hasAi)) target = null;
             return target;
         }
+        public virtual bool findClosestDeckPosition()
+        {
+            float minDistance = int.MaxValue;
+            int foundIndex = -1;
+            for (int i = 0; i < level.valueTupleList.Count; i++)
+            {
+                var (pointx, pointz, isOccupied) = level.valueTupleList[i];
+                if (isOccupied) continue; // false인 위치만 고려
 
+                // 거리 계산 (제곱 연산을 생략하고 단순 절대값 차이 비교)
+                float distance = Math.Abs(x - pointx) + Math.Abs(z - pointz);
+
+                // 최소 거리 업데이트
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    foundIndex = i;
+                }
+            }
+            if (foundIndex != -1)
+            {
+                deckPosition = (level.valueTupleList[foundIndex].Item1, level.valueTupleList[foundIndex].Item2);
+                level.valueTupleList[foundIndex] = level.valueTupleList[foundIndex] with { Item3 = true };
+                deckIndex = foundIndex; // 인덱스 저장
+                return true; // 성공적으로 위치를 찾음
+            }
+            else
+            {
+                return false; // 빈 위치를 찾지 못함    
+            }
+        }
 
         public override bool hurt(LivingEntity? attacker, float damage)
         {
@@ -128,15 +192,28 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return currentHealth > 0;
         }
+        public override void grabOccurred()
+        {
+            if(deckIndex != -1)
+            {
+                // 덱 위치를 해제
+                level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
+                deckIndex = -1; // 인덱스 초기화
+            }
+        }
         public override void releaseFromMouse()
         {
             direction = Direction.Right;
             //마우스에서 놓았을 때 z값이 200보다 낮다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 fasle로 해주세요
-            if (hasAi && z < 200)
+            if (z < 200)
             {
-                level.addFreshEntity(this);
-                level.livingentities.Remove(this);
-                hasAi = false;
+                if (!findClosestDeckPosition()) return;
+                if (hasAi)
+                {
+                    level.addFreshEntity(this);
+                    level.livingentities.Remove(this);
+                    hasAi = false;
+                }
             }
             else if(!hasAi && z >= 200)
             {
