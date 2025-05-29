@@ -161,7 +161,7 @@ namespace ApplicationSoftwareProjectTeam2
 
                 using (Graphics bgGraphics = Graphics.FromImage(cachedBackground))
                 {
-                    bgGraphics.DrawImage(Properties.Resources.力格_绝澜2,
+                    bgGraphics.DrawImage(Properties.Resources.力格_绝澜3,
                         0, 0, currentWidth, currentHeight);
                 }
 

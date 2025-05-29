@@ -166,6 +166,9 @@
   <data name="weirdGuy_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\weirdGuy_idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="제목 없음2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\제목 없음2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,7 +187,7 @@
   <data name="weirdGuy_meleeattack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\weirdGuy_meleeattack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="제목 없음2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\제목 없음2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="제목 없음3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\제목 없음3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -130,6 +130,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public override void releaseFromMouse()
         {
+            direction = Direction.Right;
             //마우스에서 놓았을 때 z값이 200보다 낮다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 fasle로 해주세요
             if (hasAi && z < 200)
             {
