@@ -123,7 +123,7 @@ namespace ApplicationSoftwareProjectTeam2
                         float x = livingEntity.x;
                         float y = livingEntity.y;
                         float z = livingEntity.z;
-                        double scale2 = 6.184 / Math.Cbrt(z + 250);
+                        double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
                         double scale3 = 3.6363 / Math.Cbrt(y + 50);
                         int screenX = currentWidth / 2 + (int)(x * (currentWidth / (float)worldWidth) * scale2);
                         int screenY = (int)(currentHeight - z * (currentHeight / (float)worldHeight) * scale2);
@@ -133,6 +133,7 @@ namespace ApplicationSoftwareProjectTeam2
                         if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
                             mouseY >= screenY - height && mouseY <= screenY)
                         {
+                            livingEntity.grabOccurred();
                             grabbed = true;
                             livingEntity.grabbedByMouse = true;
                             break; // 클릭된 엔티티를 찾으면 루프 종료
@@ -146,15 +147,37 @@ namespace ApplicationSoftwareProjectTeam2
 
 
         private Stopwatch _renderWatch = new Stopwatch();
+        private Bitmap cachedBackground = null;
+        private bool backgroundNeedsUpdate = true;
+
+
+        private void RenderBackground()
+        {
+            // 배경이 변경될 필요가 있을 때만 새로 생성
+            if (backgroundNeedsUpdate)
+            {
+                cachedBackground?.Dispose(); // 기존 배경 해제
+                cachedBackground = new Bitmap(currentWidth, currentHeight);
+
+                using (Graphics bgGraphics = Graphics.FromImage(cachedBackground))
+                {
+                    bgGraphics.DrawImage(Properties.Resources.제목_없음2,
+                        0, 0, currentWidth, currentHeight);
+                }
+
+                backgroundNeedsUpdate = false; // 배경 갱신 완료
+            }
+        }
+
         private void renderEntities()
         {
             _renderWatch.Restart();
             Graphics g = buffer.Graphics;
 
-            // renderPanel의 ClientSize를 기준으로 스케일 계산
             float scale = (float)currentWidth / (float)worldWidth;
-            g.DrawImage(Properties.Resources.제목_없음2,
-            0, 0, currentWidth, currentHeight);
+            RenderBackground();
+            g.DrawImage(cachedBackground, 0, 0);
+
             if (allentities.Count > 0)
             {
                 for (int i = allentities.Count - 1; i != -1; i--)
@@ -163,7 +186,7 @@ namespace ApplicationSoftwareProjectTeam2
                     float x = e.x;
                     float y = e.y;
                     float z = e.z;
-                    double scale2 = 6.184 / Math.Cbrt(z + 250);
+                    double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
                     double scale3 = 3.6363 / Math.Cbrt(y + 50);
                     // 엔티티의 world 좌표(entity.x, entity.y)를 renderPanel 좌표로 변환
                     int screenX = currentWidth / 2 + (int)(x * scale * scale2);
@@ -213,6 +236,7 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void GamePanel_Resize(object sender, EventArgs e)
         {
+            backgroundNeedsUpdate = true;
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;

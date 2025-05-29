@@ -15,7 +15,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public bool canDamage;
         public ProjectileEntity(GamePanel level) : base(level)
         {
-            Image = Properties.Resources._2;
+            //Image = Properties.Resources._2;
             canDamage = true;
             visualSize = 0.05f;
             width = 10; height = 10; weight = 30;

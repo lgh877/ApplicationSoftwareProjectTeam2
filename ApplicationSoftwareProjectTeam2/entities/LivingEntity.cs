@@ -109,7 +109,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual LivingEntity? getTarget()
         {
-            if (target != null && !target.isAlive()) target = null;
+            if (target != null && (!target.isAlive() || !target.hasAi)) target = null;
             return target;
         }
 
@@ -127,6 +127,23 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual bool isAlive()
         {
             return currentHealth > 0;
+        }
+        public override void releaseFromMouse()
+        {
+            //마우스에서 놓았을 때 z값이 200보다 낮다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 fasle로 해주세요
+            if (hasAi && z < 200)
+            {
+                level.addFreshEntity(this);
+                level.livingentities.Remove(this);
+                hasAi = false;
+            }
+            else if(!hasAi && z >= 200)
+            {
+                //z값이 200보다 높다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 true로 해주세요
+                level.addFreshLivingEntity(this);
+                level.entities.Remove(this);
+                hasAi = true;
+            }
         }
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드
         public virtual LivingEntity detectTargetManhattan(int range)

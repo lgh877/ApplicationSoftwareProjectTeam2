@@ -17,7 +17,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false;
+        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -84,7 +84,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 deltaMovement.Y *= elasticForce;
                 landed();
             }
-            if (z < 700 && z > 200)
+            if (!hasAi || z < 700 && z > 200)
                 this.z = z;
             else
             {
@@ -105,7 +105,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 deltaMovement.X *= -1;
                 collisionOccurred();
             }
-            if (z < 700 && z > 200)
+            if (!hasAi || z < 700 && z > 200)
                 this.z = z;
             else
             {
@@ -210,6 +210,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void releaseFromMouse()
         {
+            setPosition(x, 0, z);
+        }
+        public virtual void grabOccurred()
+        {
         }
         public virtual void tick()
         {
@@ -217,7 +221,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             if (grabbedByMouse)
             {
                 float scale = (float)level.currentWidth / GamePanel.worldWidth;
-                double fixedScale2 = 6.184 / Math.Cbrt(z + 250);
+                double fixedScale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
 
                 // 화면 좌표 변환의 역변환을 적용합니다.
                 x = (level.mouseX - level.currentWidth / 2f) / (scale * (float)fixedScale2);
@@ -226,8 +230,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 setPosition(x, height / 2, Math.Max(z - height / 2, 0));
                 if (!level.grabbed)
                 {
+                    this.releaseFromMouse();
                     grabbedByMouse = false;
-                    releaseFromMouse();
                 }
             }
             else

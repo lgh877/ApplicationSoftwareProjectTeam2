@@ -60,90 +60,93 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             switch (entityState)
             {
                 case 0:
-                    if (level.getRandomInteger(10) == 0)
+                    if (hasAi)
                     {
-                        if (getTarget() == null)
+                        if (level.getRandomInteger(10) == 0)
                         {
-                            if (hadTarget)
-                            {
-                                hadTarget = false;
-                            }
-                            LivingEntity foundTarget = detectTargetManhattan(1000);
-                            if (foundTarget != null)
-                            {
-                                target = foundTarget;
-                                hadTarget = true;
-                            }
-                        }
-                        isMoving = !isMoving || getTarget() != null;
-                    }
-                    if (isMoving)
-                    {
-                        if (tickCount % 4 == 0)
-                        {
-                            mana++;
                             if (getTarget() == null)
                             {
-                                int dir = (int)direction;
-                                dir = dir + (level.getRandomInteger(2) == 0 ? 1 : -1);
-                                dir = dir > 9 ? 0 : dir < 0 ? 9 : dir;
-                                direction = (Direction)dir;
-                            }
-                            else
-                            {
-                                float ydiff = target.y - y;
-
-                                //공격 범위 안에 들어왔는지 확인
-                                if (mana < 20)
+                                if (hadTarget)
                                 {
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
-                                    && ydiff < height
-                                    && ydiff > -target.height)
-                                    {
-                                        entityState = 1;
-                                        walkTicks = 0;
-                                    }
+                                    hadTarget = false;
+                                }
+                                LivingEntity foundTarget = detectTargetManhattan(1000);
+                                if (foundTarget != null)
+                                {
+                                    target = foundTarget;
+                                    hadTarget = true;
+                                }
+                            }
+                            isMoving = !isMoving || getTarget() != null;
+                        }
+                        if (isMoving)
+                        {
+                            if (tickCount % 4 == 0)
+                            {
+                                mana++;
+                                if (getTarget() == null)
+                                {
+                                    int dir = (int)direction;
+                                    dir = dir + (level.getRandomInteger(2) == 0 ? 1 : -1);
+                                    dir = dir > 9 ? 0 : dir < 0 ? 9 : dir;
+                                    direction = (Direction)dir;
                                 }
                                 else
                                 {
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < width * width + 0.25 * (target.width + width) * (target.width + width)
-                                    && ydiff < height
-                                    && ydiff > -target.height)
-                                    {
-                                        mana = 0;
-                                        entityState = 2;
-                                        walkTicks = 0;
-                                    }
-                                }
+                                    float ydiff = target.y - y;
 
-                                //공격 시도가 실패한 경우 상대 방향으로 이동
-                                if(entityState == 0)
-                                {
-                                    int dir = (int)direction;
-                                    Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
-
-                                    if (targetVec.X > 0)
+                                    //공격 범위 안에 들어왔는지 확인
+                                    if (mana < 20)
                                     {
-                                        if (targetVec.Z > 0.9659) dir = 0;
-                                        else if (targetVec.Z > 0.7071) dir = 1;
-                                        else if (targetVec.Z > -0.7071) dir = 2;
-                                        else if (targetVec.Z > -0.9659) dir = 3;
-                                        else dir = 4;
+                                        if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
+                                        && ydiff < height
+                                        && ydiff > -target.height)
+                                        {
+                                            entityState = 1;
+                                            walkTicks = 0;
+                                        }
                                     }
                                     else
                                     {
-                                        if (targetVec.Z > 0.9659) dir = 9;
-                                        else if (targetVec.Z > 0.7071) dir = 8;
-                                        else if (targetVec.Z > -0.7071) dir = 7;
-                                        else if (targetVec.Z > -0.9659) dir = 6;
-                                        else dir = 5;
+                                        if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < width * width + 0.25 * (target.width + width) * (target.width + width)
+                                        && ydiff < height
+                                        && ydiff > -target.height)
+                                        {
+                                            mana = 0;
+                                            entityState = 2;
+                                            walkTicks = 0;
+                                        }
                                     }
-                                    direction = (Direction)dir;
+
+                                    //공격 시도가 실패한 경우 상대 방향으로 이동
+                                    if (entityState == 0)
+                                    {
+                                        int dir = (int)direction;
+                                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
+
+                                        if (targetVec.X > 0)
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 0;
+                                            else if (targetVec.Z > 0.7071) dir = 1;
+                                            else if (targetVec.Z > -0.7071) dir = 2;
+                                            else if (targetVec.Z > -0.9659) dir = 3;
+                                            else dir = 4;
+                                        }
+                                        else
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 9;
+                                            else if (targetVec.Z > 0.7071) dir = 8;
+                                            else if (targetVec.Z > -0.7071) dir = 7;
+                                            else if (targetVec.Z > -0.9659) dir = 6;
+                                            else dir = 5;
+                                        }
+                                        direction = (Direction)dir;
+                                    }
                                 }
                             }
+
+                            if (isOnGround()) move(moveSpeed);
                         }
-                        
-                        if(isOnGround()) move(moveSpeed);
                     }
                     if (deltaMovement.X * deltaMovement.X + deltaMovement.Z * deltaMovement.Z > 4)
                     {
@@ -266,10 +269,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                     }
                     break;
             }
-        }
-        public override void releaseFromMouse()
-        {
-
         }
         public override void tickDeath()
         {
