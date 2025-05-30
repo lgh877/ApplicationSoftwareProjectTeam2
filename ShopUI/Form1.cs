@@ -10,7 +10,7 @@ namespace ShopUI
         private List<Unit> units = new List<Unit>();
         private Unit selectedUnit = null;
 
-        // 인벤토리 리스트
+        // 아이템 장착 해제 및 장착 리스트
         private List<Item> inventory = new List<Item>();
 
         //특정 유닛 아이템 장착 리스트 함수
