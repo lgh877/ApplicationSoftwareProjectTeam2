@@ -11,6 +11,9 @@ namespace ApplicationSoftwareProjectTeam2.items
         public float DefenseBonus { get; set; }
         public float SpeedBonus { get; set; }
         public float HealthBonus { get; set; }
+        public float KnockbackPowerBonus { get; set; }
+        public float WeightBonus { get; set; }
+        public float ElasticityBonus { get; set; }
 
         public Item(string name, int price, ItemType type, string description)
         {
@@ -26,6 +29,9 @@ namespace ApplicationSoftwareProjectTeam2.items
             unit.Defense += DefenseBonus;
             unit.Speed += SpeedBonus;
             unit.Health += HealthBonus;
+            unit.KnockbackPower += KnockbackPowerBonus;
+            unit.Weight += WeightBonus;
+            unit.Elasticity += ElasticityBonus;
         }
         public override string ToString()
         {

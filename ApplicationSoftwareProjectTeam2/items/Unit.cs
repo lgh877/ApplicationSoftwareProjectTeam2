@@ -9,6 +9,10 @@ namespace ApplicationSoftwareProjectTeam2.items
         public float Defense { get; set; }
         public float Speed { get; set; }
         public float Health { get; set; }
+        public float KnockbackPower { get; set; }
+        public float Weight { get; set; }
+        public float Elasticity { get; set; }
+
 
         public int MaxItemSlots { get; set; } = 3;
         public List<Item> EquippedItems { get; set; } = new List<Item>();
