@@ -159,7 +159,6 @@ namespace ShopUI
                 selectedUnit.EquippedItems.Remove(targetItem);
                 player.Gold += targetItem.Price / 2;
 
-                MessageBox.Show($"{targetItem.Name} 판매 완료! (+{targetItem.Price / 2}G)");
                 lblGold.Text = $"골드: {player.Gold}G";
                 UpdateEquippedList();
             }
