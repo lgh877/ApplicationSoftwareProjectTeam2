@@ -15,6 +15,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         public float WeightBonus { get; set; }
         public float ElasticityBonus { get; set; }
 
+
         public Item(string name, int price, ItemType type, string description)
         {
             Name = name;

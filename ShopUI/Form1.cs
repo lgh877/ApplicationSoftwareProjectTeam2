@@ -10,6 +10,9 @@ namespace ShopUI
         private List<Unit> units = new List<Unit>();
         private Unit selectedUnit = null;
 
+        // 인벤토리 리스트
+        private List<Item> inventory = new List<Item>();
+
         //특정 유닛 아이템 장착 리스트 함수
         private void UpdateEquippedList()
         {
@@ -161,6 +164,51 @@ namespace ShopUI
 
                 lblGold.Text = $"골드: {player.Gold}G";
                 UpdateEquippedList();
+            }
+        }
+
+        private void btnUnequip_Click(object sender, EventArgs e)
+        {
+            if (selectedUnit == null || lstEquipped.SelectedItem == null) return;
+
+            Item item = lstEquipped.SelectedItem as Item;
+
+            if (item != null)
+            {
+                selectedUnit.EquippedItems.Remove(item);
+                inventory.Add(item);
+
+                UpdateEquippedList();
+                UpdateInventoryList(); // 아직 없으면 다음 단계에서 추가
+            }
+        }
+
+        private void btnEquipFromInventory_Click(object sender, EventArgs e)
+        {
+            if (selectedUnit == null || lstInventory.SelectedItem == null) return;
+
+            Item item = lstInventory.SelectedItem as Item;
+
+            if (item != null && selectedUnit.EquipItem(item))
+            {
+                inventory.Remove(item);
+
+                UpdateEquippedList();
+                UpdateInventoryList();
+            }
+            else
+            {
+                MessageBox.Show("장착 실패 (슬롯 초과)");
+            }
+        }
+
+        private void UpdateInventoryList()
+        {
+            lstInventory.Items.Clear();
+
+            foreach (var item in inventory)
+            {
+                lstInventory.Items.Add(item);
             }
         }
     }
