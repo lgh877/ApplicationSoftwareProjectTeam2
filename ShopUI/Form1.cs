@@ -51,8 +51,8 @@ namespace ShopUI
             foreach (var item in store.AvailableItems)
             {
                 Panel card = new Panel();
-                card.Width = 300;
-                card.Height = 200;
+                card.Width = 100;
+                card.Height = 80;
                 card.Margin = new Padding(5);
                 card.BorderStyle = BorderStyle.FixedSingle;
 

@@ -45,10 +45,10 @@
             // 
             // flowItems
             // 
-            flowItems.Location = new Point(0, 180);
+            flowItems.Location = new Point(0, 221);
             flowItems.Margin = new Padding(3, 4, 3, 4);
             flowItems.Name = "flowItems";
-            flowItems.Size = new Size(662, 662);
+            flowItems.Size = new Size(662, 320);
             flowItems.TabIndex = 0;
             // 
             // lblGold
