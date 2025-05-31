@@ -3,6 +3,7 @@ using ApplicationSoftwareProjectTeam2.entities.weirdos;
 using System;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -51,6 +52,19 @@ namespace ApplicationSoftwareProjectTeam2
             (-350, 105, false),
             (-450, 105, false)
         };
+        public List<(int, int, bool)> shopValueTupleList = new List<(int, int, bool)>()
+        {
+            (50, 5, false),
+            (150, 5, false),
+            (250, 5, false),
+            (350, 5, false),
+            (450, 5, false),
+            (50, 105, false),
+            (150, 105, false),
+            (250, 105, false),
+            (350, 105, false),
+            (450, 105, false)
+        };
 
         public GamePanel()
         {
@@ -74,7 +88,6 @@ namespace ApplicationSoftwareProjectTeam2
             for (int i = 0; i < 50; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
-                test.attackDamage = 0;
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
                 test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);
@@ -135,13 +148,13 @@ namespace ApplicationSoftwareProjectTeam2
                         float x = livingEntity.x;
                         float y = livingEntity.y;
                         float z = livingEntity.z;
+                        float scale = (float)currentWidth / worldWidth;
                         double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
-                        double scale3 = 3.6363 / Math.Cbrt(y + 50);
-                        int screenX = currentWidth / 2 + (int)(x * (currentWidth / (float)worldWidth) * scale2);
-                        int screenY = (int)(currentHeight - z * (currentHeight / (float)worldHeight) * scale2);
-                        screenY -= (int)(y * (currentHeight / (float)worldHeight) * scale2);
-                        int width = (int)(livingEntity.Image.Width * livingEntity.visualSize * (currentWidth / (float)worldWidth) * scale2);
-                        int height = (int)(livingEntity.Image.Height * livingEntity.visualSize * (currentHeight / (float)worldHeight) * scale2);
+                        int screenX = currentWidth / 2 + (int)(x * scale * scale2);
+                        int screenY = (int)(currentHeight - z * scale * scale2);
+                        screenY -= (int)(y * scale * scale2);
+                        int width = (int)(livingEntity.width * scale * scale2);
+                        int height = (int)(livingEntity.height * scale * scale2);
                         if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
                             mouseY >= screenY - height && mouseY <= screenY)
                         {

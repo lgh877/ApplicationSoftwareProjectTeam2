@@ -46,7 +46,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 100;  currentHealth = 100;
-            attackDamage = 50;
+            attackDamage = 20;
             moveSpeed = 3;
             mana = 0;
         }
@@ -114,14 +114,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                                     }
                                     else
                                     {
-                                        if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < width * width + 0.25 * (target.width + width) * (target.width + width)
-                                        && ydiff < height
-                                        && ydiff > -target.height)
-                                        {
-                                            mana = 0;
-                                            entityState = 2;
-                                            walkTicks = 0;
-                                        }
+                                        mana = 0;
+                                        entityState = 2;
+                                        walkTicks = 0;
                                     }
 
                                     //공격 시도가 실패한 경우 상대 방향으로 이동
@@ -247,16 +242,17 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                         case 7:
                             Image = (int)direction < 5 ? images[11] : images[17];
                             float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z));
-                            push(0, moveSpeed * 5, 0); // 위로 점프
-                            move((int) Math.Min(moveSpeed * 10, distance)); //돌진
+                            Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
+                            int jp = (int)Math.Min(moveSpeed * 100, distance);
+                            push(targetVec.X * jp, moveSpeed * 10, targetVec.Z * jp); // 위로 점프
                             break;
                         case 9:
                             Image = (int)direction < 5 ? images[12] : images[18];
+                            push(0, -moveSpeed * 12, 0);
                             break;
                         case 11:
                             Image = (int)direction < 5 ? images[13] : images[19];
-                            push(0, -moveSpeed * 5, 0);
-                            if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
+                            if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width))
                                 && target.y - y < height && target.y - y > -target.height)
                             {
                                 doHurtTarget(target, attackDamage * 1.5f, pushPower * 3);

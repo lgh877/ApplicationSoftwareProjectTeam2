@@ -129,9 +129,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             foreach (var item in level.getAllEntities<LivingEntity>())
             {
                 if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
-                    && (width + item.width) * 0.5 > Math.Abs(item.x - x) + Math.Abs(item.z - z)
-                    && height > item.y - y
-                    && item.height > y - item.y)
+                    && 50 > Math.Abs(item.x - x) + Math.Abs(item.z - z))
                 {
                     grabOccurred();
                     item.entityLevel++;
