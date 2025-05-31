@@ -18,8 +18,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
     }
     public class LivingEntity : Entity
     {
+        public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex;
-        public float attackDamage, currentHealth;
+        public float attackDamage, currentHealth, maxHealth;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving;
         public LivingEntity? target;
@@ -119,6 +120,27 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             checkCollisionsLiving();
         }
+        public byte getLivingEntityId()
+        {
+            return 0;
+        }
+        public virtual void detectLivingEntityAndMerge(Object? sender, EventArgs e)
+        {
+            foreach (var item in level.getAllEntities<LivingEntity>())
+            {
+                if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
+                    && (width + item.width) * 0.5 > Math.Abs(item.x - x) + Math.Abs(item.z - z)
+                    && height > item.y - y
+                    && item.height > y - item.y)
+                {
+                    grabOccurred();
+                    item.entityLevel++;
+                    item.scaleEntity(1.2f);
+                    level.entities.Remove(this);
+                    break;
+                }
+            };
+        }
         public virtual void tickDeath()
         {
             if (++deathTime == maxDeathTime)
@@ -210,6 +232,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 if (!findClosestDeckPosition()) return;
                 if (hasAi)
                 {
+                    landedEvent += detectLivingEntityAndMerge;
                     level.addFreshEntity(this);
                     level.livingentities.Remove(this);
                     hasAi = false;
@@ -217,12 +240,14 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             else if(!hasAi && z >= 200)
             {
+                landedEvent -= detectLivingEntityAndMerge;
                 //z값이 200보다 높다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 true로 해주세요
                 level.addFreshLivingEntity(this);
                 level.entities.Remove(this);
                 hasAi = true;
             }
         }
+
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드
         public virtual LivingEntity detectTargetManhattan(int range)
         {

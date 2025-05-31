@@ -11,13 +11,14 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
+        public event EventHandler landedEvent, collisionEvent;
         public int tickCount, sharedFlags, width = 40, height = 40, weight = 1, pushPower = 2;
-        public float x, y, z, visualSize, elasticForce = -0.1f;
+        public float x, y, z, visualSize, elasticForce = -0.1f, groundFraction = 0.7f, airFraction = 0.1f, gravity = 2.0f;
         public Vector3 deltaMovement;
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true;
+        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true, wasOnGround;
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -116,9 +117,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void collisionOccurred()
         {
+            collisionEvent?.Invoke(this, EventArgs.Empty);
         }
         public virtual void landed()
         {
+            landedEvent?.Invoke(this, EventArgs.Empty);
         }
         public virtual void setDeltaMovement(Vector3 vec)
         {
@@ -155,7 +158,23 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 }
             };
         }
+        public virtual void checkCollisions()
+        {
+            foreach (var item in level.getAllEntities<LivingEntity>())
+            {
+                if (!item.Equals(this)
+                    && (width + item.width) * 0.5 > Math.Abs(item.x - x) + Math.Abs(item.z - z)
+                    && height > item.y - y
+                    && item.height > y - item.y)
+                {
+                    applyCollision(item);
+                }
+            };
+        }
+        public virtual void applyCollision(Entity? entity)
+        {
 
+        }
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
             if(entity.x == x && entity.y == y && entity.z == z)
@@ -206,7 +225,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual bool isOnGround()
         {
-            return y < 2;
+            return y < 1;
         }
         public virtual void releaseFromMouse()
         {
@@ -238,12 +257,12 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 if (isOnGround())
                 {
-                    deltaMovement = deltaMovement * 0.7f;
+                    deltaMovement = deltaMovement * groundFraction;
                 }
                 else
                 {
-                    push(-deltaMovement.X * 0.1f, 0, -deltaMovement.Z * 0.1f);
-                    push(0, -2f, 0);
+                    push(-deltaMovement.X * airFraction, 0, -deltaMovement.Z * airFraction);
+                    push(0, -gravity, 0);
                 }
                 if (deltaMovement != Vector3.Zero)
                     if (deltaMovement.Y == 0)
@@ -251,6 +270,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     else
                         this.moveTo(x + deltaMovement.X, y + deltaMovement.Y, z + deltaMovement.Z);
             }
+            wasOnGround = isOnGround();
         }
     }
 }

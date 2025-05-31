@@ -71,11 +71,10 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 32; i++)
+            for (int i = 0; i < 50; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.attackDamage = 0;
-                test.scaleEntity((getRandomInteger(20) + 10) * 0.1f);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
                 test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);
@@ -227,11 +226,11 @@ namespace ApplicationSoftwareProjectTeam2
             int elapsed = (int)_renderWatch.ElapsedMilliseconds;
 
             // 3) 다음 인터벌 계산
-            int nextInterval = 32 - elapsed;
+            int nextInterval = 42 - elapsed;
             if (nextInterval < 1)
                 nextInterval = 1;               // 최소 1ms
-            else if (nextInterval > 32)
-                nextInterval = 32; // 최대 16ms
+            else if (nextInterval > 42)
+                nextInterval = 42; // 최대 16ms
 
             // 4) 타이머에 반영
             logicTick.Interval = nextInterval;
