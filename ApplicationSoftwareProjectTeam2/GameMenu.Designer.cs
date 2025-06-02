@@ -31,7 +31,7 @@
             lblTitle = new Label();
             btnStart = new Button();
             lblInsertName = new Label();
-            textBox1 = new TextBox();
+            txtInsertName = new TextBox();
             SuspendLayout();
             // 
             // lblTitle
@@ -67,12 +67,12 @@
             lblInsertName.TabIndex = 2;
             lblInsertName.Text = "닉네임 입력 :";
             // 
-            // textBox1
+            // txtInsertName
             // 
-            textBox1.Location = new Point(374, 270);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(220, 39);
-            textBox1.TabIndex = 3;
+            txtInsertName.Location = new Point(374, 270);
+            txtInsertName.Name = "txtInsertName";
+            txtInsertName.Size = new Size(220, 39);
+            txtInsertName.TabIndex = 3;
             // 
             // GameMenu
             // 
@@ -80,7 +80,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(800, 450);
-            Controls.Add(textBox1);
+            Controls.Add(txtInsertName);
             Controls.Add(lblInsertName);
             Controls.Add(btnStart);
             Controls.Add(lblTitle);
@@ -97,6 +97,6 @@
         private Label lblTitle;
         private Button btnStart;
         private Label lblInsertName;
-        private TextBox textBox1;
+        private TextBox txtInsertName;
     }
 }

@@ -1,5 +1,6 @@
 using ApplicationSoftwareProjectTeam2.entities;
 using ApplicationSoftwareProjectTeam2.entities.weirdos;
+using ApplicationSoftwareProjectTeam2.items;
 using System;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
@@ -38,6 +39,7 @@ namespace ApplicationSoftwareProjectTeam2
         private BufferedGraphicsContext bufferContext;
         private BufferedGraphics buffer;
         private Graphics panelGraphics;
+        public Player clientPlayer;
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
@@ -76,7 +78,7 @@ namespace ApplicationSoftwareProjectTeam2
             bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
             buffer.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
+            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.None;
             buffer.Graphics.SmoothingMode = SmoothingMode.None;
             buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
             panelGraphics = panelPlayScreen.CreateGraphics();
@@ -84,12 +86,13 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = clientPlayer.playerName;
             random = new CrossPlatformRandom();
             randomSeed = 0;
 
             this.Width += 1;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 600; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
@@ -280,6 +283,10 @@ namespace ApplicationSoftwareProjectTeam2
 
             bufferContext = BufferedGraphicsManager.Current;
             buffer = bufferContext.Allocate(panelPlayScreen.CreateGraphics(), panelPlayScreen.DisplayRectangle);
+            buffer.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            buffer.Graphics.PixelOffsetMode = PixelOffsetMode.None;
+            buffer.Graphics.SmoothingMode = SmoothingMode.None;
+            buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
         }
 
         private void button1_Click(object sender, EventArgs e)
