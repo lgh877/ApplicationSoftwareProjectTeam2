@@ -82,8 +82,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
             else
             {
                 this.y = 0;
+                if (deltaMovement.Y < -2)
+                    landed();
                 deltaMovement.Y *= elasticForce;
-                landed();
             }
             if (!hasAi || z < 700 && z > 200)
                 this.z = z;

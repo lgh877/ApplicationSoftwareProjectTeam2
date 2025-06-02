@@ -41,29 +41,33 @@ namespace ApplicationSoftwareProjectTeam2
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
-            (-50, 5, false),
-            (-150, 5, false),
-            (-250, 5, false),
-            (-350, 5, false),
-            (-450, 5, false),
-            (-50, 105, false),
-            (-150, 105, false),
-            (-250, 105, false),
-            (-350, 105, false),
-            (-450, 105, false)
+            (40, 5, false),
+            (-40, 5, false),
+            (-120, 5, false),
+            (-200, 5, false),
+            (-280, 5, false),
+            (-360, 5, false),
+            (-440, 5, false),
+            (40, 105, false),
+            (-40, 105, false),
+            (-120, 105, false),
+            (-200, 105, false),
+            (-280, 105, false),
+            (-360, 105, false),
+            (-440, 105, false)
         };
         public List<(int, int, bool)> shopValueTupleList = new List<(int, int, bool)>()
         {
-            (50, 5, false),
-            (150, 5, false),
-            (250, 5, false),
-            (350, 5, false),
-            (450, 5, false),
-            (50, 105, false),
-            (150, 105, false),
-            (250, 105, false),
-            (350, 105, false),
-            (450, 105, false)
+            (120, 5, false),
+            (200, 5, false),
+            (280, 5, false),
+            (360, 5, false),
+            (440, 5, false),
+            (120, 105, false),
+            (200, 105, false),
+            (280, 105, false),
+            (360, 105, false),
+            (440, 105, false)
         };
 
         public GamePanel()
@@ -154,9 +158,8 @@ namespace ApplicationSoftwareProjectTeam2
                         int screenY = (int)(currentHeight - z * scale * scale2);
                         screenY -= (int)(y * scale * scale2);
                         int width = (int)(livingEntity.width * scale * scale2);
-                        int height = (int)(livingEntity.height * scale * scale2);
                         if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
-                            mouseY >= screenY - height && mouseY <= screenY)
+                            mouseY >= screenY - width && mouseY <= screenY)
                         {
                             livingEntity.grabOccurred();
                             grabbed = true;
