@@ -1,3 +1,7 @@
+// 계정 연동 오류 때문에 6월 이전 기록은 전체 커밋 목록에서 확인해주시면 감사하겠습니다.
+// 작성자가 Jeon Jiwon인 것도 jeonjiwon1이 작성한 것입니다!
+
+
 using ApplicationSoftwareProjectTeam2.items;
 
 namespace ShopUI

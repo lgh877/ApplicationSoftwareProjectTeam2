@@ -45,6 +45,7 @@
             // 
             // flowItems
             // 
+            flowItems.AutoScroll = true;
             flowItems.Location = new Point(0, 221);
             flowItems.Margin = new Padding(3, 4, 3, 4);
             flowItems.Name = "flowItems";
