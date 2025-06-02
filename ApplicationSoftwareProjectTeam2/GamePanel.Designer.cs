@@ -70,7 +70,8 @@
             Controls.Add(panelPlayScreen);
             MinimumSize = new Size(826, 521);
             Name = "GamePanel";
-            Text = "Form1";
+            Text = "AutoCombatant";
+            FormClosed += GamePanel_FormClosed;
             Load += Form1_Load;
             Resize += GamePanel_Resize;
             panelPlayScreen.ResumeLayout(false);

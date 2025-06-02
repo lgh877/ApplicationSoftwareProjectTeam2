@@ -1,4 +1,4 @@
-namespace ApplicationSoftwareProjectTeam2
+namespace GameMenu
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace ApplicationSoftwareProjectTeam2
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new GameMenu());
+            Application.Run(new MenuForm());
         }
     }
 }

@@ -289,9 +289,9 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void panelPlayScreen_MouseClick(object sender, MouseEventArgs e)
         {
-            if(grabbed) 
+            if (grabbed)
             {
-                grabbed = false; return; 
+                grabbed = false; return;
             }
             mouseX = e.X; mouseY = e.Y;
             handleMouseEvent = true;
@@ -303,6 +303,11 @@ namespace ApplicationSoftwareProjectTeam2
             {
                 mouseX = e.X; mouseY = e.Y;
             }
+        }
+
+        private void GamePanel_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Owner?.Show(); // ºÎ¸ð ÆûÀ» ´Ù½Ã º¸¿©ÁÜ
         }
 
         public List<T> getAllLivingEntities<T>() where T : LivingEntity
