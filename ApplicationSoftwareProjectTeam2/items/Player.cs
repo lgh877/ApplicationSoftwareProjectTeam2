@@ -4,9 +4,9 @@ namespace ApplicationSoftwareProjectTeam2.items
 {
     public class Player
     {
-        public List<LivingEntity> entitiesofplayer { get; set; }
+        public LinkedList<LivingEntity> entitiesofplayer = new LinkedList<LivingEntity>();
         public string playerName { get; set; } = "Player1";
-        public int Gold { get; set; } = 15;
+        public int Gold = 15;
 
         public bool PurchaseItem(Item item, Unit unit)
         {

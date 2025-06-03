@@ -20,10 +20,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         public event EventHandler deathEvent;
         public byte entityLevel = 0;
-        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex;
+        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost;
         public float attackDamage, currentHealth, maxHealth;
         public Direction direction = Direction.Right;
-        public bool hadTarget, isMoving, isActuallyMoving, hasLife;
+        public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased;
         public LivingEntity? target;
         public List<Item> EquippedItems = new List<Item>(3);
         public (int, int) deckPosition = (0, 0); // (x, z) 좌표로 표현되는 덱 위치
@@ -145,13 +145,27 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public void resetDeck(Object? sender, EventArgs e)
         {
-            if (deckIndex != -1)
+            if (isPurchased)
             {
-                // 덱 위치를 해제
-                level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
-                deckIndex = -1; // 인덱스 초기화
+                level.grabbed = true;
+                grabbedByMouse = true;
+                if (deckIndex != -1)
+                {
+                    // 덱 위치를 해제
+                    level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
+                    deckIndex = -1; // 인덱스 초기화
+                }
+            }
+            else if (level.clientPlayer.Gold >= cost)
+            {
+                level.clientPlayer.Gold -= cost;
+                isPurchased = true;
+                level.clientPlayer.entitiesofplayer.Append(this);
+                level.grabbed = true;
+                grabbedByMouse = true;
             }
         }
+
         public virtual void setDeath(Object? sender, EventArgs e)
         {
         }

@@ -86,12 +86,11 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = clientPlayer.playerName;
             random = new CrossPlatformRandom();
             randomSeed = 0;
 
             this.Width += 1;
-
+            
             for (int i = 0; i < 100; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
@@ -99,7 +98,6 @@ namespace ApplicationSoftwareProjectTeam2
                 test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);
             }
-
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
@@ -165,8 +163,6 @@ namespace ApplicationSoftwareProjectTeam2
                             mouseY >= screenY - width && mouseY <= screenY)
                         {
                             livingEntity.grabOccurred();
-                            grabbed = true;
-                            livingEntity.grabbedByMouse = true;
                             break; // 클릭된 엔티티를 찾으면 루프 종료
                         }
                     }
