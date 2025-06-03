@@ -31,8 +31,8 @@
             components = new System.ComponentModel.Container();
             logicTick = new System.Windows.Forms.Timer(components);
             panelPlayScreen = new Panel();
-            button1 = new Button();
             label1 = new Label();
+            button1 = new Button();
             panelPlayScreen.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,6 +54,15 @@
             panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
             panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(78, 32);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            // 
             // button1
             // 
             button1.Location = new Point(623, 3);
@@ -64,15 +73,6 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(0, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 32);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
-            // 
             // GamePanel
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
@@ -81,6 +81,7 @@
             Controls.Add(panelPlayScreen);
             MinimumSize = new Size(826, 521);
             Name = "GamePanel";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AutoCombatant";
             FormClosed += GamePanel_FormClosed;
             Load += Form1_Load;

@@ -243,7 +243,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                             Image = (int)direction < 5 ? images[11] : images[17];
                             float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z));
                             Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
-                            int jp = (int)Math.Min(moveSpeed * 100, distance);
+                            int jp = (int)Math.Min(moveSpeed * 100, distance * 1.5);
                             push(targetVec.X * jp, moveSpeed * 10, targetVec.Z * jp); // 위로 점프
                             break;
                         case 9:
@@ -272,10 +272,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                     break;
             }
         }
-        public override void tickDeath()
+        public override void setDeath(object? sender, EventArgs e)
         {
-            base.tickDeath();
-            if (deathTime == 1) { width *= 2; height /= 2; Image = (int)direction < 5 ? images[8] : images[9]; }
+            width *= 2; height /= 2; Image = (int)direction < 5 ? images[8] : images[9];
         }
     }
 }

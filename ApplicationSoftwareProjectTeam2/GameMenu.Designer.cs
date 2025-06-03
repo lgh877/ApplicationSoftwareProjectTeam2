@@ -87,6 +87,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "GameMenu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "GameMenu";
             ResumeLayout(false);
             PerformLayout();

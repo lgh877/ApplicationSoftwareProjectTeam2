@@ -92,7 +92,7 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 600; i++)
+            for (int i = 0; i < 100; i++)
             {
                 WeirdGuy test = new WeirdGuy(this);
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);

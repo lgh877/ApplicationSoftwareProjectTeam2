@@ -18,18 +18,22 @@ namespace ApplicationSoftwareProjectTeam2.entities
     }
     public class LivingEntity : Entity
     {
+        public event EventHandler deathEvent;
         public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex;
         public float attackDamage, currentHealth, maxHealth;
         public Direction direction = Direction.Right;
-        public bool hadTarget, isMoving, isActuallyMoving;
+        public bool hadTarget, isMoving, isActuallyMoving, hasLife;
         public LivingEntity? target;
         public List<Item> EquippedItems = new List<Item>(3);
         public (int, int) deckPosition = (0, 0); // (x, z) 좌표로 표현되는 덱 위치
         public LivingEntity(GamePanel level) : base(level) 
         {
+            grabbedEvent += resetDeck;
+            deathEvent += setDeath;
             deckIndex = -1;
             hadTarget = false;
+            hasLife = true;
         }
         public virtual EntityTypes getEntityType()
         {
@@ -139,8 +143,25 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 }
             };
         }
+        public void resetDeck(Object? sender, EventArgs e)
+        {
+            if (deckIndex != -1)
+            {
+                // 덱 위치를 해제
+                level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
+                deckIndex = -1; // 인덱스 초기화
+            }
+        }
+        public virtual void setDeath(Object? sender, EventArgs e)
+        {
+        }
         public virtual void tickDeath()
         {
+            if (hasLife)
+            {
+                hasLife = false;
+                deathEvent?.Invoke(this, EventArgs.Empty);
+            }
             if (++deathTime == maxDeathTime)
             {
                 shouldRemove = true;
@@ -212,15 +233,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             return currentHealth > 0;
         }
-        public override void grabOccurred()
-        {
-            if(deckIndex != -1)
-            {
-                // 덱 위치를 해제
-                level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
-                deckIndex = -1; // 인덱스 초기화
-            }
-        }
+        
         public override void releaseFromMouse()
         {
             direction = Direction.Right;

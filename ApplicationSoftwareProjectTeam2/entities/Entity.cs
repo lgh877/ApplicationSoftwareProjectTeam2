@@ -11,7 +11,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class Entity
     {
-        public event EventHandler landedEvent, collisionEvent;
+        public event EventHandler landedEvent, collisionEvent, grabbedEvent;
         public int tickCount, sharedFlags, width = 40, height = 40, weight = 1, pushPower = 2;
         public float x, y, z, visualSize, elasticForce = -0.1f, groundFraction = 0.7f, airFraction = 0.1f, gravity = 2.0f;
         public Vector3 deltaMovement;
@@ -234,6 +234,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void grabOccurred()
         {
+            grabbedEvent?.Invoke(this, EventArgs.Empty);
         }
         public virtual void tick()
         {
