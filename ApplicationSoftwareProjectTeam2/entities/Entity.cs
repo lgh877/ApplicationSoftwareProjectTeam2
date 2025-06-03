@@ -234,7 +234,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void grabOccurred()
         {
-            grabbedEvent?.Invoke(this, EventArgs.Empty);
+            if (this.team.Equals(level.clientPlayer.playerName))
+                grabbedEvent?.Invoke(this, EventArgs.Empty);
         }
         public virtual void tick()
         {

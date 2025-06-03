@@ -29,6 +29,7 @@ namespace ApplicationSoftwareProjectTeam2
         public List<LivingEntity?> livingentities = new List<LivingEntity?>();
         //투사체, 기술 등에 쓰이는 객체들을 관리하는 리스트로, 리스트에 삽입 / 삭제가 자주 발생하므로 링크드 리스트 사용
         public LinkedList<Entity?> entities = new LinkedList<Entity?>();
+        public LinkedList<Entity?> shopentities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
         public int currentWidth, currentHeight, mouseX, mouseY;
@@ -58,18 +59,18 @@ namespace ApplicationSoftwareProjectTeam2
             (-360, 105, false),
             (-440, 105, false)
         };
-        public List<(int, int, bool)> shopValueTupleList = new List<(int, int, bool)>()
+        public List<(int, int)> shopValueTupleList = new List<(int, int)>()
         {
-            (120, 5, false),
-            (200, 5, false),
-            (280, 5, false),
-            (360, 5, false),
-            (440, 5, false),
-            (120, 105, false),
-            (200, 105, false),
-            (280, 105, false),
-            (360, 105, false),
-            (440, 105, false)
+            (120, 5),
+            (200, 5),
+            (280, 5),
+            (360, 5),
+            (440, 5),
+            (120, 105),
+            (200, 105),
+            (280, 105),
+            (360, 105),
+            (440, 105)
         };
 
         public GamePanel()
@@ -137,33 +138,69 @@ namespace ApplicationSoftwareProjectTeam2
 
                 node = nextNode2;
             }
+            node = shopentities.First;
+            while (node != null)
+            {
+                var nextNode2 = node.Next;
+                node.Value.tick();
+
+                if (node.Value.shouldRemove)
+                {
+                    node.Value = null;
+                    shopentities.Remove(node);
+                }
+
+                node = nextNode2;
+            }
             allentities.Clear();
-            allentities.Capacity = livingentities.Count + entities.Count;
+            allentities.Capacity = livingentities.Count + entities.Count + shopentities.Count;
             allentities.AddRange(livingentities);
             foreach (var entity in entities) allentities.Add(entity);
+            foreach (var entity in shopentities) allentities.Add(entity);
             allentities.Sort((a, b) => a.z.CompareTo(b.z));
             if (handleMouseEvent)
             {
                 handleMouseEvent = false;
                 // 마우스 클릭 이벤트 처리
-                foreach (var entity in allentities)
+                float scale = (float)currentWidth / worldWidth;
+                if (mouseX > currentWidth - 80 * scale && mouseY > currentHeight - 60 * scale
+                    && clientPlayer.Gold >= 1)
                 {
-                    if (entity is LivingEntity livingEntity && livingEntity.isAlive())
+                    clientPlayer.Gold--;
+                    foreach (var entity in shopentities)
                     {
-                        float x = livingEntity.x;
-                        float y = livingEntity.y;
-                        float z = livingEntity.z;
-                        float scale = (float)currentWidth / worldWidth;
-                        double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
-                        int screenX = currentWidth / 2 + (int)(x * scale * scale2);
-                        int screenY = (int)(currentHeight - z * scale * scale2);
-                        screenY -= (int)(y * scale * scale2);
-                        int width = (int)(livingEntity.width * scale * scale2);
-                        if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
-                            mouseY >= screenY - width && mouseY <= screenY)
+                        entity.shouldRemove = true;
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        WeirdGuy test = new WeirdGuy(this);
+                        test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
+                        test.team = clientPlayer.playerName;
+                        test.hasAi = false;
+                        //test.deckIndex = 1;
+                        shopentities.AddFirst(test);
+                    }
+                }
+                else
+                {
+                    foreach (var entity in allentities)
+                    {
+                        if (entity is LivingEntity livingEntity && livingEntity.isAlive())
                         {
-                            livingEntity.grabOccurred();
-                            break; // 클릭된 엔티티를 찾으면 루프 종료
+                            float x = livingEntity.x;
+                            float y = livingEntity.y;
+                            float z = livingEntity.z;
+                            double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
+                            int screenX = currentWidth / 2 + (int)(x * scale * scale2);
+                            int screenY = (int)(currentHeight - z * scale * scale2);
+                            screenY -= (int)(y * scale * scale2);
+                            int width = (int)(livingEntity.width * scale * scale2);
+                            if (mouseX >= screenX - width / 2 && mouseX <= screenX + width / 2 &&
+                                mouseY >= screenY - width && mouseY <= screenY)
+                            {
+                                livingEntity.grabOccurred();
+                                break; // 클릭된 엔티티를 찾으면 루프 종료
+                            }
                         }
                     }
                 }

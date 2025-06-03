@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.items;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ApplicationSoftwareProjectTeam2.entities
 {    
@@ -160,7 +161,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 level.clientPlayer.Gold -= cost;
                 isPurchased = true;
+                level.addFreshEntity(this);
+                level.shopentities.Remove(this);
                 level.clientPlayer.entitiesofplayer.Append(this);
+                landedEvent += detectLivingEntityAndMerge;
                 level.grabbed = true;
                 grabbedByMouse = true;
             }
