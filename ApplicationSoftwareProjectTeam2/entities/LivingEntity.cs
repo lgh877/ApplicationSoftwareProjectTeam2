@@ -131,6 +131,17 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void detectLivingEntityAndMerge(Object? sender, EventArgs e)
         {
+            if (x < -470 && z < 70)
+            {
+                level.clientPlayer.Gold += cost / 2; // 덱에서 제거될 때 골드 반환
+                level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
+                level.occupiedIndexCount--;
+                deckIndex = -1; // 인덱스 초기화
+                level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
+                level.grabbed = false; // 덱에서 제거되었으므로 grabbed 상태 해제
+                shouldRemove = true; // 엔티티 제거 플래그 설정
+                return; // 덱에서 제거되었으므로 더 이상 처리하지 않음
+            }
             foreach (var item in level.getAllEntities<LivingEntity>())
             {
                 if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
