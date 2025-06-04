@@ -114,6 +114,8 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
+            bool isGameRunning = true;
+            string detectTeam = clientPlayer.playerName;
             for (int i = livingentities.Count - 1; i != -1; i--)
             {
                 LivingEntity livingentity = livingentities[i];
@@ -173,9 +175,9 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        WeirdGuy test = new WeirdGuy(this);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(3)), clientPlayer.playerName);
+                        for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
-                        test.team = clientPlayer.playerName;
                         test.hasAi = false;
                         //test.deckIndex = 1;
                         shopentities.AddFirst(test);
@@ -374,6 +376,22 @@ namespace ApplicationSoftwareProjectTeam2
                 }
             }
             return result;
+        }
+        //아이디값 입력받으면 거기에 상응하는 캐릭터를 반환해주는 메서드
+        public LivingEntity CreateEntity(byte type, string name)
+        {
+            #region 아이디별 객체 타입 열람표
+            /*
+             * 0: WeirdGuy
+             */
+            #endregion
+            return type switch
+            {
+                0 => new WeirdGuy(this) { team = name },
+                1 => new WeirdGuy(this) { team = name, entityLevel = 3 },
+                2 => new WeirdGuy(this) { team = name, entityLevel = 6 },
+                _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
+            };
         }
     }
 }
