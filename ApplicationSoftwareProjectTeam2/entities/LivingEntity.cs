@@ -152,12 +152,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 grabbedByMouse = true;
                 if (deckIndex != -1)
                 {
+                    level.occupiedIndexCount--;
                     // 덱 위치를 해제
                     level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                     deckIndex = -1; // 인덱스 초기화
                 }
             }
-            else if (level.clientPlayer.Gold >= cost)
+            else if (level.clientPlayer.Gold >= cost && level.occupiedIndexCount < 14)
             {
                 level.clientPlayer.Gold -= cost;
                 isPurchased = true;
@@ -229,6 +230,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 deckPosition = (level.valueTupleList[foundIndex].Item1, level.valueTupleList[foundIndex].Item2);
                 level.valueTupleList[foundIndex] = level.valueTupleList[foundIndex] with { Item3 = true };
                 deckIndex = foundIndex; // 인덱스 저장
+                level.occupiedIndexCount++;
                 return true; // 성공적으로 위치를 찾음
             }
             else

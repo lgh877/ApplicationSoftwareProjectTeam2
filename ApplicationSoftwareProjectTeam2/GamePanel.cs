@@ -32,7 +32,7 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> shopentities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        public int currentWidth, currentHeight, mouseX, mouseY;
+        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount;
         public bool handleMouseEvent, grabbed = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
@@ -61,16 +61,16 @@ namespace ApplicationSoftwareProjectTeam2
         };
         public List<(int, int)> shopValueTupleList = new List<(int, int)>()
         {
-            (120, 5),
-            (200, 5),
-            (280, 5),
-            (360, 5),
-            (440, 5),
-            (120, 105),
-            (200, 105),
-            (280, 105),
-            (360, 105),
-            (440, 105)
+            (150, 5),
+            (230, 5),
+            (310, 5),
+            (390, 5),
+            (470, 5),
+            (150, 105),
+            (230, 105),
+            (310, 105),
+            (390, 105),
+            (470, 105)
         };
 
         public GamePanel()
