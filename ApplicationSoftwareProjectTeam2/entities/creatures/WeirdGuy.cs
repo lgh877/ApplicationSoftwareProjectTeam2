@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.utils;
 
-namespace ApplicationSoftwareProjectTeam2.entities.weirdos
+namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class WeirdGuy : LivingEntity
     {
@@ -46,7 +46,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
             visualSize = 1f; width = 40; height = 70; weight = 10; pushPower = 30;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
-            maxHealth = 100;  currentHealth = 100;
+            maxHealth = 100; currentHealth = 100;
             attackDamage = 20;
             moveSpeed = 3;
             mana = 0;
@@ -61,6 +61,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
         {
             return EntityTypes.Weirdos;
         }
+        #region 캐릭터 아이디 기록
+        public byte getLivingEntityId()
+        {
+            return 1;
+        }
+        #endregion
         public override void tickAlive()
         {
             base.tickAlive();
@@ -69,6 +75,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                 case 0:
                     if (hasAi)
                     {
+                        #region 평상시에 아무렇게 걸어다니기 + 타겟 탐색
                         if (level.getRandomInteger(10) == 0)
                         {
                             if (getTarget() == null)
@@ -86,6 +93,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                             }
                             isMoving = !isMoving || getTarget() != null;
                         }
+                        #endregion
                         if (isMoving)
                         {
                             if (tickCount % 4 == 0)
@@ -150,6 +158,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                             if (isOnGround()) move(moveSpeed);
                         }
                     }
+                    #region 캐릭터가 실제로 움직이고 있는 지 결정하는 부분으로, 애니매이션 재생에 쓰임
                     if (deltaMovement.X * deltaMovement.X + deltaMovement.Z * deltaMovement.Z > 4)
                     {
                         walkTicks++;
@@ -173,6 +182,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                                 break;
                         }
                     }
+                    #endregion
+                    #region 평상시 애니매이션 재생 부분
                     else
                     {
                         if (isActuallyMoving)
@@ -191,6 +202,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.weirdos
                                 break;
                         }
                     }
+                    #endregion
                     break;
                 case 1:
                     direction = target.x - x > 0 ? Direction.Right : Direction.Left;

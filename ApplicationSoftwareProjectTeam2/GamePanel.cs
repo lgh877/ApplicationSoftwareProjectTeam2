@@ -1,5 +1,5 @@
 using ApplicationSoftwareProjectTeam2.entities;
-using ApplicationSoftwareProjectTeam2.entities.weirdos;
+using ApplicationSoftwareProjectTeam2.entities.creatures;
 using ApplicationSoftwareProjectTeam2.items;
 using System;
 using System.Diagnostics;
@@ -384,12 +384,13 @@ namespace ApplicationSoftwareProjectTeam2
             #region 아이디별 객체 타입 열람표
             /*
              * 0: WeirdGuy
+             * 10 : Skels
              */
             #endregion
             return type switch
             {
                 0 => new WeirdGuy(this) { team = name },
-                1 => new WeirdGuy(this) { team = name, entityLevel = 3 },
+                1 => new Skels(this) { team = name },
                 2 => new WeirdGuy(this) { team = name, entityLevel = 6 },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
