@@ -63,9 +63,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _1024 {
+        internal static System.Drawing.Bitmap sprite_Skel1_attack0 {
             get {
-                object obj = ResourceManager.GetObject("1024", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_attack0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _128 {
+        internal static System.Drawing.Bitmap sprite_Skel1_attack1 {
             get {
-                object obj = ResourceManager.GetObject("128", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_attack1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _16 {
+        internal static System.Drawing.Bitmap sprite_Skel1_attack2 {
             get {
-                object obj = ResourceManager.GetObject("16", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_attack2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _2 {
+        internal static System.Drawing.Bitmap sprite_Skel1_attack3 {
             get {
-                object obj = ResourceManager.GetObject("2", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_attack3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _2048 {
+        internal static System.Drawing.Bitmap sprite_Skel1_idle0 {
             get {
-                object obj = ResourceManager.GetObject("2048", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_idle0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _256 {
+        internal static System.Drawing.Bitmap sprite_Skel1_idle1 {
             get {
-                object obj = ResourceManager.GetObject("256", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_idle1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _32 {
+        internal static System.Drawing.Bitmap sprite_Skel1_move0 {
             get {
-                object obj = ResourceManager.GetObject("32", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_move0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,39 +133,9 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _4 {
+        internal static System.Drawing.Bitmap sprite_Skel1_move1 {
             get {
-                object obj = ResourceManager.GetObject("4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap _512 {
-            get {
-                object obj = ResourceManager.GetObject("512", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap _64 {
-            get {
-                object obj = ResourceManager.GetObject("64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap _8 {
-            get {
-                object obj = ResourceManager.GetObject("8", resourceCulture);
+                object obj = ResourceManager.GetObject("sprite_Skel1_move1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

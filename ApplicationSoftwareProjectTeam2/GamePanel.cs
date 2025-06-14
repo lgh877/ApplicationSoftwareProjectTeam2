@@ -169,6 +169,7 @@ namespace ApplicationSoftwareProjectTeam2
                     && clientPlayer.Gold >= 1)
                 {
                     clientPlayer.Gold--;
+                    label1.Text = $"Gold: {clientPlayer.Gold}";
                     foreach (var entity in shopentities)
                     {
                         entity.shouldRemove = true;

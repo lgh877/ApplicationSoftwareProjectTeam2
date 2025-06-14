@@ -14,7 +14,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         Nothing = 0,
         Weirdos,
-        Skeletons,
+        Undeads,
         Avengers
     }
     public class LivingEntity : Entity
@@ -131,9 +131,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void detectLivingEntityAndMerge(Object? sender, EventArgs e)
         {
+            #region 판매 부분
             if (x < -470 && z < 70)
             {
                 level.clientPlayer.Gold += cost / 2; // 덱에서 제거될 때 골드 반환
+                level.label1.Text = $"Gold: {level.clientPlayer.Gold}";
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
@@ -142,6 +144,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 shouldRemove = true; // 엔티티 제거 플래그 설정
                 return; // 덱에서 제거되었으므로 더 이상 처리하지 않음
             }
+            #endregion
+            #region 조합 부분
             foreach (var item in level.getAllEntities<LivingEntity>())
             {
                 if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
@@ -154,11 +158,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     break;
                 }
             };
+            #endregion
         }
         public void resetDeck(Object? sender, EventArgs e)
         {
             if (isPurchased)
             {
+                #region 캐릭터가 보유중일 시의 덱 위치 초기화
                 level.grabbed = true;
                 grabbedByMouse = true;
                 if (deckIndex != -1)
@@ -168,10 +174,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                     deckIndex = -1; // 인덱스 초기화
                 }
+                #endregion
             }
             else if (level.clientPlayer.Gold >= cost && level.occupiedIndexCount < 14)
             {
+                #region 캐릭터가 구매 시 구입 가능 여부 확인 및 덱 위치 초기화
                 level.clientPlayer.Gold -= cost;
+                level.label1.Text = $"Gold: {level.clientPlayer.Gold}";
                 isPurchased = true;
                 level.addFreshEntity(this);
                 level.shopentities.Remove(this);
@@ -179,6 +188,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 landedEvent += detectLivingEntityAndMerge;
                 level.grabbed = true;
                 grabbedByMouse = true;
+                #endregion
             }
         }
 

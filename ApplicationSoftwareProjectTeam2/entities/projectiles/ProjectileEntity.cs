@@ -6,7 +6,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationSoftwareProjectTeam2.entities
+namespace ApplicationSoftwareProjectTeam2.entities.projectiles
 {
     public class ProjectileEntity : Entity
     {
@@ -33,7 +33,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public override void checkCollisionsLiving()
         {
-            if(!canDamage) return;
+            if (!canDamage) return;
             base.checkCollisionsLiving();
         }
         public override void applyCollisionLiving(LivingEntity entity)
