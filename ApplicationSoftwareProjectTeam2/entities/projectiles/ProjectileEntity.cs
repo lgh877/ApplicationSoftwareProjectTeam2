@@ -11,25 +11,18 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
     public class ProjectileEntity : Entity
     {
         public LivingEntity Owner;
-        public float damage;
+        public int maxLifeTime;
+        public float attackDamage;
         public bool canDamage;
         public ProjectileEntity(GamePanel level) : base(level)
         {
-            //Image = Properties.Resources._2;
             canDamage = true;
-            visualSize = 0.05f;
-            width = 10; height = 10; weight = 30;
-        }
-        public override void landed()
-        {
-            base.landed();
-            canDamage = false;
         }
         public override void tick()
         {
             base.tick();
             checkCollisionsLiving();
-            if (tickCount > 100) shouldRemove = true;
+            if (tickCount > maxLifeTime) shouldRemove = true;
         }
         public override void checkCollisionsLiving()
         {
@@ -39,9 +32,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
         public override void applyCollisionLiving(LivingEntity entity)
         {
             if (entity.team.Equals(team)) return;
-            base.applyCollisionLiving(entity);
-            entity.hurt(Owner != null ? Owner : null, damage);
-            //canDamage = false;
+            //base.applyCollisionLiving(entity);
+            collisionOccurred(entity);
+        }
+        public virtual void collisionOccurred(LivingEntity victim)
+        {
+            victim.hurt(Owner != null ? Owner : null, attackDamage);
         }
     }
 }

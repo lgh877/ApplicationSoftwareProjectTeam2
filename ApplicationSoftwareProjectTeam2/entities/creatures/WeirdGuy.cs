@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.entities.projectiles;
 using ApplicationSoftwareProjectTeam2.utils;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures

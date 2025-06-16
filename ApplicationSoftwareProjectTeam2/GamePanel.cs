@@ -92,11 +92,10 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
             
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
-                WeirdGuy test = new WeirdGuy(this);
+                LivingEntity test = CreateEntity((byte)(new Random().Next(2)), getRandomInteger(101).ToString());
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
-                test.team = getRandomInteger(101).ToString();
                 addFreshLivingEntity(test);
             }
             currentWidth = this.Width - 50;
@@ -176,7 +175,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(3)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(2)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
