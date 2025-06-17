@@ -313,6 +313,96 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion1 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion2 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion3 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion4 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion5 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion6 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion7 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion8 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap groundSoulExplosion9 {
+            get {
+                object obj = ResourceManager.GetObject("groundSoulExplosion9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap skel_projectile {
             get {
                 object obj = ResourceManager.GetObject("skel_projectile", resourceCulture);
@@ -406,6 +496,66 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         internal static System.Drawing.Bitmap Skel4_torso_png {
             get {
                 object obj = ResourceManager.GetObject("Skel4_torso.png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert0 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_ColEffVert5 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_ColEffVert5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

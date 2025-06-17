@@ -10,7 +10,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class GiantWeirdGuy : LivingEntity
     {
-        private int walkTicks, mana;
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.giantWeirdGuyHead,
@@ -36,17 +35,18 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public GiantWeirdGuy(GamePanel level) : base(level)
         {
             this.visualSize = 1.0f;
-            this.width = 76;
+            cost = 4;
+            this.width = 66;
             this.height = 78;
             this.weight = 30;
-            maxHealth = 100; currentHealth = 100;
-            this.pushPower = 10; moveSpeed = 3;
+            maxHealth = 300; currentHealth = 200;
+            this.pushPower = 20; moveSpeed = 3;
             this.renderType = 2; // default shadow
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
             parts.Add(new PartEntity(level, this, 5, 30, 5) { Image = images[2] }); // Upper Body
-            parts.Add(new PartEntity(level, this, -25, 12, 14) { Image = images[3] }); // LeftArm
-            parts.Add(new PartEntity(level, this, 21, 14, 0) { Image = images[3] }); // RightArm
+            parts.Add(new PartEntity(level, this, -25, 10, 14) { Image = images[3] }); // LeftArm
+            parts.Add(new PartEntity(level, this, 21, 10, 0) { Image = images[3] }); // RightArm
             parts.Add(new PartEntity(level, this, 5, 18, 6) { Image = images[1] }); // Lower Body
             parts.Add(new PartEntity(level, this, -19, 0, 12) { Image = images[4] }); // Left Leg
             parts.Add(new PartEntity(level, this, 15, 0, 2) { Image = images[5] }); // Right Leg
@@ -56,6 +56,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             }
             scaleEntity(1.5f);
         }
+        #region 캐릭터 아이디 기록
+        public override byte getLivingEntityId()
+        {
+            return 2;
+        }
+        #endregion
         public override void tickAlive()
         {
             base.tickAlive();
@@ -115,12 +121,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                         break;
                                     case 2:
                                         pe.Image = images[3];
-                                        pe.offsetX = f * 7.5f;
+                                        pe.offsetX = f * 4f;
                                         pe.offsetY = f3 * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[3];
-                                        pe.offsetX = -f * 7.5f;
+                                        pe.offsetX = -f * 4f;
                                         pe.offsetY = -f3 * 1.5f;
                                         break;
                                     case 4:
@@ -161,12 +167,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                         break;
                                     case 2:
                                         pe.Image = images[12];
-                                        pe.offsetX = f * 7.5f;
+                                        pe.offsetX = f * 4f;
                                         pe.offsetY = f3 * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[12];
-                                        pe.offsetX = - f * 7.5f;
+                                        pe.offsetX = - f * 4f;
                                         pe.offsetY = -f3 * 1.5f;
                                         break;
                                     case 4:
@@ -306,6 +312,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void scaleEntity(float scale)
         {
             base.scaleEntity(scale);
+            maxHealth *= scale; currentHealth = maxHealth;
+            attackDamage *= scale; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
             foreach (PartEntity part in parts)
             {
                 part.offsetX *= scale;

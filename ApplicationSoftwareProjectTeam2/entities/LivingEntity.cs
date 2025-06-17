@@ -21,7 +21,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         public event EventHandler deathEvent;
         public byte entityLevel = 0;
-        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost;
+        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost, walkTicks, mana;
         public float attackDamage, currentHealth, maxHealth, currentDamage;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased, canBeDamaged = true;
@@ -159,8 +159,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     grabOccurred();
                     item.entityLevel++;
                     item.scaleEntity(1.2f);
+                    item.cost = (int) (item.cost * 1.5);
                     discard();
-                    //level.entities.Remove(this);
                     break;
                 }
             };

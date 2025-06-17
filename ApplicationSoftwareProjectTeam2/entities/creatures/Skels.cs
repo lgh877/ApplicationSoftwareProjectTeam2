@@ -11,7 +11,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class Skels : LivingEntity
     {
-        private int walkTicks, mana;
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.sprite_Skel1_idle0,
@@ -24,9 +23,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel1_move0),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel1_move1),
             //4 ~ 7번 인덱스
-            Properties.Resources.weirdGuy_died,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_died),
-            //8 ~ 9번 인덱스
             Properties.Resources.sprite_Skel1_attack0,
             Properties.Resources.sprite_Skel1_attack1,
             Properties.Resources.sprite_Skel1_attack2,
@@ -37,7 +33,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel1_attack2),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel1_attack3),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel1_attack4),
-            //10 ~ 19번 인덱스
+            //8 ~ 17번 인덱스
         };
         public Skels(GamePanel level) : base(level)
         {
@@ -46,9 +42,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 75; currentHealth = 75;
-            attackDamage = 15;
+            attackDamage = 13;
             moveSpeed = 3;
-            mana = 0;
         }
         public override void scaleEntity(float scale)
         {
@@ -147,22 +142,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         isActuallyMoving = true;
 
                         //걷는 애니메이션
-                        switch (walkTicks)
-                        {
-                            case 2:
-                                Image = (int)direction < 5 ? images[4] : images[6];
-                                break;
-                            case 4:
-                                Image = (int)direction < 5 ? images[5] : images[7];
-                                break;
-                            case 6:
-                                Image = (int)direction < 5 ? images[4] : images[6];
-                                break;
-                            case 8:
-                                Image = (int)direction < 5 ? images[0] : images[2];
-                                walkTicks = 0;
-                                break;
-                        }
+                        if (walkTicks == 2) Image = (int)direction < 5 ? images[4] : images[6];
+                        else if (walkTicks == 4) Image = (int)direction < 5 ? images[5] : images[7];
+                        else if (walkTicks == 6) Image = (int)direction < 5 ? images[4] : images[6];
+                        else if (walkTicks > 7) { Image = (int)direction < 5 ? images[0] : images[2]; walkTicks = 0; }
                     }
                     #endregion
                     #region 평상시 애니매이션 재생 부분
@@ -173,16 +156,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             isActuallyMoving = false;
                             Image = (int)direction < 5 ? images[0] : images[2];
                         }
-                        walkTicks = 0;
-                        switch (tickCount % 16)
-                        {
-                            case 0:
-                                Image = (int)direction < 5 ? images[0] : images[2];
-                                break;
-                            case 8:
-                                Image = (int)direction < 5 ? images[1] : images[3];
-                                break;
-                        }
+                        walkTicks = tickCount % 16;
+                        if (walkTicks == 0) Image = (int)direction < 5 ? images[0] : images[2];
+                        else if (walkTicks == 8) Image = (int)direction < 5 ? images[1] : images[3];
                     }
                     #endregion
                     break;
@@ -192,16 +168,16 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     switch (walkTicks)
                     {
                         case 1:
-                            Image = (int)direction < 5 ? images[10] : images[15];
+                            Image = (int)direction < 5 ? images[8] : images[13];
                             break;
                         case 3:
-                            Image = (int)direction < 5 ? images[11] : images[16];
+                            Image = (int)direction < 5 ? images[9] : images[14];
                             break;
                         case 5:
-                            Image = (int)direction < 5 ? images[12] : images[17];
+                            Image = (int)direction < 5 ? images[10] : images[15];
                             break;
                         case 7:
-                            Image = (int)direction < 5 ? images[13] : images[18];
+                            Image = (int)direction < 5 ? images[11] : images[16];
                             Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x,
                                                                                 (target.y - y) * 2f,
                                                                                 target.z - z));
@@ -216,7 +192,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             level.addFreshEntity(bone);
                             break;
                         case 13:
-                            Image = (int)direction < 5 ? images[14] : images[19];
+                            Image = (int)direction < 5 ? images[12] : images[17];
                             break;
                         case 17:
                             Image = (int)direction < 5 ? images[5] : images[7];
@@ -258,7 +234,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             skull2.team = team;
             for (int j = 0; j < entityLevel; j++) skull2.scaleEntity(1.2f);
             level.addFreshEntity(skull2);
-            shouldRemove = true;
+            discard();
         }
     }
 }

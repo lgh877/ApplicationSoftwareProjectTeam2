@@ -1,59 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Numerics;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.entities.miscellaneous;
 using ApplicationSoftwareProjectTeam2.entities.projectiles;
 using ApplicationSoftwareProjectTeam2.utils;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
-    public class SkelsBig : LivingEntity
+    public class Skulls : LivingEntity
     {
         public static List<Image> images = new List<Image>()
         {
-            Properties.Resources.sprite_Skel2_idle0,
-            Properties.Resources.sprite_Skel2_idle1,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_idle0),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_idle1),
+            Properties.Resources.sprite_Skel3_idle0,
+            Properties.Resources.sprite_Skel3_idle1,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_idle0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_idle1),
             //0 ~ 3번 인덱스
-            Properties.Resources.sprite_Skel2_move0,
-            Properties.Resources.sprite_Skel2_move1,
-            Properties.Resources.sprite_Skel2_move2,
-            Properties.Resources.sprite_Skel2_move3,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move0),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move1),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move2),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move3),
+            Properties.Resources.sprite_Skel3_move0,
+            Properties.Resources.sprite_Skel3_move1,
+            Properties.Resources.sprite_Skel3_move2,
+            Properties.Resources.sprite_Skel3_move3,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_move0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_move1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_move2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_move3),
             //4 ~ 11번 인덱스
-            Properties.Resources.sprite_Skel2_attack0,
-            Properties.Resources.sprite_Skel2_attack1,
-            Properties.Resources.sprite_Skel2_attack2,
-            Properties.Resources.sprite_Skel2_attack3,
-            Properties.Resources.sprite_Skel2_attack4,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack0),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack1),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack2),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack3),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack4),
+            Properties.Resources.sprite_Skel3_attack0,
+            Properties.Resources.sprite_Skel3_attack1,
+            Properties.Resources.sprite_Skel3_attack2,
+            Properties.Resources.sprite_Skel3_attack3,
+            Properties.Resources.sprite_Skel3_attack4,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_attack0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_attack1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_attack2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_attack3),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel3_attack4),
             //12 ~ 21번 인덱스
-            Properties.Resources.Skel2_skull_png,
-            Properties.Resources.Skel2_torso_png,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.Skel2_skull_png),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.Skel2_torso_png)
-            //22 ~ 25번 인덱스
+            Properties.Resources.Skel3_skull_png,
+            Properties.Resources.Skel3_torso_png,
+            Properties.Resources.Skel3_chin_png,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.Skel3_skull_png),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.Skel3_torso_png),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.Skel3_chin_png),
+            //22 ~ 27번 인덱스
         };
-        public SkelsBig(GamePanel level) : base(level)
+        public Skulls(GamePanel level) : base(level)
         {
-            cost = 3;
-            visualSize = 3f; width = 42; height = 78; weight = 16; pushPower = 30;
+            cost = 4;
+            visualSize = 2.5f; width = 57; height = 80; weight = 25; pushPower = 50;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
-            maxHealth = 125; currentHealth = 125;
-            attackDamage = 20;
-            moveSpeed = 4;
+            maxHealth = 250; currentHealth = 250;
+            attackDamage = 50;
+            moveSpeed = 2;
         }
         public override void scaleEntity(float scale)
         {
@@ -68,7 +71,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         #region 캐릭터 아이디 기록
         public override byte getLivingEntityId()
         {
-            return 11;
+            return 12;
         }
         #endregion
         public override void tickAlive()
@@ -114,7 +117,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     float ydiff = target.y - y;
 
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width))
+                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
                                     && ydiff < height
                                     && ydiff > -target.height)
                                     {
@@ -159,10 +162,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         isActuallyMoving = true;
 
                         //걷는 애니메이션
-                        if (walkTicks == 2) Image = (int)direction < 5 ? images[4] : images[8];
-                        else if (walkTicks == 4) Image = (int)direction < 5 ? images[5] : images[9];
-                        else if (walkTicks == 6) Image = (int)direction < 5 ? images[6] : images[10];
-                        else if (walkTicks > 7) { Image = (int)direction < 5 ? images[7] : images[11]; walkTicks = 0; }
+                        if (walkTicks == 3) Image = (int)direction < 5 ? images[4] : images[8];
+                        else if (walkTicks == 6) Image = (int)direction < 5 ? images[5] : images[9];
+                        else if (walkTicks == 9) Image = (int)direction < 5 ? images[6] : images[10];
+                        else if (walkTicks > 11) { Image = (int)direction < 5 ? images[7] : images[11]; walkTicks = 0; }
                     }
                     #endregion
                     #region 평상시 애니매이션 재생 부분
@@ -173,9 +176,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             isActuallyMoving = false;
                             Image = (int)direction < 5 ? images[0] : images[2];
                         }
-                        walkTicks = tickCount % 16;
-                        if(walkTicks == 0) Image = (int)direction < 5 ? images[0] : images[2];
-                        else if(walkTicks == 8) Image = (int)direction < 5 ? images[1] : images[3];
+                        walkTicks = tickCount % 20;
+                        if (walkTicks == 0) Image = (int)direction < 5 ? images[0] : images[2];
+                        else if (walkTicks == 10) Image = (int)direction < 5 ? images[1] : images[3];
                     }
                     #endregion
                     break;
@@ -184,20 +187,23 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     walkTicks++;
                     #region 평타 공격 작동 코드
                     if (walkTicks == 1) Image = (int)direction < 5 ? images[12] : images[17];
-                    else if (walkTicks == 3) Image = (int)direction < 5 ? images[13] : images[18];
-                    else if (walkTicks == 5) Image = (int)direction < 5 ? images[14] : images[19];
-                    else if (walkTicks == 7)
+                    else if (walkTicks == 4) Image = (int)direction < 5 ? images[13] : images[18];
+                    else if (walkTicks == 7) Image = (int)direction < 5 ? images[14] : images[19];
+                    else if (walkTicks == 10)
                     {
                         Image = (int)direction < 5 ? images[15] : images[20];
-                        if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width))
+                        VerticalImpactVisualEffect eff = new VerticalImpactVisualEffect(level, (int)direction < 5, x + ((int)direction < 5 ? 20 : -20) * visualSize, y - 28 + height * 0.1875f, z - 2);
+                        level.addFreshEntity(eff);
+                        if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
                                 && target.y - y < height && target.y - y > -target.height)
                         {
                             doHurtTarget(target);
                         }
                     }
-                    else if (walkTicks == 9) Image = (int)direction < 5 ? images[16] : images[21];
-                    else if (walkTicks == 11) Image = (int)direction < 5 ? images[14] : images[19];
-                    else if (walkTicks == 13)
+                    else if (walkTicks == 11) Image = (int)direction < 5 ? images[16] : images[21];
+                    else if (walkTicks == 13) Image = (int)direction < 5 ? images[15] : images[20];
+                    else if (walkTicks == 15) Image = (int)direction < 5 ? images[12] : images[17];
+                    else if (walkTicks == 17)
                     {
                         walkTicks = 0;
                         entityState = 0;
@@ -208,37 +214,47 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 SkelsBone bone = new SkelsBone(level);
+                bone.imageOffset = level.getRandomInteger(4);
                 bone.Owner = this;
-                bone.attackDamage = attackDamage; bone.pushPower = pushPower;
+                bone.attackDamage = attackDamage / 2; bone.pushPower = pushPower;
                 bone.x = x; bone.y = y + height; bone.z = z;
-                bone.deltaMovement = new Vector3((deltaMovement.X + level.getRandomInteger(5) - 2) * 1.6f
-                    , (deltaMovement.Y + level.getRandomInteger(5)) * 1.6f
-                    , (deltaMovement.Z + level.getRandomInteger(5) - 2) * 1.6f);
+                bone.deltaMovement = new Vector3(deltaMovement.X + level.getRandomInteger(11) - 5
+                    , deltaMovement.Y + level.getRandomInteger(7)
+                    , deltaMovement.Z + level.getRandomInteger(11) - 5);
                 bone.team = team;
                 for (int j = 0; j < entityLevel; j++) bone.scaleEntity(1.2f);
                 level.addFreshEntity(bone);
             }
-            SkelsSkull skull = new SkelsSkull(level);
-            skull.Owner = this; skull.Image = (int)direction < 5 ? images[22] : images[24];
-            skull.visualSize = 3f; skull.width = 24; skull.height = 24;
+            SkullsSkull skull = new SkullsSkull(level);
+            skull.Owner = this; skull.Image = (int)direction < 5 ? images[22] : images[25];
+            skull.visualSize = 3f; skull.width = 57; skull.height = 55;
             skull.attackDamage = attackDamage; skull.pushPower = pushPower;
-            skull.x = x; skull.y = y + height * 0.75f; skull.z = z;
-            skull.deltaMovement = deltaMovement;
+            skull.x = x; skull.y = y + height / 2; skull.z = z;
+            skull.deltaMovement = -deltaMovement;
             skull.team = team;
             for (int j = 0; j < entityLevel; j++) skull.scaleEntity(1.2f);
             level.addFreshEntity(skull);
             SkelsSkull skull2 = new SkelsSkull(level);
-            skull2.Owner = this; skull2.Image = (int)direction < 5 ? images[23] : images[25];
-            skull2.visualSize = 3f; skull2.width = 24; skull2.height = 24;
-            skull2.attackDamage = attackDamage; skull2.pushPower = pushPower;
+            skull2.Owner = this; skull2.Image = (int)direction < 5 ? images[23] : images[26];
+            skull2.visualSize = 3f; skull2.width = 17; skull2.height = 17;
+            skull2.attackDamage = attackDamage / 2; skull2.pushPower = pushPower;
             skull2.x = x; skull2.y = y + height / 3; skull2.z = z;
-            skull2.deltaMovement = deltaMovement * 1.3f;
+            skull2.deltaMovement = deltaMovement * 0.5f;
             skull2.team = team;
             for (int j = 0; j < entityLevel; j++) skull2.scaleEntity(1.2f);
             level.addFreshEntity(skull2);
+            SkelsSkull skull3 = new SkelsSkull(level);
+            skull3.Owner = this; skull3.Image = (int)direction < 5 ? images[24] : images[27];
+            skull3.visualSize = 3f; skull3.width = 32; skull3.height = 15;
+            skull3.attackDamage = attackDamage / 2; skull3.pushPower = pushPower;
+            skull3.x = x; skull3.y = y + height / 3; skull3.z = z;
+            skull3.deltaMovement = deltaMovement * 0.7f;
+            skull3.team = team;
+            for (int j = 0; j < entityLevel; j++) skull3.scaleEntity(1.2f);
+            level.addFreshEntity(skull3);
             discard();
         }
     }
