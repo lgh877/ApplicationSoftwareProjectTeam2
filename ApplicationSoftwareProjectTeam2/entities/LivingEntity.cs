@@ -160,6 +160,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     item.entityLevel++;
                     item.scaleEntity(1.2f);
                     discard();
+                    //level.entities.Remove(this);
                     break;
                 }
             };

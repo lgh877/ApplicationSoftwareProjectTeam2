@@ -137,11 +137,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public virtual void discard()
         {
             shouldRemove = true;
+            /*
             if (grabbedByMouse)
             {
                 grabbedByMouse = false;
                 releaseFromMouse();
             }
+            */
         }
         public virtual void push(Vector3 vec)
         {

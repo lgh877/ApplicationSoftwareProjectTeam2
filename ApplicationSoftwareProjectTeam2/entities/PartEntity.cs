@@ -11,14 +11,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         public float offsetX, offsetY, offsetZ;
         public LivingEntity Owner;
-        public PartEntity(GamePanel level) : base(level) { renderType = 0; visualSize = 2.0f; }
-        public PartEntity(GamePanel level, float x, float y, float z) : base(level) { renderType = 0; visualSize = 2.0f; setPosition(x, y, z); }
+        public PartEntity(GamePanel level) : base(level) { renderType = 0; visualSize = 1.0f; }
+        public PartEntity(GamePanel level, float x, float y, float z) : base(level) { renderType = 0; visualSize = 1.0f; setPosition(x, y, z); }
         public override void tick()
         {
             tickCount++;
-            this.setPosition(Owner.x + offsetX,
-                            Owner.y + offsetY,
-                            Owner.z + offsetZ);
+            float sizeFactor = (float) Math.Cbrt(visualSize);
+            this.setPosition(Owner.x + offsetX * sizeFactor,
+                            Owner.y + offsetY * sizeFactor,
+                            Owner.z + offsetZ * sizeFactor);
             if(Owner == null)
             {
                 shouldRemove = true;
