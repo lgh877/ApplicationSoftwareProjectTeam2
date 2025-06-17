@@ -133,6 +133,96 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyArm {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyArm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyArmPrepares {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyArmPrepares", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyArmRelease {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyArmRelease", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyHead {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyHead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyHeadDeath {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyHeadDeath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyLeftLeg {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyLeftLeg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyLowerBody {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyLowerBody", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyRightLeg {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyRightLeg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap giantWeirdGuyUpperBody {
+            get {
+                object obj = ResourceManager.GetObject("giantWeirdGuyUpperBody", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap groundExplosion1 {
             get {
                 object obj = ResourceManager.GetObject("groundExplosion1", resourceCulture);

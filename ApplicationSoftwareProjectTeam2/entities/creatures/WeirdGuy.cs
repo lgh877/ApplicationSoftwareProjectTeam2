@@ -43,7 +43,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         };
         public WeirdGuy(GamePanel level) : base(level)
         {
-            cost = 1;
+            cost = 2;
             visualSize = 1f; width = 40; height = 70; weight = 10; pushPower = 30;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;

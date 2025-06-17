@@ -134,7 +134,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             this.deltaMovement = new Vector3(x, y, z);
         }
-
+        public virtual void discard()
+        {
+            shouldRemove = true;
+            if (grabbedByMouse)
+            {
+                grabbedByMouse = false;
+                releaseFromMouse();
+            }
+        }
         public virtual void push(Vector3 vec)
         {
             this.deltaMovement += vec;

@@ -54,7 +54,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
                 direction.Y * 2 * powerFactor,
                 direction.Z * 2 * powerFactor);
             deltaMovement *= -0.5f;
-            GroundExplosion exp = new GroundExplosion(level);
+            Explosion exp = new Explosion(level);
             exp.Owner = this.Owner; exp.attackDamage = attackDamage;
             exp.x = x; exp.y = 2; exp.z = z;
             exp.team = team;

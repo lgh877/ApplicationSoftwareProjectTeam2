@@ -171,11 +171,11 @@ namespace ApplicationSoftwareProjectTeam2
                     label1.Text = $"Gold: {clientPlayer.Gold}";
                     foreach (var entity in shopentities)
                     {
-                        entity.shouldRemove = true;
+                        entity.discard();
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(2)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(3)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -429,7 +429,7 @@ namespace ApplicationSoftwareProjectTeam2
             {
                 0 => new WeirdGuy(this) { team = name },
                 1 => new Skels(this) { team = name },
-                2 => new WeirdGuy(this) { team = name, entityLevel = 6 },
+                2 => new GiantWeirdGuy(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }

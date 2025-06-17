@@ -22,9 +22,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public event EventHandler deathEvent;
         public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost;
-        public float attackDamage, currentHealth, maxHealth;
+        public float attackDamage, currentHealth, maxHealth, currentDamage;
         public Direction direction = Direction.Right;
-        public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased;
+        public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased, canBeDamaged = true;
         public LivingEntity? target;
         public List<Item> EquippedItems = new List<Item>(3);
         public (int, int) deckPosition = (0, 0); // (x, z) 좌표로 표현되는 덱 위치
@@ -122,6 +122,12 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     deltaMovement = Vector3.Zero;
                     direction = Direction.Right;
                 }
+            }
+            if (currentDamage > 0)
+            {
+                currentHealth -= currentDamage;
+                currentDamage = 0;
+                canBeDamaged = true;
             }
             checkCollisionsLiving();
         }
@@ -260,8 +266,18 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public override bool hurt(LivingEntity? attacker, float damage)
         {
-            currentHealth -= damage;
-            return true;
+            if (canBeDamaged)
+            {
+                currentDamage = damage;
+                canBeDamaged = false;
+                return true;
+            }
+            else if(damage > currentDamage)
+            {
+                currentDamage = damage;
+                return true;
+            }
+            return false;
         }
 
         public override void applyCollisionLiving(LivingEntity entity)

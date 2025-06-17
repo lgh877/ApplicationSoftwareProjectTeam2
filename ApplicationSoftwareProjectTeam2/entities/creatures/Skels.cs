@@ -41,7 +41,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         };
         public Skels(GamePanel level) : base(level)
         {
-            cost = 1;
+            cost = 2;
             visualSize = 2f; width = 46; height = 54; weight = 8; pushPower = 10;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
