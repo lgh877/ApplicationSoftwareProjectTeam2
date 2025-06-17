@@ -124,6 +124,9 @@
   <data name="sprite_Skel1_attack0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Skel1\sprite_Skel1_attack0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="sprite_Skel1_attack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_attack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="skel_torso" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Skel1\skel_torso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -190,7 +193,25 @@
   <data name="skel_projectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Skel1\skel_projectile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sprite_Skel1_attack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_attack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="explode1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

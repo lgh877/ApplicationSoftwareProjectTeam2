@@ -18,7 +18,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public GamePanel level;
         public string team;
         public Image Image;
-        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true, wasOnGround;
+        public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true;
+        public byte renderType = 1; // 0: noShadow, 1: default, 2: shadowOnly, 3: grounded
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)
@@ -273,7 +274,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     else
                         this.moveTo(x + deltaMovement.X, y + deltaMovement.Y, z + deltaMovement.Z);
             }
-            wasOnGround = isOnGround();
         }
     }
 }

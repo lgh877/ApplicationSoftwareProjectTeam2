@@ -249,6 +249,43 @@ namespace ApplicationSoftwareProjectTeam2
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
+                    if (e.renderType == 0) continue;
+                    float x = e.x;
+                    float y = e.y;
+                    float z = e.z;
+                    double scale2 = z > 200 ? 6.184 / Math.Cbrt(z + 250) : 0.823654768;
+                    double scale3 = 3.6363 / Math.Cbrt(y + 50);
+                    int screenX = currentWidth / 2 + (int)(x * scale * scale2);
+                    int screenY = (int)(currentHeight - z * scale * scale2);
+                    switch (e.renderType)
+                    {
+                        case 1:
+                        case 2:
+                            int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
+                            using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
+                            {
+                                int shadowWidth = (int)(shadowSize * 1.2 / scale3);
+                                int shadowHeight = (int)(shadowSize * 0.4 / scale3);
+                                int shadowX = screenX - shadowWidth / 2;
+                                int shadowY = screenY - (int)(shadowHeight * 0.75); // 약간 위로 올림
+
+                                g.FillEllipse(shadowBrush, shadowX, shadowY, shadowWidth, shadowHeight);
+                            }
+                            if(e.renderType == 2) allentities.RemoveAt(i); // 엔티티 제거
+                            break;
+                        case 3:
+                            int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                            int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                            screenY -= (int)(y * scale * scale2);
+                            g.DrawImage(e.Image,
+                                screenX - width / 2, screenY - height,
+                                width, height);
+                            break;
+                    }
+                }
+                for (int i = allentities.Count - 1; i != -1; i--)
+                {
+                    Entity e = allentities[i];
                     float x = e.x;
                     float y = e.y;
                     float z = e.z;
@@ -259,6 +296,7 @@ namespace ApplicationSoftwareProjectTeam2
                     int screenY = (int)(currentHeight - z * scale * scale2);
                     int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
                     int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
+                    /*
                     int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
                     using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
                     {
@@ -269,6 +307,7 @@ namespace ApplicationSoftwareProjectTeam2
 
                         g.FillEllipse(shadowBrush, shadowX, shadowY, shadowWidth, shadowHeight);
                     }
+                    */
                     screenY -= (int)(y * scale * scale2);
                     g.DrawImage(e.Image,
                         screenX - width / 2, screenY - height,
