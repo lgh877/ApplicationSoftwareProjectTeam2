@@ -41,7 +41,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack6)
             //10 ~ 21번 인덱스
         };
-        public WeirdGuy(GamePanel level) : base(level)
+        public Skel2(GamePanel level) : base(level)
         {
             cost = 1;
             visualSize = 1f; width = 40; height = 70; weight = 10; pushPower = 30;

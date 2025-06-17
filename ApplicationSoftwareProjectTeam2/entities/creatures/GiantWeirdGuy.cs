@@ -40,13 +40,13 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 100; currentHealth = 100;
             this.pushPower = 10;
             this.renderType = 2; // default shadow
-            parts.Add(new PartEntity(level, x + 14, y + 44, z + 3) { Owner = this, offsetX = 14, offsetY = 44, offsetZ = 3, Image = images[0] }); // Head
-            parts.Add(new PartEntity(level, x, y + 30, z + 5) { Owner = this, offsetX = 0, offsetY = 30, offsetZ = 5, Image = images[2] }); // Upper Body
-            parts.Add(new PartEntity(level, x + 24, y + 18, z + 7) { Owner = this, offsetX = 24, offsetY = 18, offsetZ = 7, Image = images[3] }); // LeftArm
-            parts.Add(new PartEntity(level, x - 26, y + 14, z) { Owner = this, offsetX = -26, offsetY = 14, offsetZ = 0, Image = images[3] }); // RightArm
-            parts.Add(new PartEntity(level, x, y + 18, z + 6) { Owner = this, offsetX = 0, offsetY = 18, offsetZ = 6, Image = images[1] }); // Lower Body
-            parts.Add(new PartEntity(level, x + 14, y, z + 12) { Owner = this, offsetX = 14, offsetY = 0, offsetZ = 12, Image = images[4] }); // Left Leg
-            parts.Add(new PartEntity(level, x - 20, y, z + 2) { Owner = this, offsetX = -20, offsetY = 0, offsetZ = 2, Image = images[5] }); // Right Leg
+            parts.Add(new PartEntity(level, x + 19, y + 44, z + 3) { Owner = this, offsetX = 19, offsetY = 44, offsetZ = 3, Image = images[0] }); // Head
+            parts.Add(new PartEntity(level, x + 5, y + 30, z + 5) { Owner = this, offsetX = 5, offsetY = 30, offsetZ = 5, Image = images[2] }); // Upper Body
+            parts.Add(new PartEntity(level, x + 39, y + 18, z + 7) { Owner = this, offsetX = 29, offsetY = 18, offsetZ = 7, Image = images[3] }); // LeftArm
+            parts.Add(new PartEntity(level, x - 21, y + 14, z) { Owner = this, offsetX = -21, offsetY = 14, offsetZ = 0, Image = images[3] }); // RightArm
+            parts.Add(new PartEntity(level, x + 5, y + 18, z + 6) { Owner = this, offsetX = 5, offsetY = 18, offsetZ = 6, Image = images[1] }); // Lower Body
+            parts.Add(new PartEntity(level, x + 19, y, z + 12) { Owner = this, offsetX = 19, offsetY = 0, offsetZ = 12, Image = images[4] }); // Left Leg
+            parts.Add(new PartEntity(level, x - 15, y, z + 2) { Owner = this, offsetX = -15, offsetY = 0, offsetZ = 2, Image = images[5] }); // Right Leg
             foreach (PartEntity part in parts)
             {
                 level.addFreshEntity(part);
@@ -59,6 +59,11 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void discard()
         {
             base.discard();
+            foreach (PartEntity part in parts)
+            {
+                part.discard();
+            }
+            parts.Clear();
         }
         public override void scaleEntity(float scale)
         {
