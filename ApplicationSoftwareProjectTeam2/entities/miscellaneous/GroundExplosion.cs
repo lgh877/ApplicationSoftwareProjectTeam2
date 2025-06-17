@@ -7,24 +7,26 @@ using System.Threading.Tasks;
 
 namespace ApplicationSoftwareProjectTeam2.entities.miscellaneous
 {
-    public class Explosion : Entity
+    public class GroundExplosion : Entity
     {
         public static List<Image> images = new List<Image>()
         {
-            Properties.Resources.explode1,
-            Properties.Resources.explode2,
-            Properties.Resources.explode3,
-            Properties.Resources.explode4,
-            Properties.Resources.explode5,
-            Properties.Resources.explode6,
-            Properties.Resources.explode7,
+            Properties.Resources.groundExplosion1,
+            Properties.Resources.groundExplosion2,
+            Properties.Resources.groundExplosion3,
+            Properties.Resources.groundExplosion4,
+            Properties.Resources.groundExplosion5,
+            Properties.Resources.groundExplosion6,
+            Properties.Resources.groundExplosion7,
+            Properties.Resources.groundExplosion8,
+            Properties.Resources.groundExplosion9,
         };
         public LivingEntity Owner;
         public float attackDamage;
-        public Explosion(GamePanel level) : base(level)
+        public GroundExplosion(GamePanel level) : base(level)
         {
             this.visualSize = 2.0f;
-            this.width = 128;
+            this.width = 256;
             this.height = 128;
             this.weight = 1000;
             this.pushPower = 100;
@@ -35,7 +37,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.miscellaneous
         public override void tick()
         {
             base.tick();
-            if (tickCount < 7)
+            if (tickCount < 9)
             {
                 Image = images[tickCount - 1];
             }

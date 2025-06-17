@@ -107,7 +107,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 250000)
+                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
                                     {
                                         entityState = 1;
                                         walkTicks = 0;

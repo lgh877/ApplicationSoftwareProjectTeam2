@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.entities.miscellaneous;
 using ApplicationSoftwareProjectTeam2.utils;
 
 namespace ApplicationSoftwareProjectTeam2.entities.projectiles
@@ -51,7 +52,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
                 direction.Y * 2 * powerFactor,
                 direction.Z * 2 * powerFactor);
             deltaMovement *= -0.3f;
-            push(direction.X * -2 * powerFactor, direction.Y * -2 * powerFactor, direction.Z * -2 * powerFactor);
         }
     }
 }

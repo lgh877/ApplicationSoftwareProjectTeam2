@@ -259,7 +259,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             else
             {
-                if (isOnGround())
+                if (isOnGround() || !hasGravity)
                 {
                     deltaMovement = deltaMovement * groundFraction;
                 }

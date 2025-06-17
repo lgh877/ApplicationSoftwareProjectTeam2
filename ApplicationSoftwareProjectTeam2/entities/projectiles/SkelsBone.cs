@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.entities.miscellaneous;
 using ApplicationSoftwareProjectTeam2.utils;
 
 namespace ApplicationSoftwareProjectTeam2.entities.projectiles
@@ -53,6 +54,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
                 direction.Y * 2 * powerFactor,
                 direction.Z * 2 * powerFactor);
             deltaMovement *= -0.5f;
+            GroundExplosion exp = new GroundExplosion(level);
+            exp.Owner = this.Owner; exp.attackDamage = attackDamage;
+            exp.x = x; exp.y = 2; exp.z = z;
+            exp.team = team;
+            level.addFreshEntity(exp);
+            exp.checkCollisionsLiving();
             //push(direction.X * -2 * powerFactor, direction.Y * -2 * powerFactor, direction.Z * -2 * powerFactor);
         }
     }

@@ -118,100 +118,127 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="weirdGuy_walk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_walk1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_attack0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_attack0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_attack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_attack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="skel_torso" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\skel_torso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="제목 없음2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\제목 없음2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_meleeattack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_meleeattack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="sprite_Skel1_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Skel1\sprite_Skel1_attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_walk2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_walk2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_idle0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_idle0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="제목 없음3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\제목 없음3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="weirdGuy_meleeattack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\weirdGuy\weirdGuy_meleeattack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="weirdGuy_meleeattack6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_meleeattack6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_attack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_meleeattack5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_meleeattack5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_died" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_died.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sprite_Skel1_move1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\sprite_Skel1_move1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="weirdGuy_meleeattack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_meleeattack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="skel_skull" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\skel_skull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="weirdGuy_idle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\weirdGuy\weirdGuy_idle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="skel_skull" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\skel_skull.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="skel_projectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\skel_projectile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_meleeattack5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_meleeattack5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sprite_Skel1_move0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Skel1\sprite_Skel1_move0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="weirdGuy_meleeattack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\weirdGuy\weirdGuy_meleeattack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="skel_projectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Skel1\skel_projectile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="explode1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\explosion\explode1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="explode2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\explosion\explode2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="explode3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\explosion\explode3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="제목 없음3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\제목 없음3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="explode4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\explosion\explode4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="제목 없음2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\제목 없음2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="explode5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\explosion\explode5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="explode7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_move1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_move1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="explode6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\explosion\explode6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="explode7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\explosion\explode7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="weirdGuy_meleeattack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_meleeattack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_attack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_walk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_walk1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_meleeattack6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_meleeattack6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_meleeattack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_meleeattack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_meleeattack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_meleeattack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_attack0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_attack0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_idle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_died" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_died.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_idle0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_idle0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skel_torso" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\skel_torso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weirdGuy_walk2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\weirdGuy\weirdGuy_walk2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_Skel1_attack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\Skel1\sprite_Skel1_attack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explode5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explosion\explode5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groundExplosion9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\groundExplosion\groundExplosion9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
