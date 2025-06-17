@@ -92,9 +92,9 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
             
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
-                LivingEntity test = CreateEntity((byte)(random.Next(2)), getRandomInteger(101).ToString());
+                LivingEntity test = CreateEntity((byte)(random.Next(4)), getRandomInteger(101).ToString());
                 test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
             }
@@ -175,7 +175,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(3)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(4)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -421,15 +421,19 @@ namespace ApplicationSoftwareProjectTeam2
         {
             #region 아이디별 객체 타입 열람표
             /*
-             * 0: WeirdGuy
-             * 10 : Skels
+             * 0 : WeirdGuy
+             * 1 : Skels
+             * 2 : GiantWeirdGuy
+             * 3 : SkelsBig
              */
             #endregion
             return type switch
             {
                 0 => new WeirdGuy(this) { team = name },
                 1 => new Skels(this) { team = name },
-                2 => new GiantWeirdGuy(this) { team = name },
+                2 => new SkelsBig(this) { team = name },
+                3 => new Skulls(this) { team = name },
+                4 => new GiantWeirdGuy(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }

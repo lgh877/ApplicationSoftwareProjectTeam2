@@ -19,25 +19,27 @@ namespace ApplicationSoftwareProjectTeam2.entities.miscellaneous
             Properties.Resources.explode6,
             Properties.Resources.explode7,
         };
+        public List<Image> expImages;
         public LivingEntity Owner;
         public float attackDamage;
         public Explosion(GamePanel level) : base(level)
         {
             this.visualSize = 2.0f;
+            expImages = images;
             this.width = 128;
             this.height = 128;
             this.weight = 1000;
             this.pushPower = 100;
             this.hasGravity = false;
-            Image = images[0];
+            Image = expImages[0];
             renderType = 0; // no shadow
         }
         public override void tick()
         {
             base.tick();
-            if (tickCount < 7)
+            if (tickCount < expImages.Count)
             {
-                Image = images[tickCount - 1];
+                Image = expImages[tickCount - 1];
             }
             else
             {

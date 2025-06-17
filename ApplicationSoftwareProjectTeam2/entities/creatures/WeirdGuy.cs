@@ -11,7 +11,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class WeirdGuy : LivingEntity
     {
-        private int walkTicks, mana;
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.weirdGuy_idle1,
@@ -50,7 +49,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 100; currentHealth = 100;
             attackDamage = 20;
             moveSpeed = 3;
-            mana = 0;
         }
         public override void scaleEntity(float scale)
         {
@@ -166,22 +164,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         isActuallyMoving = true;
 
                         //걷는 애니메이션
-                        switch (walkTicks)
-                        {
-                            case 2:
-                                Image = (int)direction < 5 ? images[4] : images[6];
-                                break;
-                            case 4:
-                                Image = (int)direction < 5 ? images[5] : images[7];
-                                break;
-                            case 6:
-                                Image = (int)direction < 5 ? images[4] : images[6];
-                                break;
-                            case 8:
-                                Image = (int)direction < 5 ? images[0] : images[2];
-                                walkTicks = 0;
-                                break;
-                        }
+                        if (walkTicks == 2) Image = (int)direction < 5 ? images[4] : images[6];
+                        else if (walkTicks == 4) Image = (int)direction < 5 ? images[5] : images[7];
+                        else if (walkTicks == 6) Image = (int)direction < 5 ? images[4] : images[6];
+                        else if (walkTicks > 7) { Image = (int)direction < 5 ? images[0] : images[2]; walkTicks = 0; }
                     }
                     #endregion
                     #region 평상시 애니매이션 재생 부분
@@ -192,16 +178,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             isActuallyMoving = false;
                             Image = (int)direction < 5 ? images[0] : images[2];
                         }
-                        walkTicks = 0;
-                        switch (tickCount % 16)
-                        {
-                            case 0:
-                                Image = (int)direction < 5 ? images[0] : images[2];
-                                break;
-                            case 8:
-                                Image = (int)direction < 5 ? images[1] : images[3];
-                                break;
-                        }
+                        walkTicks = tickCount % 16;
+                        if (walkTicks == 0) Image = (int)direction < 5 ? images[0] : images[2];
+                        else if (walkTicks == 8) Image = (int)direction < 5 ? images[1] : images[3];
                     }
                     #endregion
                     break;

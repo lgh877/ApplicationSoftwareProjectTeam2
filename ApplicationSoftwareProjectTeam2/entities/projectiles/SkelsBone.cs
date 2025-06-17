@@ -11,7 +11,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
 {
     public class SkelsBone : ProjectileEntity
     {
-        int imageOffset = 0;
+        public int imageOffset = 0;
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.skel_projectile,
@@ -54,13 +54,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
                 direction.Y * 2 * powerFactor,
                 direction.Z * 2 * powerFactor);
             deltaMovement *= -0.5f;
-            Explosion exp = new Explosion(level);
-            exp.Owner = this.Owner; exp.attackDamage = attackDamage;
-            exp.x = x; exp.y = 2; exp.z = z;
-            exp.team = team;
-            level.addFreshEntity(exp);
-            exp.checkCollisionsLiving();
-            //push(direction.X * -2 * powerFactor, direction.Y * -2 * powerFactor, direction.Z * -2 * powerFactor);
         }
     }
 }
