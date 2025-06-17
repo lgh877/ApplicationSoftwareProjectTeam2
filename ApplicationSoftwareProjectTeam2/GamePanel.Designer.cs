@@ -32,6 +32,7 @@
             logicTick = new System.Windows.Forms.Timer(components);
             panelPlayScreen = new Panel();
             label1 = new Label();
+            btnGameStart = new Button();
             button1 = new Button();
             panelPlayScreen.SuspendLayout();
             SuspendLayout();
@@ -46,6 +47,7 @@
             // 
             panelPlayScreen.BackColor = SystemColors.ButtonShadow;
             panelPlayScreen.Controls.Add(label1);
+            panelPlayScreen.Controls.Add(btnGameStart);
             panelPlayScreen.Controls.Add(button1);
             panelPlayScreen.Location = new Point(12, 13);
             panelPlayScreen.Margin = new Padding(4, 2, 4, 2);
@@ -64,6 +66,17 @@
             label1.Size = new Size(78, 32);
             label1.TabIndex = 1;
             label1.Text = "label1";
+            // 
+            // btnGameStart
+            // 
+            btnGameStart.Location = new Point(466, 2);
+            btnGameStart.Margin = new Padding(4, 2, 4, 2);
+            btnGameStart.Name = "btnGameStart";
+            btnGameStart.Size = new Size(150, 47);
+            btnGameStart.TabIndex = 1;
+            btnGameStart.Text = "gameStart";
+            btnGameStart.UseVisualStyleBackColor = true;
+            btnGameStart.Click += btnGameStart_Click;
             // 
             // button1
             // 
@@ -101,5 +114,6 @@
         private Panel panelPlayScreen;
         private Button button1;
         public Label label1;
+        private Button btnGameStart;
     }
 }

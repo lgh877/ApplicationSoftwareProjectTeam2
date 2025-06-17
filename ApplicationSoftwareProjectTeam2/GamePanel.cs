@@ -33,7 +33,7 @@ namespace ApplicationSoftwareProjectTeam2
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
         public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount;
-        public bool handleMouseEvent, grabbed = false;
+        public bool handleMouseEvent, grabbed = false, isGameRunning = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
@@ -92,10 +92,10 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 30; i++)
             {
-                LivingEntity test = CreateEntity((byte)(random.Next(4)), getRandomInteger(101).ToString());
-                test.setPosition(getRandomInteger(1000) - 500, getRandomInteger(450) + 200);
+                LivingEntity test = CreateEntity((byte)(random.Next(4)), "Enemy");
+                test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
             }
             currentWidth = this.Width - 50;
@@ -189,6 +189,7 @@ namespace ApplicationSoftwareProjectTeam2
                     {
                         if (entity is LivingEntity livingEntity && livingEntity.isAlive())
                         {
+                            if (livingEntity.canStartTask()) continue; // 게임이 진행 중이고 AI가 있는 경우 클릭 무시
                             float x = livingEntity.x;
                             float y = livingEntity.y;
                             float z = livingEntity.z;
@@ -436,6 +437,11 @@ namespace ApplicationSoftwareProjectTeam2
                 4 => new GiantWeirdGuy(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
+        }
+
+        private void btnGameStart_Click(object sender, EventArgs e)
+        {
+            isGameRunning = true;
         }
     }
 }

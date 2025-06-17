@@ -67,7 +67,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             switch (entityState)
             {
                 case 0:
-                    if (hasAi)
+                    if (canStartTask())
                     {
                         #region 평상시에 아무렇게 걸어다니기 + 타겟 탐색
                         if (level.getRandomInteger(10) == 0)

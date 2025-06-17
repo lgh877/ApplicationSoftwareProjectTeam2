@@ -89,6 +89,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 tickDeath();
             }
         }
+        public virtual bool canStartTask()
+        {
+            return hasAi && level.isGameRunning;
+        }
         public virtual void tickAlive()
         {
             if (!hasAi && isOnGround() && deckIndex != -1)
@@ -129,7 +133,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 currentDamage = 0;
                 canBeDamaged = true;
             }
-            checkCollisionsLiving();
+            if(hasAi) checkCollisionsLiving();
         }
         public virtual byte getLivingEntityId()
         {
@@ -294,8 +298,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             direction = Direction.Right;
             //마우스에서 놓았을 때 z값이 200보다 낮다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 fasle로 해주세요
-            if (z < 200)
+            if (z < 200 || level.isGameRunning)
             {
+                if (z > 175) setPosition(x, 0, 175);
                 if (!findClosestDeckPosition()) return;
                 if (hasAi)
                 {
