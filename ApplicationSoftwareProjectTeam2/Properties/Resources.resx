@@ -469,4 +469,31 @@
   <data name="sprite_Bot1_walk4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sprite_Bot1_walk4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="sprite_Human1_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_attack1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_attack2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_attack3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_idle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_idle1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_idle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_idle2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_walk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_walk1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_walk2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_walk2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_walk3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_walk3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sprite_Human1_walk4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sprite_Human1_walk4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
