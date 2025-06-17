@@ -139,7 +139,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
-                level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
                 level.grabbed = false; // 덱에서 제거되었으므로 grabbed 상태 해제
                 shouldRemove = true; // 엔티티 제거 플래그 설정
                 return; // 덱에서 제거되었으므로 더 이상 처리하지 않음
@@ -184,7 +183,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 isPurchased = true;
                 level.addFreshEntity(this);
                 level.shopentities.Remove(this);
-                level.clientPlayer.entitiesofplayer.Append(this);
                 landedEvent += detectLivingEntityAndMerge;
                 level.grabbed = true;
                 grabbedByMouse = true;
@@ -287,6 +285,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     landedEvent += detectLivingEntityAndMerge;
                     level.addFreshEntity(this);
                     level.livingentities.Remove(this);
+                    level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
                     hasAi = false;
                 }
             }
@@ -295,6 +294,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 landedEvent -= detectLivingEntityAndMerge;
                 //z값이 200보다 높다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 true로 해주세요
                 level.addFreshLivingEntity(this);
+                level.clientPlayer.entitiesofplayer.Append(this);
                 level.entities.Remove(this);
                 hasAi = true;
             }
