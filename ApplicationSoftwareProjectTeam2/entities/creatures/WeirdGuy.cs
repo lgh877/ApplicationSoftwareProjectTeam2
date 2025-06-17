@@ -63,7 +63,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             return EntityTypes.Weirdos;
         }
         #region 캐릭터 아이디 기록
-        public byte getLivingEntityId()
+        public override byte getLivingEntityId()
         {
             return 1;
         }

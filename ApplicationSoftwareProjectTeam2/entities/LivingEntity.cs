@@ -131,7 +131,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             checkCollisionsLiving();
         }
-        public byte getLivingEntityId()
+        public virtual byte getLivingEntityId()
         {
             return 0;
         }

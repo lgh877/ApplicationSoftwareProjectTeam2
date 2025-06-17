@@ -59,11 +59,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void discard()
         {
             base.discard();
-            foreach (PartEntity part in parts)
-            {
-                part.discard();
-            }
-            parts.Clear();
         }
         public override void scaleEntity(float scale)
         {

@@ -19,6 +19,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
             this.setPosition(Owner.x + offsetX,
                             Owner.y + offsetY,
                             Owner.z + offsetZ);
+            if(Owner == null)
+            {
+                shouldRemove = true;
+            }
         }
         public override void push(float x, float y, float z)
         {
