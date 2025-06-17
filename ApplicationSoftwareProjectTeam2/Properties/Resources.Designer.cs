@@ -501,6 +501,86 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         }
         
         /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_attack1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_attack1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_attack2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_attack2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_attack3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_attack3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_idle1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_idle1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_idle2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_idle2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_walk2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_walk2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_walk3_png {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_walk3.png", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] sprite_Bot1_walk4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Bot1_walk4", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Bitmap sprite_ColEffVert0 {
