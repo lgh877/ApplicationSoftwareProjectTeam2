@@ -43,13 +43,13 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             this.pushPower = 10; moveSpeed = 3;
             this.renderType = 2; // default shadow
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
-            parts.Add(new PartEntity(level, x + 25, y + 44, z + 3) { Owner = this, offsetX = 25, offsetY = 44, offsetZ = 3, Image = images[0] }); // Head
-            parts.Add(new PartEntity(level, x + 5, y + 30, z + 5) { Owner = this, offsetX = 5, offsetY = 30, offsetZ = 5, Image = images[2] }); // Upper Body
-            parts.Add(new PartEntity(level, x + 34, y + 18, z + 7) { Owner = this, offsetX = 34, offsetY = 18, offsetZ = 7, Image = images[3] }); // LeftArm
-            parts.Add(new PartEntity(level, x - 21, y + 14, z) { Owner = this, offsetX = -21, offsetY = 14, offsetZ = 0, Image = images[3] }); // RightArm
-            parts.Add(new PartEntity(level, x + 5, y + 18, z + 6) { Owner = this, offsetX = 5, offsetY = 18, offsetZ = 6, Image = images[1] }); // Lower Body
-            parts.Add(new PartEntity(level, x + 19, y, z + 12) { Owner = this, offsetX = 19, offsetY = 0, offsetZ = 12, Image = images[4] }); // Left Leg
-            parts.Add(new PartEntity(level, x - 15, y, z + 2) { Owner = this, offsetX = -15, offsetY = 0, offsetZ = 2, Image = images[5] }); // Right Leg
+            parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
+            parts.Add(new PartEntity(level, this, 5, 30, 5) { Image = images[2] }); // Upper Body
+            parts.Add(new PartEntity(level, this, -25, 12, 14) { Image = images[3] }); // LeftArm
+            parts.Add(new PartEntity(level, this, 21, 14, 0) { Image = images[3] }); // RightArm
+            parts.Add(new PartEntity(level, this, 5, 18, 6) { Image = images[1] }); // Lower Body
+            parts.Add(new PartEntity(level, this, -19, 0, 12) { Image = images[4] }); // Left Leg
+            parts.Add(new PartEntity(level, this, 15, 0, 2) { Image = images[5] }); // Right Leg
             foreach (PartEntity part in parts)
             {
                 level.addFreshEntity(part);
@@ -105,37 +105,37 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     case 0:
                                         pe.Image = images[0];
-                                        pe.offsetX = 25;
-                                        pe.offsetY = 44 + f2 * 2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2 * 2;
                                         break;
                                     case 1:
                                         pe.Image = images[2];
-                                        pe.offsetX = 5;
-                                        pe.offsetY = 30 + f2 * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2 * 1.5f;
                                         break;
                                     case 2:
                                         pe.Image = images[3];
-                                        pe.offsetX = 34 + f * 5f;
-                                        pe.offsetY = 18 + f2 * 1.5f;
+                                        pe.offsetX = f * 7.5f;
+                                        pe.offsetY = f3 * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[3];
-                                        pe.offsetX = -21 - f * 5f;
-                                        pe.offsetY = 14 + f2 * 1.5f;
+                                        pe.offsetX = -f * 7.5f;
+                                        pe.offsetY = -f3 * 1.5f;
                                         break;
                                     case 4:
                                         pe.Image = images[1];
-                                        pe.offsetX = 5;
-                                        pe.offsetY = 18 + f2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2;
                                         break;
                                     case 5:
                                         pe.Image = images[4];
-                                        pe.offsetX = 19 - f * 5f;
+                                        pe.offsetX = - f * 7.5f;
                                         pe.offsetY = Math.Max(-f3 * 3f, 0);
                                         break;
                                     case 6:
                                         pe.Image = images[5];
-                                        pe.offsetX = -15 + f * 5f;
+                                        pe.offsetX = f * 7.5f;
                                         pe.offsetY = Math.Max(f3 * 3f, 0);
                                         break;
                                 }
@@ -151,37 +151,37 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     case 0:
                                         pe.Image = images[9];
-                                        pe.offsetX = -25;
-                                        pe.offsetY = 44 + f2 * 2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2 * 2;
                                         break;
                                     case 1:
                                         pe.Image = images[11];
-                                        pe.offsetX = -5;
-                                        pe.offsetY = 30 + f2 * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2 * 1.5f;
                                         break;
                                     case 2:
                                         pe.Image = images[12];
-                                        pe.offsetX = -34 + f * 5f;
-                                        pe.offsetY = 18 + f2 * 1.5f;
+                                        pe.offsetX = f * 7.5f;
+                                        pe.offsetY = f3 * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[12];
-                                        pe.offsetX = 21 - f * 5f;
-                                        pe.offsetY = 14 + f2 * 1.5f;
+                                        pe.offsetX = - f * 7.5f;
+                                        pe.offsetY = -f3 * 1.5f;
                                         break;
                                     case 4:
                                         pe.Image = images[10];
-                                        pe.offsetX = -5;
-                                        pe.offsetY = 18 + f2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f2;
                                         break;
                                     case 5:
                                         pe.Image = images[13];
-                                        pe.offsetX = -19 - f * 5f;
+                                        pe.offsetX = - f * 7.5f;
                                         pe.offsetY = Math.Max(-f3 * 3f, 0);
                                         break;
                                     case 6:
                                         pe.Image = images[14];
-                                        pe.offsetX = 15 + f * 5f;
+                                        pe.offsetX = f * 7.5f;
                                         pe.offsetY = Math.Max(f3 * 3f, 0);
                                         break;
                                 }
@@ -207,37 +207,37 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     case 0:
                                         pe.Image = images[0];
-                                        pe.offsetX = 25;
-                                        pe.offsetY = 44 + f * 2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 2;
                                         break;
                                     case 1:
                                         pe.Image = images[2];
-                                        pe.offsetX = 5;
-                                        pe.offsetY = 30 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 2:
                                         pe.Image = images[3];
-                                        pe.offsetX = 34;
-                                        pe.offsetY = 18 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[3];
-                                        pe.offsetX = -21;
-                                        pe.offsetY = 14 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 4:
                                         pe.Image = images[1];
-                                        pe.offsetX = 5;
-                                        pe.offsetY = 18 + f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f;
                                         break;
                                     case 5:
                                         pe.Image = images[4];
-                                        pe.offsetX = 19;
+                                        pe.offsetX = 0;
                                         pe.offsetY = 0;
                                         break;
                                     case 6:
                                         pe.Image = images[5];
-                                        pe.offsetX = -15;
+                                        pe.offsetX = 0;
                                         pe.offsetY = 0;
                                         break;
                                 }
@@ -253,37 +253,37 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     case 0:
                                         pe.Image = images[9];
-                                        pe.offsetX = -25;
-                                        pe.offsetY = 44 + f * 2;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 2;
                                         break;
                                     case 1:
                                         pe.Image = images[11];
-                                        pe.offsetX = -5;
-                                        pe.offsetY = 30 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 2:
                                         pe.Image = images[12];
-                                        pe.offsetX = -34;
-                                        pe.offsetY = 18 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 3:
                                         pe.Image = images[12];
-                                        pe.offsetX = 21;
-                                        pe.offsetY = 14 + f * 1.5f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f * 1.5f;
                                         break;
                                     case 4:
                                         pe.Image = images[10];
-                                        pe.offsetX = -5;
-                                        pe.offsetY = 18 + f;
+                                        pe.offsetX = 0;
+                                        pe.offsetY = f;
                                         break;
                                     case 5:
                                         pe.Image = images[13];
-                                        pe.offsetX = -19;
+                                        pe.offsetX = 0;
                                         pe.offsetY = 0;
                                         break;
                                     case 6:
                                         pe.Image = images[14];
-                                        pe.offsetX = 15;
+                                        pe.offsetX = 0;
                                         pe.offsetY = 0;
                                         break;
                                 }

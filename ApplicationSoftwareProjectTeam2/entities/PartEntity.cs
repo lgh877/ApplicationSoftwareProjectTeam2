@@ -9,17 +9,26 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class PartEntity : Entity
     {
-        public float offsetX, offsetY, offsetZ;
+        public float offsetX, offsetY, offsetZ, baseX, baseY, baseZ;
         public LivingEntity Owner;
         public PartEntity(GamePanel level) : base(level) { renderType = 0; visualSize = 1.0f; }
-        public PartEntity(GamePanel level, float x, float y, float z) : base(level) { renderType = 0; visualSize = 1.0f; setPosition(x, y, z); }
+        public PartEntity(GamePanel level, LivingEntity owner, float x, float y, float z) : base(level) 
+        {
+            Owner = owner; baseX = x; baseY = y; baseZ = z;
+            renderType = 0; visualSize = 1.0f; setPosition(owner.x + x, owner.y + y, owner.z + z); 
+        }
         public override void tick()
         {
             tickCount++;
             float sizeFactor = (float) Math.Cbrt(visualSize);
-            this.setPosition(Owner.x + offsetX * sizeFactor,
-                            Owner.y + offsetY * sizeFactor,
-                            Owner.z + offsetZ * sizeFactor);
+            float bx = baseX;
+            if ((int)Owner.direction < 5)
+            {
+                bx *= -1; // 반전
+            }
+            this.setPosition(Owner.x + (bx + offsetX) * sizeFactor,
+                            Owner.y + (baseY + offsetY) * sizeFactor,
+                            Owner.z + (baseZ + offsetZ) * sizeFactor);
             if(Owner == null)
             {
                 shouldRemove = true;
