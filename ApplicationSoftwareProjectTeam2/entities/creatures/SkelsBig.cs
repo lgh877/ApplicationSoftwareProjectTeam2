@@ -14,36 +14,38 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         private int walkTicks, mana;
         public static List<Image> images = new List<Image>()
         {
-            Properties.Resources.weirdGuy_idle1,
-            Properties.Resources.weirdGuy_idle2,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_idle1),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_idle2),
+            Properties.Resources.sprite_Skel2_idle0,
+            Properties.Resources.sprite_Skel2_idle1,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_idle0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_idle1),
             //0 ~ 3번 인덱스
-            Properties.Resources.weirdGuy_walk1,
-            Properties.Resources.weirdGuy_walk2,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_walk1),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_walk2),
-            //4 ~ 7번 인덱스
+            Properties.Resources.sprite_Skel2_move0,
+            Properties.Resources.sprite_Skel2_move1,
+            Properties.Resources.sprite_Skel2_move2,
+            Properties.Resources.sprite_Skel2_move3,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_move3),
+            //4 ~ 11번 인덱스
             Properties.Resources.weirdGuy_died,
             ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_died),
-            //8 ~ 9번 인덱스
-            Properties.Resources.weirdGuy_meleeattack1,
-            Properties.Resources.weirdGuy_meleeattack2,
-            Properties.Resources.weirdGuy_meleeattack3,
-            Properties.Resources.weirdGuy_meleeattack4,
-            Properties.Resources.weirdGuy_meleeattack5,
-            Properties.Resources.weirdGuy_meleeattack6,
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack1),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack2),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack3),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack4),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack5),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.weirdGuy_meleeattack6)
-            //10 ~ 21번 인덱스
+            //12 ~ 13번 인덱스
+            Properties.Resources.sprite_Skel2_attack0,
+            Properties.Resources.sprite_Skel2_attack1,
+            Properties.Resources.sprite_Skel2_attack2,
+            Properties.Resources.sprite_Skel2_attack3,
+            Properties.Resources.sprite_Skel2_attack4,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack0),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack3),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Skel2_attack4),
+            //14 ~ 23번 인덱스
         };
         public SkelsBig(GamePanel level) : base(level)
         {
-            cost = 1;
+            cost = 2;
             visualSize = 1f; width = 40; height = 70; weight = 10; pushPower = 30;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
@@ -288,7 +290,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
-            width *= 2; height /= 2; Image = (int)direction < 5 ? images[8] : images[9];
+            width *= 2; height /= 2; Image = (int)direction < 5 ? images[12] : images[13];
         }
     }
 }
