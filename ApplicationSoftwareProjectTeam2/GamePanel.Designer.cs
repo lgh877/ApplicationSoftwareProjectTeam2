@@ -47,9 +47,10 @@
             panelPlayScreen.BackColor = SystemColors.ButtonShadow;
             panelPlayScreen.Controls.Add(label1);
             panelPlayScreen.Controls.Add(button1);
-            panelPlayScreen.Location = new Point(12, 12);
+            panelPlayScreen.Location = new Point(6, 6);
+            panelPlayScreen.Margin = new Padding(2, 1, 2, 1);
             panelPlayScreen.Name = "panelPlayScreen";
-            panelPlayScreen.Size = new Size(776, 426);
+            panelPlayScreen.Size = new Size(388, 200);
             panelPlayScreen.TabIndex = 0;
             panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
             panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
@@ -58,16 +59,18 @@
             // 
             label1.AutoSize = true;
             label1.Location = new Point(0, 0);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(78, 32);
+            label1.Size = new Size(39, 15);
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
             // button1
             // 
-            button1.Location = new Point(623, 3);
+            button1.Location = new Point(312, 1);
+            button1.Margin = new Padding(2, 1, 2, 1);
             button1.Name = "button1";
-            button1.Size = new Size(150, 46);
+            button1.Size = new Size(75, 22);
             button1.TabIndex = 1;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -75,11 +78,12 @@
             // 
             // GamePanel
             // 
-            AutoScaleDimensions = new SizeF(14F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(405, 226);
             Controls.Add(panelPlayScreen);
-            MinimumSize = new Size(826, 521);
+            Margin = new Padding(2, 1, 2, 1);
+            MinimumSize = new Size(421, 265);
             Name = "GamePanel";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AutoCombatant";
