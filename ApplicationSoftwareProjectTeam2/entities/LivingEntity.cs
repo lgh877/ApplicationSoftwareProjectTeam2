@@ -146,7 +146,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
                 level.grabbed = false; // 덱에서 제거되었으므로 grabbed 상태 해제
-                shouldRemove = true; // 엔티티 제거 플래그 설정
+                discard(); // 엔티티 제거 플래그 설정
                 return; // 덱에서 제거되었으므로 더 이상 처리하지 않음
             }
             #endregion
@@ -159,7 +159,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     grabOccurred();
                     item.entityLevel++;
                     item.scaleEntity(1.2f);
-                    level.entities.Remove(this);
+                    discard();
                     break;
                 }
             };
@@ -208,7 +208,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             if (++deathTime == maxDeathTime)
             {
-                shouldRemove = true;
+                discard();
             }
         }
 

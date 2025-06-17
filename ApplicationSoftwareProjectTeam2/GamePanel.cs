@@ -227,7 +227,7 @@ namespace ApplicationSoftwareProjectTeam2
 
                 using (Graphics bgGraphics = Graphics.FromImage(cachedBackground))
                 {
-                    bgGraphics.DrawImage(Properties.Resources.제목_없음3,
+                    bgGraphics.DrawImage(Properties.Resources.필드1,
                         0, 0, currentWidth, currentHeight);
                 }
 
