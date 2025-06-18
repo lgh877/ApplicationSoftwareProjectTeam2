@@ -55,7 +55,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 level.addFreshEntity(part);
             }
             scaleEntity(1.5f);
-            effectWeather();
         }
         #region 캐릭터 아이디 기록
         public override byte getLivingEntityId()
@@ -71,6 +70,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 case 0:
                     if (canStartTask())
                     {
+                        effectWeather(); // 날씨 효과 적용
                         #region 평상시에 아무렇게 걸어다니기 + 타겟 탐색
                         if (level.getRandomInteger(10) == 0)
                         {

@@ -39,7 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             hadTarget = false;
             hasLife = true;
 
-            weatherCode = 1;
+            weatherCode = 0;
         }
         public virtual EntityTypes getEntityType()
         {

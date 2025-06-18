@@ -50,7 +50,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 75; currentHealth = 75; finalMaxHealth = maxHealth;
             attackDamage = 13; finalAttackDamage = attackDamage;
             moveSpeed = 3;
-            effectWeather();
         }
         public override void scaleEntity(float scale)
         {
@@ -76,6 +75,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 case 0:
                     if (canStartTask())
                     {
+                        effectWeather(); // 날씨 효과 적용
                         #region 평상시에 아무렇게 걸어다니기 + 타겟 탐색
                         if (level.getRandomInteger(10) == 0)
                         {
