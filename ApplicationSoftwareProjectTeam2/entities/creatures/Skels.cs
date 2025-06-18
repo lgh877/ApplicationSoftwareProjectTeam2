@@ -5,7 +5,9 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.entities.projectiles;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
 using ApplicationSoftwareProjectTeam2.utils;
+using WMPLib;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
@@ -111,7 +113,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     {
                                         int dir = (int)direction;
                                         Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
-
                                         if (targetVec.X > 0)
                                         {
                                             if (targetVec.Z > 0.9659) dir = 0;
