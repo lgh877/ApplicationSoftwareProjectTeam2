@@ -211,7 +211,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
-            level.playSound(sounds[level.getRandomInteger(2)]);
             SkelsBone bone = new SkelsBone(level);
             bone.Owner = this;
             bone.attackDamage = attackDamage; bone.pushPower = pushPower;

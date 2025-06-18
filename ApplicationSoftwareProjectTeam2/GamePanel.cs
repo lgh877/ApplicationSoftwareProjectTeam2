@@ -90,14 +90,6 @@ namespace ApplicationSoftwareProjectTeam2
             buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
             panelGraphics = panelPlayScreen.CreateGraphics();
         }
-        public void playSound(IWMPMedia sound)
-        {
-            if (soundList.Count > 6)
-            {
-                return;
-            }
-            if(!soundList.Contains(sound)) soundList.AddLast(sound);
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             random = new CrossPlatformRandom();
