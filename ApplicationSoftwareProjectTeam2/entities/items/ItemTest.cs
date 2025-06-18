@@ -13,6 +13,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
     public class ItemTest : LivingEntity
     {
         public string Name;
+        public string Description;
 
         public static List<Image> images = new List<Image>()
         {
@@ -30,6 +31,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             renderType = 0;
 
             Name = "TestItem";
+            Description = "This is the Item for test";
         }
         public override void scaleEntity(float scale)
         {
@@ -80,7 +82,13 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 {
                     grabOccurred();
                     Item data;
-                    item.EquippedItems.Add(data = new Item(Name, cost, ItemType.Universal, Name));
+                    data = new Item(Name, cost, ItemType.Universal, Description);
+                    data.AttackBonus = 10;
+                    data.HealthBonus = 50;
+                    item.EquippedItems.Add(data);
+                    item.finalAttackDamage += data.AttackBonus;
+                    item.finalMaxHealth += data.HealthBonus;
+                    item.currentHealth = item.finalMaxHealth;
                     discard();
                     break;
                 }

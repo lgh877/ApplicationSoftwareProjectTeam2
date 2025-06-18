@@ -39,7 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             this.width = 66;
             this.height = 78;
             this.weight = 30;
-            maxHealth = 300; currentHealth = 200;
+            maxHealth = 300; currentHealth = 200; finalMaxHealth = maxHealth;
             this.pushPower = 20; moveSpeed = 3;
             this.renderType = 2; // default shadow
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;

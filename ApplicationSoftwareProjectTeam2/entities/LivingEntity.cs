@@ -24,6 +24,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost, walkTicks, mana;
         public float attackDamage, currentHealth, maxHealth, currentDamage;
+        public float finalAttackDamage, finalMaxHealth;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased, canBeDamaged = true;
         public LivingEntity? target;
@@ -223,7 +224,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = Math.Max(0, pushPower - entity.weight);
             entity.push(direction.X * powerFactor, direction.Y * powerFactor, direction.Z * powerFactor);
-            return entity.hurt(this, attackDamage);
+            return entity.hurt(this, finalAttackDamage);
         }
         public override bool doHurtTarget(LivingEntity entity, float damage)
         {
