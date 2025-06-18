@@ -1,12 +1,16 @@
 using ApplicationSoftwareProjectTeam2.entities;
 using ApplicationSoftwareProjectTeam2.entities.creatures;
 using ApplicationSoftwareProjectTeam2.items;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
 using System;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Media;
+using System.Numerics;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using WMPLib;
 
 namespace ApplicationSoftwareProjectTeam2
 {
@@ -32,7 +36,7 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> shopentities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount;
+        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount, levelTick;
         public bool handleMouseEvent, grabbed = false, isGameRunning = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
@@ -41,6 +45,8 @@ namespace ApplicationSoftwareProjectTeam2
         private BufferedGraphics buffer;
         private Graphics panelGraphics;
         public Player clientPlayer;
+        //WindowsMediaPlayer soundEffectPlayer = new WindowsMediaPlayer();
+        LinkedList<WindowsMediaPlayer> soundList = new LinkedList<WindowsMediaPlayer>();
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
@@ -84,7 +90,14 @@ namespace ApplicationSoftwareProjectTeam2
             buffer.Graphics.CompositingQuality = CompositingQuality.HighSpeed;
             panelGraphics = panelPlayScreen.CreateGraphics();
         }
-
+        public void playSound(IWMPMedia sound)
+        {
+            if (soundList.Count > 6)
+            {
+                return;
+            }
+            if(!soundList.Contains(sound)) soundList.AddLast(sound);
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             random = new CrossPlatformRandom();
@@ -92,9 +105,9 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 100; i++)
             {
-                LivingEntity test = CreateEntity((byte)(random.Next(4)), "Enemy");
+                LivingEntity test = CreateEntity((byte)(random.Next(4)), getRandomInteger(450).ToString()); //"Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
             }
@@ -113,6 +126,15 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
+            if (levelTick++ == 3)
+            {
+                levelTick = 0;
+                foreach (var sound in soundList)
+                {
+                    sound.controls.play();
+                }
+                soundList.Clear(); // 사운드 리스트 초기화
+            }
             bool isGameRunning = true;
             string detectTeam = clientPlayer.playerName;
             for (int i = livingentities.Count - 1; i != -1; i--)

@@ -6,7 +6,9 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.entities.projectiles;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
 using ApplicationSoftwareProjectTeam2.utils;
+using WMPLib;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
