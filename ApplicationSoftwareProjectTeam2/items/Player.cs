@@ -5,7 +5,7 @@ namespace ApplicationSoftwareProjectTeam2.items
     public class Player
     {
         public LinkedList<LivingEntity> entitiesofplayer = new LinkedList<LivingEntity>();
-        public string playerName { get; set; } = "Player1";
+        public string playerName, actualPlayerName;
         public int Gold = 250;
 
         public bool PurchaseItem(Item item, Unit unit)

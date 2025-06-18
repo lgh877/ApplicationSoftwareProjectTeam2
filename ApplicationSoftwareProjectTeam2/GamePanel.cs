@@ -92,7 +92,7 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 6; i++)
             {
                 LivingEntity test = CreateEntity((byte)(random.Next(4)), "Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
@@ -263,7 +263,7 @@ namespace ApplicationSoftwareProjectTeam2
                         case 1:
                         case 2:
                             int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
-                            using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
+                            using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(120 * scale3), clientPlayer.playerName.Equals(e.team) ? Color.Black : Color.Firebrick)))
                             {
                                 int shadowWidth = (int)(shadowSize * 1.2 / scale3);
                                 int shadowHeight = (int)(shadowSize * 0.4 / scale3);

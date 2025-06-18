@@ -22,6 +22,7 @@ namespace ApplicationSoftwareProjectTeam2
             GamePanel gamePanel = new GamePanel();
             gamePanel.Owner = this;
             gamePanel.clientPlayer = new items.Player();
+            gamePanel.clientPlayer.actualPlayerName = txtInsertName.Text;
             gamePanel.clientPlayer.playerName = txtInsertName.Text + new Random().NextInt64();
             gamePanel.Show();
             this.Hide();
