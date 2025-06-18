@@ -99,7 +99,7 @@ namespace ApplicationSoftwareProjectTeam2
 
             for (int i = 0; i < 6; i++)
             {
-                LivingEntity test = CreateEntity((byte)(random.Next(4)), getRandomInteger(450).ToString()); //"Enemy");
+                LivingEntity test = CreateEntity((byte)(random.Next(4)), "Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
             }

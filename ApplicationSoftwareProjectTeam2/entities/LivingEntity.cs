@@ -299,7 +299,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void releaseFromMouse()
         {
             direction = Direction.Right;
-            //마우스에서 놓았을 때 z값이 200보다 낮다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 fasle로 해주세요
             if (z < 200 || level.isGameRunning)
             {
                 if (z > 175) setPosition(x, 0, 175);
@@ -322,6 +321,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 level.entities.Remove(this);
                 hasAi = true;
             }
+            if(hasAi && x > 0) setPosition(0, y, z);
         }
 
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드
