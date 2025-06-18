@@ -14,6 +14,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class SkelsBig : LivingEntity
     {
+        public static List<WindowsMediaPlayer> sounds = new List<WindowsMediaPlayer>()
+        {
+            SoundCache.bonely_punch1, SoundCache.bonely_punch2, SoundCache.bonely_punch3,
+        };
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.sprite_Skel2_idle0,
@@ -191,6 +195,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     else if (walkTicks == 7)
                     {
                         Image = (int)direction < 5 ? images[15] : images[20];
+                        level.playSound(sounds[level.getRandomInteger(3)]);
                         if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width))
                                 && target.y - y < height && target.y - y > -target.height)
                         {
@@ -210,6 +215,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            level.playSound(Skels.sounds[level.getRandomInteger(2)]);
             for (int i = 0; i < 3; i++)
             {
                 SkelsBone bone = new SkelsBone(level);

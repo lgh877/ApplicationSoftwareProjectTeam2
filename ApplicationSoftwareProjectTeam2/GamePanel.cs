@@ -97,7 +97,7 @@ namespace ApplicationSoftwareProjectTeam2
 
             this.Width += 1;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 6; i++)
             {
                 LivingEntity test = CreateEntity((byte)(random.Next(4)), getRandomInteger(450).ToString()); //"Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
