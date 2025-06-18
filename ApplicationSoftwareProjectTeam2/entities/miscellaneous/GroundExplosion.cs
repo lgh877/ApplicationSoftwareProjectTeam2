@@ -4,11 +4,17 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
+using WMPLib;
 
 namespace ApplicationSoftwareProjectTeam2.entities.miscellaneous
 {
     public class GroundExplosion : Explosion
     {
+        public static List<WindowsMediaPlayer> sounds = new List<WindowsMediaPlayer>()
+        {
+            SoundCache.explosion1, SoundCache.explosion2, SoundCache.explosion3, SoundCache.explosion4
+        };
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.groundExplosion1,
