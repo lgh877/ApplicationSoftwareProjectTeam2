@@ -23,6 +23,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public event EventHandler deathEvent;
         public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost, walkTicks, mana;
+        public int weatherCode;
         public float attackDamage, currentHealth, maxHealth, currentDamage;
         public float finalAttackDamage, finalMaxHealth;
         public Direction direction = Direction.Right;
@@ -37,6 +38,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             deckIndex = -1;
             hadTarget = false;
             hasLife = true;
+
+            weatherCode = 1;
         }
         public virtual EntityTypes getEntityType()
         {
@@ -343,6 +346,24 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 }
             };
             return found;
+        }
+
+        public void effectWeather()
+        {
+            switch (weatherCode)
+            {
+                case 0: //맑음
+                    break;
+
+                case 1: //임시 공격력 감소 날씨
+                    finalAttackDamage -= 100;
+                    break;
+
+                case 2: //임시 체력 감소 날씨
+                    finalMaxHealth -= 50;
+                    currentHealth = finalMaxHealth;
+                    break;
+            }
         }
     }
 }

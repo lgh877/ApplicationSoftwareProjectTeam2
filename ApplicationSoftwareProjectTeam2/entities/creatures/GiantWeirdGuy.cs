@@ -55,6 +55,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 level.addFreshEntity(part);
             }
             scaleEntity(1.5f);
+            effectWeather();
         }
         #region 캐릭터 아이디 기록
         public override byte getLivingEntityId()

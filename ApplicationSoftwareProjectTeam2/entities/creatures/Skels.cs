@@ -50,6 +50,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 75; currentHealth = 75; finalMaxHealth = maxHealth;
             attackDamage = 13; finalAttackDamage = attackDamage;
             moveSpeed = 3;
+            effectWeather();
         }
         public override void scaleEntity(float scale)
         {
