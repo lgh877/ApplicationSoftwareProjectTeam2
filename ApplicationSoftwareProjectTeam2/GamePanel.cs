@@ -185,7 +185,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(7)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(6)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -405,6 +405,7 @@ namespace ApplicationSoftwareProjectTeam2
             return result;
         }
         //아이디값 입력받으면 거기에 상응하는 캐릭터를 반환해주는 메서드
+        //상점에서 사용되는 것임. 서버에서는 다른 것을 사용할 예정
         public LivingEntity CreateEntity(byte type, string name)
         {
             #region 아이디별 객체 타입 열람표
@@ -423,12 +424,21 @@ namespace ApplicationSoftwareProjectTeam2
                 2 => new SkelsBig(this) { team = name },
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
-                5 => new ChainsawItemEntity(this) { team = name },
-                6 => new EjectionDeviceItemEntity(this) { team = name },
+                5 => CreateItemEntity((byte)(new Random().Next(5)), name), // 체인톱 아이템
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }
-
+        public ItemEntity CreateItemEntity(byte type, string name)
+        {
+            return type switch
+            {
+                0 => new ChainsawItemEntity(this) { team = name },
+                1 => new EjectionDeviceItemEntity(this) { team = name },
+                2 => new ExplosiveGasVesselItemEntity(this) { team = name },
+                3 => new EjectionShoesItemEntityItemEntity(this) { team = name },
+                4 => new FlamingGloveItemEntity(this) { team = name },
+            };
+        }
         private void btnGameStart_Click(object sender, EventArgs e)
         {
             isGameRunning = true;

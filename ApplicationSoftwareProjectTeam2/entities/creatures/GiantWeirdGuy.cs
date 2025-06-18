@@ -36,7 +36,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         {
             this.visualSize = 1.0f;
             cost = 4;
-            this.width = 66;
+            this.width = 50;
             this.height = 78;
             this.weight = 30;
             maxHealth = 300; currentHealth = 200; finalMaxHealth = maxHealth;

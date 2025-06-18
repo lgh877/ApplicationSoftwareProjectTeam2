@@ -20,8 +20,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.miscellaneous
             Properties.Resources.groundSoulExplosion8,
             Properties.Resources.groundSoulExplosion9,
         };
-        public LivingEntity Owner;
-        public float attackDamage;
         public GroundSoulExplosion(GamePanel level) : base(level)
         {
             expImages = images;

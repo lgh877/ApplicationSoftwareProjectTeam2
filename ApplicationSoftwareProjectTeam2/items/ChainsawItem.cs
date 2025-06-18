@@ -24,11 +24,11 @@ namespace ApplicationSoftwareProjectTeam2.items
         public override void ApplyTo(LivingEntity unit)
         {
             unit.moveSpeed += SpeedBonus;
+            unit.finalAttackDamage *= 1.2f; // 공격력 20% 증가
             unit.attackEvent += attackOccur;
         }
         private void attackOccur(object attacker, AttackEventArgs attackEventArgs)
         {
-            attackEventArgs.damage *= 1.2f;
             GamePanel level = ((LivingEntity)attacker).level;
             level.playSound(sounds[level.getRandomInteger(3)]);
         }

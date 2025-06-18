@@ -30,5 +30,8 @@ namespace ApplicationSoftwareProjectTeam2.resources.sounds
         public static WindowsMediaPlayer teleport1 = new WindowsMediaPlayer() { URL = "sounds//teleport1.mp3", settings = { volume = 0 } };
         public static WindowsMediaPlayer teleport2 = new WindowsMediaPlayer() { URL = "sounds//teleport2.mp3", settings = { volume = 0 } };
         public static WindowsMediaPlayer teleport3 = new WindowsMediaPlayer() { URL = "sounds//teleport3.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer cosmicJump1 = new WindowsMediaPlayer() { URL = "sounds//cosmicJump1.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer cosmicJump2 = new WindowsMediaPlayer() { URL = "sounds//cosmicJump2.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer cosmicJump3 = new WindowsMediaPlayer() { URL = "sounds//cosmicJump3.mp3", settings = { volume = 0 } };
     }
 }
