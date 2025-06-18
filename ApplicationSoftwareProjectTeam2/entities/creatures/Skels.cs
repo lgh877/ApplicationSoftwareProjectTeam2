@@ -191,7 +191,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.y - y) * (target.y - y) + (target.z - z) * (target.z - z)) * 1.5f;
                             SkelsBone bone = new SkelsBone(level);
                             bone.Owner = this;
-                            bone.attackDamage = attackDamage; bone.pushPower = pushPower;
+                            bone.attackDamage = finalAttackDamage; bone.pushPower = pushPower;
                             bone.x = x; bone.y = y + height; bone.z = z;
                             bone.deltaMovement = targetVec * distance;
                             bone.team = team;
@@ -220,7 +220,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             level.playSound(sounds[level.getRandomInteger(2)]);
             SkelsBone bone = new SkelsBone(level);
             bone.Owner = this;
-            bone.attackDamage = attackDamage; bone.pushPower = pushPower;
+            bone.attackDamage = finalAttackDamage; bone.pushPower = pushPower;
             bone.x = x; bone.y = y + height; bone.z = z;
             bone.deltaMovement = deltaMovement * 1.6f;
             bone.team = team;
@@ -228,7 +228,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             level.addFreshEntity(bone);
             SkelsSkull skull = new SkelsSkull(level);
             skull.Owner = this; skull.Image = (int)direction < 5 ? SkelsSkull.images[0] : SkelsSkull.images[2];
-            skull.attackDamage = attackDamage; skull.pushPower = pushPower;
+            skull.attackDamage = finalAttackDamage; skull.pushPower = pushPower;
             skull.x = x; skull.y = y + height; skull.z = z;
             skull.deltaMovement = deltaMovement;
             skull.team = team;
@@ -236,7 +236,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             level.addFreshEntity(skull);
             SkelsSkull skull2 = new SkelsSkull(level);
             skull2.Owner = this; skull2.Image = (int)direction < 5 ? SkelsSkull.images[1] : SkelsSkull.images[3];
-            skull2.attackDamage = attackDamage; skull2.pushPower = pushPower;
+            skull2.attackDamage = finalAttackDamage; skull2.pushPower = pushPower;
             skull2.x = x; skull2.y = y + height / 2; skull2.z = z;
             skull2.deltaMovement = deltaMovement * 1.3f;
             skull2.team = team;

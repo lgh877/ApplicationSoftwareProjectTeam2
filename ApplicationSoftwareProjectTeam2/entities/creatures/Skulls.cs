@@ -223,7 +223,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 SkelsBone bone = new SkelsBone(level);
                 bone.imageOffset = level.getRandomInteger(4);
                 bone.Owner = this;
-                bone.attackDamage = attackDamage / 2; bone.pushPower = pushPower;
+                bone.attackDamage = finalAttackDamage / 2; bone.pushPower = pushPower;
                 bone.x = x; bone.y = y + height; bone.z = z;
                 bone.deltaMovement = new Vector3(deltaMovement.X + level.getRandomInteger(11) - 5
                     , deltaMovement.Y + level.getRandomInteger(7)
@@ -235,7 +235,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             SkullsSkull skull = new SkullsSkull(level);
             skull.Owner = this; skull.Image = (int)direction < 5 ? images[22] : images[25];
             skull.visualSize = 3f; skull.width = 57; skull.height = 55;
-            skull.attackDamage = attackDamage; skull.pushPower = pushPower;
+            skull.attackDamage = finalAttackDamage; skull.pushPower = pushPower;
             skull.x = x; skull.y = y + height / 2; skull.z = z;
             skull.deltaMovement = -deltaMovement;
             skull.team = team;
@@ -244,7 +244,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             SkelsSkull skull2 = new SkelsSkull(level);
             skull2.Owner = this; skull2.Image = (int)direction < 5 ? images[23] : images[26];
             skull2.visualSize = 3f; skull2.width = 17; skull2.height = 17;
-            skull2.attackDamage = attackDamage / 2; skull2.pushPower = pushPower;
+            skull2.attackDamage = finalAttackDamage / 2; skull2.pushPower = pushPower;
             skull2.x = x; skull2.y = y + height / 3; skull2.z = z;
             skull2.deltaMovement = deltaMovement * 0.5f;
             skull2.team = team;
@@ -253,7 +253,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             SkelsSkull skull3 = new SkelsSkull(level);
             skull3.Owner = this; skull3.Image = (int)direction < 5 ? images[24] : images[27];
             skull3.visualSize = 3f; skull3.width = 32; skull3.height = 15;
-            skull3.attackDamage = attackDamage / 2; skull3.pushPower = pushPower;
+            skull3.attackDamage = finalAttackDamage / 2; skull3.pushPower = pushPower;
             skull3.x = x; skull3.y = y + height / 3; skull3.z = z;
             skull3.deltaMovement = deltaMovement * 0.7f;
             skull3.team = team;

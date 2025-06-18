@@ -221,7 +221,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             {
                 SkelsBone bone = new SkelsBone(level);
                 bone.Owner = this;
-                bone.attackDamage = attackDamage; bone.pushPower = pushPower;
+                bone.attackDamage = finalAttackDamage; bone.pushPower = pushPower;
                 bone.x = x; bone.y = y + height; bone.z = z;
                 bone.deltaMovement = new Vector3((deltaMovement.X + level.getRandomInteger(5) - 2) * 1.6f
                     , (deltaMovement.Y + level.getRandomInteger(5)) * 1.6f
@@ -233,7 +233,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             SkelsSkull skull = new SkelsSkull(level);
             skull.Owner = this; skull.Image = (int)direction < 5 ? images[22] : images[24];
             skull.visualSize = 3f; skull.width = 24; skull.height = 24;
-            skull.attackDamage = attackDamage; skull.pushPower = pushPower;
+            skull.attackDamage = finalAttackDamage; skull.pushPower = pushPower;
             skull.x = x; skull.y = y + height * 0.75f; skull.z = z;
             skull.deltaMovement = deltaMovement;
             skull.team = team;
@@ -242,7 +242,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             SkelsSkull skull2 = new SkelsSkull(level);
             skull2.Owner = this; skull2.Image = (int)direction < 5 ? images[23] : images[25];
             skull2.visualSize = 3f; skull2.width = 24; skull2.height = 24;
-            skull2.attackDamage = attackDamage; skull2.pushPower = pushPower;
+            skull2.attackDamage = finalAttackDamage; skull2.pushPower = pushPower;
             skull2.x = x; skull2.y = y + height / 3; skull2.z = z;
             skull2.deltaMovement = deltaMovement * 1.3f;
             skull2.team = team;
