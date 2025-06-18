@@ -403,6 +403,16 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ItemTest {
+            get {
+                object obj = ResourceManager.GetObject("ItemTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap skel_projectile {
             get {
                 object obj = ResourceManager.GetObject("skel_projectile", resourceCulture);

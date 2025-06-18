@@ -15,7 +15,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
         Nothing = 0,
         Weirdos,
         Undeads,
-        Avengers
+        Avengers,
+        Items
     }
     public class LivingEntity : Entity
     {
