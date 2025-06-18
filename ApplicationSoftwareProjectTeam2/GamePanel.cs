@@ -184,7 +184,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(6)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(7)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
