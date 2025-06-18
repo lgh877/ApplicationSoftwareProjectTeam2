@@ -52,7 +52,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public Skulls(GamePanel level) : base(level)
         {
             cost = 4;
-            visualSize = 2.5f; width = 57; height = 80; weight = 25; pushPower = 50;
+            visualSize = 2.5f; width = 57; height = 80; weight = 55; pushPower = 50;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 250; currentHealth = 250; finalMaxHealth = maxHealth;
@@ -63,8 +63,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void scaleEntity(float scale)
         {
             base.scaleEntity(scale);
-            maxHealth *= scale; currentHealth = maxHealth;
-            attackDamage *= scale; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
+            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
         }
         public override EntityTypes getEntityType()
         {

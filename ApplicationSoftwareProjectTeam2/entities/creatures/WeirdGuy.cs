@@ -15,7 +15,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
     {
         public static List<WindowsMediaPlayer> sounds = new List<WindowsMediaPlayer>()
         {
-            SoundCache.slap1, SoundCache.slap2, SoundCache.slap3,
+            SoundCache.slap1, SoundCache.slap2, SoundCache.slap3, SoundCache.jump1, SoundCache.jump2
         };
         public static List<Image> images = new List<Image>()
         {
@@ -60,8 +60,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void scaleEntity(float scale)
         {
             base.scaleEntity(scale);
-            maxHealth *= scale; currentHealth = maxHealth;
-            attackDamage *= scale; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
+            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
         }
         public override EntityTypes getEntityType()
         {
@@ -242,6 +242,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             break;
                         case 7:
                             Image = (int)direction < 5 ? images[11] : images[17];
+                            level.playSound(sounds[level.getRandomInteger(2) + 3]);
                             float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z));
                             Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
                             int jp = (int)Math.Min(moveSpeed * 100, distance * 1.5);

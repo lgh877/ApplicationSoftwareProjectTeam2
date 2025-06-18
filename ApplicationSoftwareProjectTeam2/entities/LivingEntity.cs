@@ -39,7 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             hadTarget = false;
             hasLife = true;
 
-            weatherCode = 1;
+            weatherCode = 0;
         }
         public virtual EntityTypes getEntityType()
         {
@@ -160,7 +160,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             #endregion
             #region 조합 부분
-            foreach (var item in level.getAllEntities<LivingEntity>())
+            if(entityLevel < 3)
+                foreach (var item in level.getAllEntities<LivingEntity>())
             {
                 if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
                     && 40 > Math.Abs(item.x - x) + Math.Abs(item.z - z))

@@ -313,8 +313,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void scaleEntity(float scale)
         {
             base.scaleEntity(scale);
-            maxHealth *= scale; currentHealth = maxHealth;
-            attackDamage *= scale; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
+            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
             foreach (PartEntity part in parts)
             {
                 part.offsetX *= scale;
