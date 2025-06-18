@@ -723,6 +723,186 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack5 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack6 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack7 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_attack8 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_attack8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_idle1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_idle1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_idle2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_idle2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk5 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk6 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk7 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_Ghost1_walk8 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_Ghost1_walk8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap sprite_Skel1_attack0 {
             get {
                 object obj = ResourceManager.GetObject("sprite_Skel1_attack0", resourceCulture);
