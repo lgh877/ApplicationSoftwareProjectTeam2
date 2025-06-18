@@ -193,6 +193,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     else if (walkTicks == 10)
                     {
                         Image = (int)direction < 5 ? images[15] : images[20];
+                        level.playSound(SoundCache.skulls_bite);
                         VerticalImpactVisualEffect eff = new VerticalImpactVisualEffect(level, (int)direction < 5, x + ((int)direction < 5 ? 20 : -20) * visualSize, y - 28 + height * 0.1875f, z - 2);
                         level.addFreshEntity(eff);
                         if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
@@ -215,6 +216,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            level.playSound(Skels.sounds[level.getRandomInteger(2)]);
             for (int i = 0; i < 4; i++)
             {
                 SkelsBone bone = new SkelsBone(level);

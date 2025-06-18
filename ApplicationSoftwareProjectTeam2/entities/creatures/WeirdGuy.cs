@@ -5,12 +5,18 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.entities.projectiles;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
 using ApplicationSoftwareProjectTeam2.utils;
+using WMPLib;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class WeirdGuy : LivingEntity
     {
+        public static List<WindowsMediaPlayer> sounds = new List<WindowsMediaPlayer>()
+        {
+            SoundCache.slap1, SoundCache.slap2, SoundCache.slap3,
+        };
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.weirdGuy_idle1,
@@ -200,6 +206,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             break;
                         case 7:
                             Image = (int)direction < 5 ? images[13] : images[19];
+                            level.playSound(sounds[level.getRandomInteger(3)]);
                             if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
                                 && target.y - y < height && target.y - y > -target.height)
                             {
@@ -245,6 +252,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             break;
                         case 11:
                             Image = (int)direction < 5 ? images[13] : images[19];
+                            level.playSound(sounds[level.getRandomInteger(3)]);
                             if (target != null && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width))
                                 && target.y - y < height && target.y - y > -target.height)
                             {
