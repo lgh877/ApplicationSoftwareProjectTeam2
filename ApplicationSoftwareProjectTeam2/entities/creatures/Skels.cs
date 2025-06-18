@@ -47,8 +47,8 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             visualSize = 2f; width = 46; height = 54; weight = 8; pushPower = 10;
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
-            maxHealth = 75; currentHealth = 75;
-            attackDamage = 13;
+            maxHealth = 75; currentHealth = 75; finalMaxHealth = maxHealth;
+            attackDamage = 13; finalAttackDamage = attackDamage;
             moveSpeed = 3;
         }
         public override void scaleEntity(float scale)
