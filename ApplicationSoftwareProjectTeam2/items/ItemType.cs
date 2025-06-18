@@ -5,6 +5,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         Tank,
         Ranged,
         Special,
-        Universal
+        Universal,
+        Melee
     }
 }

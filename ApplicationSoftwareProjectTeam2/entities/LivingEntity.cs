@@ -5,6 +5,7 @@ using System.Media;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationSoftwareProjectTeam2.entities.eventArgs;
 using ApplicationSoftwareProjectTeam2.items;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -21,6 +22,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
     public class LivingEntity : Entity
     {
         public event EventHandler deathEvent;
+        public event EventHandler<AttackEventArgs> attackEvent, hurtEvent;
         public byte entityLevel = 0;
         public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost, walkTicks, mana;
         public int weatherCode;
@@ -228,14 +230,18 @@ namespace ApplicationSoftwareProjectTeam2.entities
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = Math.Max(0, pushPower - entity.weight);
             entity.push(direction.X * powerFactor, direction.Y * powerFactor, direction.Z * powerFactor);
-            return entity.hurt(this, finalAttackDamage);
+            AttackEventArgs args = new AttackEventArgs(entity, finalAttackDamage);
+            attackEvent?.Invoke(this, args);
+            return entity.hurt(this, args.damage);
         }
         public override bool doHurtTarget(LivingEntity entity, float damage)
         {
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = Math.Max(0, pushPower - entity.weight);
             entity.push(direction.X * powerFactor, direction.Y * powerFactor, direction.Z * powerFactor);
-            return entity.hurt(this, damage);
+            AttackEventArgs args = new AttackEventArgs(entity, damage);
+            attackEvent?.Invoke(this, args);
+            return entity.hurt(this, args.damage);
         }
         public virtual LivingEntity? getTarget()
         {
@@ -277,15 +283,12 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public override bool hurt(LivingEntity? attacker, float damage)
         {
-            if (canBeDamaged)
+            if (canBeDamaged || damage > currentDamage)
             {
-                currentDamage = damage;
+                AttackEventArgs args = new AttackEventArgs(this, damage);
+                hurtEvent?.Invoke(attacker, args);
+                currentDamage = args.damage;
                 canBeDamaged = false;
-                return true;
-            }
-            else if (damage > currentDamage)
-            {
-                currentDamage = damage;
                 return true;
             }
             return false;

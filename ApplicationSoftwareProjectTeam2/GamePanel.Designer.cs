@@ -49,10 +49,10 @@
             panelPlayScreen.Controls.Add(label1);
             panelPlayScreen.Controls.Add(btnGameStart);
             panelPlayScreen.Controls.Add(button1);
-            panelPlayScreen.Location = new Point(6, 6);
-            panelPlayScreen.Margin = new Padding(2, 1, 2, 1);
+            panelPlayScreen.Location = new Point(12, 13);
+            panelPlayScreen.Margin = new Padding(4, 2, 4, 2);
             panelPlayScreen.Name = "panelPlayScreen";
-            panelPlayScreen.Size = new Size(388, 200);
+            panelPlayScreen.Size = new Size(776, 427);
             panelPlayScreen.TabIndex = 0;
             panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
             panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
@@ -61,18 +61,18 @@
             // 
             label1.AutoSize = true;
             label1.Location = new Point(0, 0);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(78, 32);
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
             // btnGameStart
             // 
-            btnGameStart.Location = new Point(233, 1);
-            btnGameStart.Margin = new Padding(2, 1, 2, 1);
+            btnGameStart.Location = new Point(466, 2);
+            btnGameStart.Margin = new Padding(4, 2, 4, 2);
             btnGameStart.Name = "btnGameStart";
-            btnGameStart.Size = new Size(75, 22);
+            btnGameStart.Size = new Size(150, 47);
             btnGameStart.TabIndex = 1;
             btnGameStart.Text = "gameStart";
             btnGameStart.UseVisualStyleBackColor = true;
@@ -80,10 +80,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(312, 1);
-            button1.Margin = new Padding(2, 1, 2, 1);
+            button1.Location = new Point(624, 2);
+            button1.Margin = new Padding(4, 2, 4, 2);
             button1.Name = "button1";
-            button1.Size = new Size(75, 22);
+            button1.Size = new Size(150, 47);
             button1.TabIndex = 1;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -91,12 +91,12 @@
             // 
             // GamePanel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(405, 226);
+            ClientSize = new Size(810, 482);
             Controls.Add(panelPlayScreen);
-            Margin = new Padding(2, 1, 2, 1);
-            MinimumSize = new Size(416, 248);
+            Margin = new Padding(4, 2, 4, 2);
+            MinimumSize = new Size(806, 449);
             Name = "GamePanel";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AutoCombatant";

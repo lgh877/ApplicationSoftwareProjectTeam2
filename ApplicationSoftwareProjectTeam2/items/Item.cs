@@ -1,3 +1,5 @@
+using ApplicationSoftwareProjectTeam2.entities;
+
 namespace ApplicationSoftwareProjectTeam2.items
 {
     public class Item
@@ -10,11 +12,11 @@ namespace ApplicationSoftwareProjectTeam2.items
         public string Description { get; set; }
 
         public float AttackBonus { get; set; }
-        public float DefenseBonus { get; set; }
-        public float SpeedBonus { get; set; }
+        //public float DefenseBonus { get; set; }
+        public int SpeedBonus { get; set; }
         public float HealthBonus { get; set; }
-        public float KnockbackPowerBonus { get; set; }
-        public float WeightBonus { get; set; }
+        public int KnockbackPowerBonus { get; set; }
+        public int WeightBonus { get; set; }
         public float ElasticityBonus { get; set; }
 
 
@@ -26,15 +28,15 @@ namespace ApplicationSoftwareProjectTeam2.items
             Description = description;
         }
 
-        public void ApplyTo(Unit unit)
+        public virtual void ApplyTo(LivingEntity unit)
         {
-            unit.Attack += AttackBonus;
-            unit.Defense += DefenseBonus;
-            unit.Speed += SpeedBonus;
-            unit.Health += HealthBonus;
-            unit.KnockbackPower += KnockbackPowerBonus;
-            unit.Weight += WeightBonus;
-            unit.Elasticity += ElasticityBonus;
+            unit.finalAttackDamage += AttackBonus;
+            //unit.Defense += DefenseBonus;
+            unit.moveSpeed += SpeedBonus;
+            unit.finalMaxHealth += HealthBonus;
+            unit.pushPower += KnockbackPowerBonus;
+            unit.weight += WeightBonus;
+            unit.elasticForce += ElasticityBonus;
         }
         public override string ToString()
         {

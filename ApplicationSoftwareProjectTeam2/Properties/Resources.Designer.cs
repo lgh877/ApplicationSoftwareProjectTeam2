@@ -63,6 +63,16 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap chainSaw {
+            get {
+                object obj = ResourceManager.GetObject("chainSaw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap explode1 {
             get {
                 object obj = ResourceManager.GetObject("explode1", resourceCulture);
@@ -396,26 +406,6 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         internal static System.Drawing.Bitmap groundSoulExplosion9 {
             get {
                 object obj = ResourceManager.GetObject("groundSoulExplosion9", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap ItemTest {
-            get {
-                object obj = ResourceManager.GetObject("ItemTest", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap ItemTest2 {
-            get {
-                object obj = ResourceManager.GetObject("ItemTest2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

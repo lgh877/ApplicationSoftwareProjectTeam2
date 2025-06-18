@@ -7,19 +7,5 @@ namespace ApplicationSoftwareProjectTeam2.items
         public LinkedList<LivingEntity> entitiesofplayer = new LinkedList<LivingEntity>();
         public string playerName, actualPlayerName;
         public int Gold = 250;
-
-        public bool PurchaseItem(Item item, Unit unit)
-        {
-            if (Gold < item.Price)
-                return false;
-
-            if (unit.EquipItem(item))
-            {
-                Gold -= item.Price;
-                return true;
-            }
-
-            return false;
-        }
     }
 }

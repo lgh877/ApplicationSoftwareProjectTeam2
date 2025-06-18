@@ -1,5 +1,6 @@
 using ApplicationSoftwareProjectTeam2.entities;
 using ApplicationSoftwareProjectTeam2.entities.creatures;
+using ApplicationSoftwareProjectTeam2.entities.items;
 using ApplicationSoftwareProjectTeam2.items;
 using ApplicationSoftwareProjectTeam2.resources.sounds;
 using System;
@@ -184,7 +185,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(7)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(6)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -410,8 +411,9 @@ namespace ApplicationSoftwareProjectTeam2
             /*
              * 0 : WeirdGuy
              * 1 : Skels
-             * 2 : GiantWeirdGuy
-             * 3 : SkelsBig
+             * 2 : SkelsBig
+             * 3 : Skulls
+             * 4 : 
              */
             #endregion
             return type switch
@@ -421,8 +423,7 @@ namespace ApplicationSoftwareProjectTeam2
                 2 => new SkelsBig(this) { team = name },
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
-                5 => new ItemTest(this) { team = name },
-                6 => new ItemTest2(this) { team = name },
+                5 => new ChainsawItemEntity(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }

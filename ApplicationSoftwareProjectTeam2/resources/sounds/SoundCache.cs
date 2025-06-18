@@ -24,5 +24,8 @@ namespace ApplicationSoftwareProjectTeam2.resources.sounds
         public static WindowsMediaPlayer explosionSmall2 = new WindowsMediaPlayer() { URL = "sounds//explosionSmall2.mp3", settings = { volume = 0 } };
         public static WindowsMediaPlayer jump1 = new WindowsMediaPlayer() { URL = "sounds//jump1.mp3", settings = { volume = 0 } };
         public static WindowsMediaPlayer jump2 = new WindowsMediaPlayer() { URL = "sounds//jump2.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer chainsaw1 = new WindowsMediaPlayer() { URL = "sounds//chainsaw1.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer chainsaw2 = new WindowsMediaPlayer() { URL = "sounds//chainsaw2.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer chainsaw3 = new WindowsMediaPlayer() { URL = "sounds//chainsaw3.mp3", settings = { volume = 0 } };
     }
 }
