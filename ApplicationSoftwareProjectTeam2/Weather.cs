@@ -9,7 +9,7 @@ namespace ApplicationSoftwareProjectTeam2
     public enum MainWeathers
     {
         Clear,
-        Fog,
+        //Fog,
         Hot,
         Cold
     }
@@ -17,7 +17,7 @@ namespace ApplicationSoftwareProjectTeam2
     public enum SubWeathers
     {
         Clear,
-        S_Fog,
+        //S_Fog,
         S_Hot,
         S_Cold
     }
