@@ -16,7 +16,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         {
             SoundCache.chainsaw1, SoundCache.chainsaw2, SoundCache.chainsaw3
         };
-        public ChainsawItem() : base("체인톱", 10, ItemType.Melee, "근접 공격력 +n, 적을 베어 넘어뜨림")
+        public ChainsawItem() : base("체인톱", 10, ItemType.Melee, "캐릭터에게 광기를 불어넣어 이동속도를 빠르게 하고 데미지를 20% 증가시켜준다. 또한 공격 시 전기톱 효과음이 난다.")
         {
             Id = 0;
             this.SpeedBonus = 3;
@@ -25,9 +25,8 @@ namespace ApplicationSoftwareProjectTeam2.items
         {
             unit.moveSpeed += SpeedBonus;
             unit.attackEvent += attackOccur;
-
         }
-        public void attackOccur(object attacker, AttackEventArgs attackEventArgs)
+        private void attackOccur(object attacker, AttackEventArgs attackEventArgs)
         {
             attackEventArgs.damage *= 1.2f;
             GamePanel level = ((LivingEntity)attacker).level;

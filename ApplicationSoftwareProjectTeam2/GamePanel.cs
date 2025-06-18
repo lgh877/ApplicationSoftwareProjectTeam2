@@ -185,7 +185,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(6)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(7)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -424,6 +424,7 @@ namespace ApplicationSoftwareProjectTeam2
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
                 5 => new ChainsawItemEntity(this) { team = name },
+                6 => new EjectionDeviceItemEntity(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }
