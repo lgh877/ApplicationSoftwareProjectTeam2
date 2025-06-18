@@ -36,7 +36,7 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> shopentities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount, levelTick;
+        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount;
         public bool handleMouseEvent, grabbed = false, isGameRunning = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
@@ -107,7 +107,11 @@ namespace ApplicationSoftwareProjectTeam2
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
         }
-
+        public void playSound(WindowsMediaPlayer sound)
+        {
+            sound.settings.volume = 100; // 볼륨 설정 (0-100)
+            sound.controls.play();
+        }
         public void addFreshLivingEntity(LivingEntity? entity)
         {
             livingentities.Add(entity);
@@ -118,15 +122,6 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
-            if (levelTick++ == 3)
-            {
-                levelTick = 0;
-                foreach (var sound in soundList)
-                {
-                    sound.controls.play();
-                }
-                soundList.Clear(); // 사운드 리스트 초기화
-            }
             bool isGameRunning = true;
             string detectTeam = clientPlayer.playerName;
             for (int i = livingentities.Count - 1; i != -1; i--)
@@ -228,36 +223,14 @@ namespace ApplicationSoftwareProjectTeam2
 
 
         private Stopwatch _renderWatch = new Stopwatch();
-        private Bitmap cachedBackground = null;
-        private bool backgroundNeedsUpdate = true;
-
-
-        private void RenderBackground()
-        {
-            // 배경이 변경될 필요가 있을 때만 새로 생성
-            if (backgroundNeedsUpdate)
-            {
-                cachedBackground?.Dispose(); // 기존 배경 해제
-                cachedBackground = new Bitmap(currentWidth, currentHeight);
-
-                using (Graphics bgGraphics = Graphics.FromImage(cachedBackground))
-                {
-                    bgGraphics.DrawImage(Properties.Resources.필드1,
-                        0, 0, currentWidth, currentHeight);
-                }
-
-                backgroundNeedsUpdate = false; // 배경 갱신 완료
-            }
-        }
-
         private void renderEntities()
         {
             _renderWatch.Restart();
             Graphics g = buffer.Graphics;
 
             float scale = (float)currentWidth / (float)worldWidth;
-            RenderBackground();
-            g.DrawImage(cachedBackground, 0, 0);
+            //RenderBackground();
+            g.DrawImage(Properties.Resources.필드1, 0, 0, currentWidth, currentHeight);
 
             if (allentities.Count > 0)
             {
@@ -356,7 +329,6 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void GamePanel_Resize(object sender, EventArgs e)
         {
-            backgroundNeedsUpdate = true;
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;

@@ -13,6 +13,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class Skels : LivingEntity
     {
+        public static List<WindowsMediaPlayer> sounds = new List<WindowsMediaPlayer>()
+        {
+            SoundCache.bone_crack1, SoundCache.bone_crack2, SoundCache.swosh
+        };
         public static List<Image> images = new List<Image>()
         {
             Properties.Resources.sprite_Skel1_idle0,
@@ -179,6 +183,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             break;
                         case 7:
                             Image = (int)direction < 5 ? images[11] : images[16];
+                            level.playSound(sounds[2]);
                             Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x,
                                                                                 (target.y - y) * 2f,
                                                                                 target.z - z));
@@ -211,6 +216,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            level.playSound(sounds[level.getRandomInteger(2)]);
             SkelsBone bone = new SkelsBone(level);
             bone.Owner = this;
             bone.attackDamage = attackDamage; bone.pushPower = pushPower;
