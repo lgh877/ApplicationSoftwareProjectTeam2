@@ -183,6 +183,16 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap flyingeye_projectile {
+            get {
+                object obj = ResourceManager.GetObject("flyingeye_projectile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap giantWeirdGuyArm {
             get {
                 object obj = ResourceManager.GetObject("giantWeirdGuyArm", resourceCulture);
@@ -726,6 +736,206 @@ namespace ApplicationSoftwareProjectTeam2.Properties {
         internal static System.Drawing.Bitmap sprite_ColEffVert5 {
             get {
                 object obj = ResourceManager.GetObject("sprite_ColEffVert5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack5 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack6 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack7 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_attack8 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_attack8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_death1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_death1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_death2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_death2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_death3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_death3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_death4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_death4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk1 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk2 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk3 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk4 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk5 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk6 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk7 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap sprite_FlyingEye1_idlewalk8 {
+            get {
+                object obj = ResourceManager.GetObject("sprite_FlyingEye1_idlewalk8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

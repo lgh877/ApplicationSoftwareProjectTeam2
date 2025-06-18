@@ -508,6 +508,9 @@
   <data name="ejectionShoes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Items\ejectionShoes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="flyingeye_projectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\flyingeye_projectile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mushroom_projectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Mushroom\mushroom_projectile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -540,6 +543,66 @@
   </data>
   <data name="sprite_Bot1_walk4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Bot1\sprite_Bot1_walk4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_attack8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_attack8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_death1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_death1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_death2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_death2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_death3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_death3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_death4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_death4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sprite_FlyingEye1_idlewalk8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\FlyingEye1\sprite_FlyingEye1_idlewalk8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sprite_Ghost1_attack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Ghost1\sprite_Ghost1_attack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
