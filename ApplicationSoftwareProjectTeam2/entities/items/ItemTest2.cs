@@ -10,7 +10,7 @@ using ApplicationSoftwareProjectTeam2.utils;
 
 namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
-    public class ItemTest : LivingEntity
+    public class ItemTest2 : LivingEntity
     {
         public int Id;
         public string Name;
@@ -18,9 +18,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 
         public static List<Image> images = new List<Image>()
         {
-            Properties.Resources.ItemTest
+            Properties.Resources.ItemTest2
         };
-        public ItemTest(GamePanel level) : base(level)
+        public ItemTest2(GamePanel level) : base(level)
         {
             cost = 2;
             visualSize = 1f; width = 40; height = 70; weight = 10; pushPower = 0;
@@ -31,9 +31,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             moveSpeed = 5;
             renderType = 0;
 
-            Id = 0;
-            Name = "TestItem";
-            Description = "This is the Item for test";
+            Id = 1;
+            Name = "TestItem2";
+            Description = "This is the Item for test2";
         }
         public override void scaleEntity(float scale)
         {
@@ -84,10 +84,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 {
                     grabOccurred();
                     Item data;
-                    data = new Item( Name, cost, ItemType.Universal, Description);
+                    data = new Item(Name, cost, ItemType.Universal, Description);
                     data.Id = Id;
-                    data.AttackBonus = 10;
-                    data.HealthBonus = 50;
+                    data.AttackBonus = 30;
+                    data.HealthBonus = 0;
                     item.EquippedItems.Add(data);
                     item.finalAttackDamage += data.AttackBonus;
                     item.finalMaxHealth += data.HealthBonus;

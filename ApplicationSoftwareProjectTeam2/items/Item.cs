@@ -18,9 +18,8 @@ namespace ApplicationSoftwareProjectTeam2.items
         public float ElasticityBonus { get; set; }
 
 
-        public Item(int id, string name, int price, ItemType type, string description)
+        public Item(string name, int price, ItemType type, string description)
         {
-            Id = id;
             Name = name;
             Price = price;
             Type = type;

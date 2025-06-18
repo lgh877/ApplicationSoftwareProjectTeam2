@@ -422,6 +422,7 @@ namespace ApplicationSoftwareProjectTeam2
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
                 5 => new ItemTest(this) { team = name },
+                6 => new ItemTest2(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }
