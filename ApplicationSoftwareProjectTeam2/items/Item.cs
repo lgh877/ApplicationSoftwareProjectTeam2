@@ -2,6 +2,8 @@ namespace ApplicationSoftwareProjectTeam2.items
 {
     public class Item
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
         public int Price { get; set; }
         public ItemType Type { get; set; }
@@ -16,8 +18,9 @@ namespace ApplicationSoftwareProjectTeam2.items
         public float ElasticityBonus { get; set; }
 
 
-        public Item(string name, int price, ItemType type, string description)
+        public Item(int id, string name, int price, ItemType type, string description)
         {
+            Id = id;
             Name = name;
             Price = price;
             Type = type;

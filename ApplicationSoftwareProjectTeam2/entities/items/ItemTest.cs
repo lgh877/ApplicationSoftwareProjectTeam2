@@ -12,6 +12,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 {
     public class ItemTest : LivingEntity
     {
+        public int Id;
         public string Name;
         public string Description;
 
@@ -30,6 +31,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             moveSpeed = 5;
             renderType = 0;
 
+            Id = 0;
             Name = "TestItem";
             Description = "This is the Item for test";
         }
@@ -82,7 +84,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 {
                     grabOccurred();
                     Item data;
-                    data = new Item(Name, cost, ItemType.Universal, Description);
+                    data = new Item(Id, Name, cost, ItemType.Universal, Description);
                     data.AttackBonus = 10;
                     data.HealthBonus = 50;
                     item.EquippedItems.Add(data);
@@ -96,12 +98,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ;
             #endregion
         }
-        #region 캐릭터 아이디 기록
-        public override byte getLivingEntityId()
-        {
-            return 1;
-        }
-        #endregion
 
         //********아이템이라서 모션 및 사망 처리 필요 없음
 
