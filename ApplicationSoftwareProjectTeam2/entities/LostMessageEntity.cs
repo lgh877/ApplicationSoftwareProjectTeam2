@@ -27,7 +27,11 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     level.playSound(SoundCache.gameOver);
                     level.addFreshEntity(new GameOverEntity(level));
                 }
-                else level.isGameRunning = false;
+                else
+                {
+                    level.isGameRunning = false;
+                    level.RecoverPlayerEntities();
+                }
                 discard();
             }
         }

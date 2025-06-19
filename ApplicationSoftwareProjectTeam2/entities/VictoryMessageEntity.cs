@@ -21,6 +21,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             y = level.Lerp(y, 200, 0.1f);
             if (tickCount == 30)
             {
+                level.RecoverPlayerEntities();
                 level.isGameRunning = false;
                 discard();
             }

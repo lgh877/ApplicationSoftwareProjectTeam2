@@ -500,6 +500,55 @@ namespace ApplicationSoftwareProjectTeam2
             }
             return result;
         }
+        public void RecoverPlayerEntities()
+        {
+            foreach(var entity in livingentities)
+            {
+                entity.discard();
+            }
+            clientPlayer.entitiesofplayer.Clear();
+            foreach (var se in serialized)
+            {
+                LivingEntity entity = TranslateAndCreateLivingEntity(se.Id, clientPlayer.playerName);
+                entity.entityLevel = se.EntityLevel;
+                for (int i = 0; i < entity.entityLevel; i++) entity.scaleEntity(1.2f);
+                entity.setPosition(se.X, 2, se.Z);
+                entity.EquippedItems[0] = TranslateAndCreateItem(se.ItemId1);
+                entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
+                entity.EquippedItems[2] = TranslateAndCreateItem(se.ItemId3);
+                addFreshLivingEntity(entity);
+                clientPlayer.entitiesofplayer.AddLast(entity);
+            }
+        }
+        //서버에서 전송된 캐릭터 타입을 받아서 해당 캐릭터를 생성하는 메서드
+        public LivingEntity TranslateAndCreateLivingEntity(byte type, string name)
+        {
+            return type switch
+            {
+                1 => new WeirdGuy(this) { team = name },
+                2 => new GiantWeirdGuy(this) { team = name },
+                10 => new Skels(this) { team = name },
+                11 => new SkelsBig(this) { team = name },
+                12 => new Skulls(this) { team = name },
+                20 => new Boxer(this) { team = name },
+                21 => new FlyingEye1(this) { team = name },
+                22 => new Ghost1(this) { team = name },
+                23 => new Mushroom1(this) { team = name },
+                _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
+            };
+        }
+        public Item TranslateAndCreateItem(byte type)
+        {
+            return type switch
+            {
+                1 => new EjectionDeviceItem(),
+                2 => new ExplosiveGasVesselItem(),
+                3 => new EjectionShoesItem(),
+                4 => new FlamingGloveItem(),
+                5 => new ChainsawItem(),
+                _ => throw new ArgumentException("존재하지 않는 아이템 타입입니다.")
+            };
+        }
         //아이디값 입력받으면 거기에 상응하는 캐릭터를 반환해주는 메서드
         //상점에서 사용되는 것임. 서버에서는 다른 것을 사용할 예정
         public LivingEntity CreateEntity(byte type, string name)
@@ -539,36 +588,31 @@ namespace ApplicationSoftwareProjectTeam2
                 4 => new FlamingGloveItemEntity(this) { team = name },
             };
         }
+        List<SerializedEntity> serialized;
         private void btnGameStart_Click(object sender, EventArgs e)
         {
             if (isGameRunning || leftCount[0] == 0) return;
             isGameRunning = true; gameOverDetected = false;
-            if (currentRound == 0)
+            randomSeed = (ulong)(new Random().Next(int.MaxValue));
+            //유닛 정보 서버 전송
+            serialized = new();
+            foreach (var unit in clientPlayer.entitiesofplayer)
             {
-                randomSeed = (ulong)(new Random().Next(int.MaxValue));
-
-                //유닛 정보 서버 전송
-                List<SerializedEntity> serialized = new();
-                foreach (var unit in clientPlayer.entitiesofplayer)
+                if (unit is LivingEntity le)
                 {
-                    if (unit is LivingEntity le)
+                    serialized.Add(new SerializedEntity
                     {
-                        serialized.Add(new SerializedEntity
-                        {
-                            Id = le.getLivingEntityId(), // LivingEntity의 고유 ID 사용
-                            EntityLevel = le.entityLevel, // LivingEntity의 고유 ID 사용
-                            X = (int)le.x,                          // x 좌표
-                            Z = (int)le.z,                           // y 좌표
-                            ItemId1 = le.EquippedItems[0] != null ? (byte) 0 : (byte) le.EquippedItems[0].Id, // y 좌표
-                            ItemId2 = le.EquippedItems[1] != null ? (byte) 0 : (byte) le.EquippedItems[1].Id, // y 좌표
-                            ItemId3 = le.EquippedItems[2] != null ? (byte) 0 : (byte) le.EquippedItems[2].Id // y 좌표
-                        });
-                    }
+                        Id = le.getLivingEntityId(), // LivingEntity의 고유 ID 사용
+                        EntityLevel = le.entityLevel, // LivingEntity의 고유 ID 사용
+                        X = (int)le.x,                          // x 좌표
+                        Z = (int)le.z,                           // y 좌표
+                        ItemId1 = le.EquippedItems[0] != null ? (byte)0 : (byte)le.EquippedItems[0].Id, // y 좌표
+                        ItemId2 = le.EquippedItems[1] != null ? (byte)0 : (byte)le.EquippedItems[1].Id, // y 좌표
+                        ItemId3 = le.EquippedItems[2] != null ? (byte)0 : (byte)le.EquippedItems[2].Id // y 좌표
+                    });
                 }
-                gameClient.SendEntities(serialized);
-
-
             }
+            gameClient.SendEntities(serialized);
             for (int i = 0; i < 6 + currentRound; i++)
             {
                 LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");

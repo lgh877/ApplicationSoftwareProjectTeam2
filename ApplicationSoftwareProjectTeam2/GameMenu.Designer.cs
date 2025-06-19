@@ -124,7 +124,7 @@
         private Button btnStart;
         private Label lblInsertName;
         private TextBox txtInsertName;
-        private CheckBox ckbClient;
         private TextBox txbIpAddress;
+        public CheckBox ckbClient;
     }
 }

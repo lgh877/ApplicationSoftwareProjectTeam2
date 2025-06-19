@@ -63,7 +63,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             moveSpeed = 4;
         }
 
-        public override byte getLivingEntityId() => 12;
+        public override byte getLivingEntityId() => 21;
         public override EntityTypes getEntityType() => EntityTypes.Avengers;
 
         public override void tickAlive()

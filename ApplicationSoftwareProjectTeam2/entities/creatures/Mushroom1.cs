@@ -85,7 +85,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
             attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
         }
-        public override byte getLivingEntityId() => 20;
+        public override byte getLivingEntityId() => 23;
         public override EntityTypes getEntityType() => EntityTypes.Avengers;
 
         public override void tickAlive()

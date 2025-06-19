@@ -18,7 +18,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         };
         public ChainsawItem() : base("체인톱", 10, ItemType.Melee, "캐릭터에게 광기를 불어넣어 이동속도를 빠르게 하고 데미지를 20% 증가시켜준다. 또한 공격 시 전기톱 효과음이 난다.")
         {
-            Id = 0;
+            Id = 5;
             this.SpeedBonus = 3;
         }
         public override void ApplyTo(LivingEntity unit)
