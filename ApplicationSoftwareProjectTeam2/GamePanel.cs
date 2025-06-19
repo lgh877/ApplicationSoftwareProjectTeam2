@@ -441,9 +441,10 @@ namespace ApplicationSoftwareProjectTeam2
         {
             if (isGameRunning) return;
             isGameRunning = true;
+            randomSeed = 0;
             for (int i = 0; i < 6; i++)
             {
-                LivingEntity test = CreateEntity((byte)(random.Next(11) + 1), "Enemy");
+                LivingEntity test = CreateEntity((byte)(getRandomInteger(11) + 1), "Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
                 leftCount[1]++;
