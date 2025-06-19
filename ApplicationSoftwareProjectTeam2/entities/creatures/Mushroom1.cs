@@ -18,8 +18,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             Properties.Resources.sprite_Mushroom1_idle2,
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_idle1),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_idle2),
-
-            // walk (4~11)
+            // walk (4~20)
             Properties.Resources.sprite_Mushroom1_walk1,
             Properties.Resources.sprite_Mushroom1_walk2,
             Properties.Resources.sprite_Mushroom1_walk3,
@@ -36,8 +35,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_walk6),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_walk7),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_walk8),
-
-            // attack (12~19)
+            // attack (20~35)
             Properties.Resources.sprite_Mushroom1_attack1,
             Properties.Resources.sprite_Mushroom1_attack2,
             Properties.Resources.sprite_Mushroom1_attack3,
@@ -53,7 +51,16 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_attack5),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_attack6),
             ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_attack7),
-            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_attack8)
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_attack8),
+            // death (36~43)
+            Properties.Resources.sprite_Mushroom1_death1,
+            Properties.Resources.sprite_Mushroom1_death2,
+            Properties.Resources.sprite_Mushroom1_death3,
+            Properties.Resources.sprite_Mushroom1_death4,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_death1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_death2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_death3),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_Mushroom1_death4)
         };
 
         public Mushroom1(GamePanel level) : base(level)
@@ -67,14 +74,18 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             Image = images[0];
             direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 120;
-            currentHealth = 120;
-            finalMaxHealth = maxHealth;
-            attackDamage = 40;
-            finalAttackDamage = attackDamage;
+            currentHealth = 120; finalMaxHealth = maxHealth;
+            attackDamage = 8; finalAttackDamage = attackDamage;
             moveSpeed = 3;
+            maxDeathTime = 20;
         }
-
-        public override byte getLivingEntityId() => 11;
+        public override void scaleEntity(float scale)
+        {
+            base.scaleEntity(scale);
+            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
+            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+        }
+        public override byte getLivingEntityId() => 20;
         public override EntityTypes getEntityType() => EntityTypes.Avengers;
 
         public override void tickAlive()
@@ -115,6 +126,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
                                     {
                                         entityState = 1;
@@ -154,11 +174,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     {
                         walkTicks++;
                         isActuallyMoving = true;
-                        if (walkTicks == 2) Image = (int)direction < 5 ? images[4] : images[12];
-                        else if (walkTicks == 4) Image = (int)direction < 5 ? images[5] : images[13];
-                        else if (walkTicks == 6) Image = (int)direction < 5 ? images[6] : images[14];
-                        else if (walkTicks == 8) Image = (int)direction < 5 ? images[7] : images[15];
-                        else if (walkTicks > 8) { Image = (int)direction < 5 ? images[0] : images[2]; walkTicks = 0; }
+                        Image = (int)direction < 5 ? images[4 + walkTicks % 8] : images[12 + walkTicks % 8];
                     }
                     else
                     {
@@ -173,29 +189,22 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         else if (walkTicks == 8) Image = (int)direction < 5 ? images[1] : images[3];
                     }
                     break;
-
                 case 1:
                     direction = target.x - x > 0 ? Direction.Right : Direction.Left;
                     walkTicks++;
-                    switch (walkTicks)
+                    if (walkTicks == 1) Image = (int)direction < 5 ? images[20] : images[28];
+                    else if (walkTicks == 3) Image = (int)direction < 5 ? images[21] : images[29];
+                    else if (walkTicks == 5) Image = (int)direction < 5 ? images[22] : images[30];
+                    else if (walkTicks == 7) Image = (int)direction < 5 ? images[23] : images[31];
+                    else if (walkTicks == 9) Image = (int)direction < 5 ? images[24] : images[32];
+                    else if (walkTicks == 11) Image = (int)direction < 5 ? images[25] : images[33];
+                    else if (walkTicks == 13)
                     {
-                        case 1:
-                        case 2:
-                            Image = (int)direction < 5 ? images[12] : images[20];
-                            break;
-                        case 3:
-                        case 4:
-                            Image = (int)direction < 5 ? images[13] : images[21];
-                            break;
-                        case 5:
-                        case 6:
-                            Image = (int)direction < 5 ? images[14] : images[22];
-                            break;
-                        case 7:
-                            Image = (int)direction < 5 ? images[15] : images[23];
-                            Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, (target.y - y) * 1.8f, target.z - z));
-                            float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.y - y) * (target.y - y) + (target.z - z) * (target.z - z)) * 1.4f;
-
+                        Image = (int)direction < 5 ? images[26] : images[34];
+                        float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.y - y) * (target.y - y) + (target.z - z) * (target.z - z)) * 0.3f;
+                        for(int i = 0; i < 4; i++)
+                        {
+                            Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x + level.getRandomInteger(51) - 25, (target.y - y) * 1.8f + level.getRandomInteger(51) - 25, target.z - z + level.getRandomInteger(51) - 25));
                             MushroomSpore spore = new MushroomSpore(level);
                             spore.Owner = this;
                             spore.attackDamage = finalAttackDamage;
@@ -205,37 +214,27 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             spore.z = z;
                             spore.deltaMovement = targetVec * distance;
                             spore.team = team;
-                            for (int j = 0; j < entityLevel; j++) spore.scaleEntity(1.2f);
+                            spore.scaleEntity((float) Math.Pow(1.2f,entityLevel));
                             level.addFreshEntity(spore);
-                            break;
-                        case 13:
-                            Image = (int)direction < 5 ? images[18] : images[26];
-                            break;
-                        case 17:
-                            Image = (int)direction < 5 ? images[19] : images[27];
-                            break;
-                        case 20:
-                            walkTicks = 0;
-                            entityState = 0;
-                            break;
+                        }
                     }
-                    break;
-
-                case 2: // 죽는 중
-                    walkTicks++;
-                    if (walkTicks == 3) Image = Properties.Resources.sprite_Mushroom1_death1;
-                    else if (walkTicks == 6) Image = Properties.Resources.sprite_Mushroom1_death2;
-                    else if (walkTicks == 9) Image = Properties.Resources.sprite_Mushroom1_death3;
-                    else if (walkTicks == 12) Image = Properties.Resources.sprite_Mushroom1_death4;
-                    else if (walkTicks > 15) discard();
+                    else if (walkTicks == 15) Image = (int)direction < 5 ? images[27] : images[35];
+                    else if (walkTicks == 17)
+                    {
+                        walkTicks = 0;
+                        entityState = 0;
+                    }
                     break;
             }
         }
-
-        public override void setDeath(object? sender, EventArgs e)
+        public override void tickDeath()
         {
-            entityState = 2; // 죽음 애니메이션 전용 상태
-            walkTicks = 0;
+            base.tickDeath();
+            if (deathTime > 12) return;
+            if (deathTime == 3) Image = (int)direction < 5 ? images[36] : images[40];
+            else if (deathTime == 6) Image = (int)direction < 5 ? images[37] : images[41];
+            else if (deathTime == 9) Image = (int)direction < 5 ? images[38] : images[42];
+            else if (deathTime == 12) Image = (int)direction < 5 ? images[39] : images[43];
         }
     }
 }

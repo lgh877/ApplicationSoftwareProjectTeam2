@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             logicTick = new System.Windows.Forms.Timer(components);
             panelPlayScreen = new Panel();
+            label2 = new Label();
             label1 = new Label();
             btnGameStart = new Button();
             button1 = new Button();
@@ -46,6 +47,7 @@
             // panelPlayScreen
             // 
             panelPlayScreen.BackColor = SystemColors.ButtonShadow;
+            panelPlayScreen.Controls.Add(label2);
             panelPlayScreen.Controls.Add(label1);
             panelPlayScreen.Controls.Add(btnGameStart);
             panelPlayScreen.Controls.Add(button1);
@@ -56,6 +58,15 @@
             panelPlayScreen.TabIndex = 0;
             panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
             panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(0, 44);
+            label2.Name = "label2";
+            label2.Size = new Size(78, 32);
+            label2.TabIndex = 2;
+            label2.Text = "label2";
             // 
             // label1
             // 
@@ -115,5 +126,6 @@
         private Button button1;
         public Label label1;
         private Button btnGameStart;
+        public Label label2;
     }
 }

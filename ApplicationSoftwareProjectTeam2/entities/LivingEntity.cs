@@ -211,6 +211,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
         public virtual void setDeath(Object? sender, EventArgs e)
         {
+            level.leftCount[team.Equals(level.clientPlayer.playerName) ? 0 : 1]--;
         }
         public virtual void tickDeath()
         {
@@ -317,6 +318,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     level.livingentities.Remove(this);
                     level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
                     hasAi = false;
+                    level.leftCount[0]--;
+                    level.label2.Text = $"Left Count: {level.leftCount[0]} / {level.leftCount[1]}";
                 }
             }
             else if (!hasAi && z >= 200)
@@ -327,8 +330,10 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 level.clientPlayer.entitiesofplayer.Append(this);
                 level.entities.Remove(this);
                 hasAi = true;
+                level.leftCount[0]++;
+                level.label2.Text = $"Left Count: {level.leftCount[0]} / {level.leftCount[1]}";
             }
-            if(hasAi && x > 0) setPosition(0, y, z);
+            if (hasAi && x > 0) setPosition(0, y, z);
         }
 
         //맨해튼 거리 기반으로 주변에 있는 타겟을 찾는 메서드

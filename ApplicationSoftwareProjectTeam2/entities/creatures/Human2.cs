@@ -108,6 +108,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     float dx = target.x - x;
                                     float dz = target.z - z;
                                     float distance = dx * dx + dz * dz;
@@ -173,6 +182,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 
         public override void setDeath(object? sender, EventArgs e)
         {
+            base.setDeath(sender, e);
             Image = Properties.Resources.sprite_Knight1_idle1;
         }
     }

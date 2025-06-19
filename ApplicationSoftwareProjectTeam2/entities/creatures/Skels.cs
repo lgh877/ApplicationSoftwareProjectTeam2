@@ -109,6 +109,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
                                     {
                                         entityState = 1;
@@ -195,7 +204,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             bone.x = x; bone.y = y + height; bone.z = z;
                             bone.deltaMovement = targetVec * distance;
                             bone.team = team;
-                            for (int j = 0; j < entityLevel; j++) bone.scaleEntity(1.2f);
+                            bone.scaleEntity((float)Math.Pow(1.2f, entityLevel));
                             level.addFreshEntity(bone);
                             break;
                         case 13:
@@ -217,6 +226,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            base.setDeath(sender, e);
             level.playSound(sounds[level.getRandomInteger(2)]);
             SkelsBone bone = new SkelsBone(level);
             bone.Owner = this;

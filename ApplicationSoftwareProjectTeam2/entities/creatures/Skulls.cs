@@ -117,6 +117,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     float ydiff = target.y - y;
 
                                     if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.25 * (width * width + (target.width + width) * (target.width + width))
@@ -217,6 +226,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            base.setDeath(sender, e);
             level.playSound(Skels.sounds[level.getRandomInteger(2)]);
             for (int i = 0; i < 4; i++)
             {

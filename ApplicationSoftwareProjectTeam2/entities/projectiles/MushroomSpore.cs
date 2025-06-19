@@ -8,26 +8,19 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
 {
     public class MushroomSpore : ProjectileEntity
     {
-        public int imageOffset = 0;
-
-        public static List<Image> images = new List<Image>()
-        {
-            Properties.Resources.mushroom_projectile,
-            ImageUtils.RotateImage(Properties.Resources.mushroom_projectile, 45),
-            ImageUtils.RotateImage(Properties.Resources.mushroom_projectile, 90),
-            ImageUtils.RotateImage(Properties.Resources.mushroom_projectile, 135),
-        };
 
         public MushroomSpore(GamePanel level) : base(level)
         {
-            elasticForce = -0.5f;
-            this.maxLifeTime = 100;
-            this.canDamage = true;
+            elasticForce = -1f;
+            gravity = 0.1f;
+            airFraction = 0.01f;
+            groundFraction = 0.3f;
+            this.maxLifeTime = 50;
             this.weight = 1;
-            this.visualSize = 2f;
-            width = 22;
-            height = 22;
-            this.hasGravity = true;
+            this.visualSize = 1.5f;
+            width = 14;
+            height = 14;
+            Image = Properties.Resources.mushroom_projectile;
         }
 
         public override void landed()
@@ -39,8 +32,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
 
         public override void tick()
         {
-            if (canDamage)
-                Image = images[(imageOffset + tickCount) % 4];
             base.tick();
         }
 
@@ -48,18 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.projectiles
         {
             victim.hurt(Owner != null ? Owner : null, attackDamage);
             canDamage = false;
-
-            if (victim.x == x && victim.y == y && victim.z == z)
-                return;
-
-            Vector3 direction = Vector3.Normalize(new Vector3(victim.x - x, victim.y - y, victim.z - z));
-            float powerFactor = pushPower * 10 / victim.weight;
-
-            victim.push(direction.X * 2 * powerFactor,
-                        direction.Y * 2 * powerFactor,
-                        direction.Z * 2 * powerFactor);
-
-            deltaMovement *= -0.5f;
+            discard();
         }
     }
 }

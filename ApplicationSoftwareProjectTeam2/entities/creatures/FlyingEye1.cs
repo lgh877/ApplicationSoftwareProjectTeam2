@@ -88,6 +88,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
                                     {
                                         entityState = 1;
@@ -149,6 +158,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 
         public override void setDeath(object? sender, EventArgs e)
         {
+            base.setDeath(sender, e);
             entityState = 2;
             walkTicks = 0;
         }

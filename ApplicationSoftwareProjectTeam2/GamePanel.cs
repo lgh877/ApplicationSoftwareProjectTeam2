@@ -46,8 +46,7 @@ namespace ApplicationSoftwareProjectTeam2
         private BufferedGraphics buffer;
         private Graphics panelGraphics;
         public Player clientPlayer;
-        //WindowsMediaPlayer soundEffectPlayer = new WindowsMediaPlayer();
-        LinkedList<WindowsMediaPlayer> soundList = new LinkedList<WindowsMediaPlayer>();
+        public int[] leftCount = [0, 0];
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
@@ -95,15 +94,7 @@ namespace ApplicationSoftwareProjectTeam2
         {
             random = new CrossPlatformRandom();
             randomSeed = 0;
-
             this.Width += 1;
-
-            for (int i = 0; i < 6; i++)
-            {
-                LivingEntity test = CreateEntity((byte)(random.Next(4)), "Enemy");
-                test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
-                addFreshLivingEntity(test);
-            }
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
@@ -123,7 +114,6 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void logicTick_Tick(object sender, EventArgs e)
         {
-            bool isGameRunning = true;
             string detectTeam = clientPlayer.playerName;
             for (int i = livingentities.Count - 1; i != -1; i--)
             {
@@ -133,6 +123,8 @@ namespace ApplicationSoftwareProjectTeam2
                 {
                     livingentity = null;
                     livingentities.RemoveAt(i);
+                    isGameRunning = leftCount[0] != 0 && leftCount[1] != 0;
+                    label2.Text = $"Left Count: {leftCount[0]} / {leftCount[1]}";
                 }
             }
             var node = entities.First;
@@ -419,15 +411,15 @@ namespace ApplicationSoftwareProjectTeam2
             #endregion
             return type switch
             {
-                0 => new WeirdGuy(this) { team = name },
+                0 => CreateItemEntity((byte)(new Random().Next(5)), name),
                 1 => new Skels(this) { team = name },
                 2 => new SkelsBig(this) { team = name },
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
-                5 => CreateItemEntity((byte)(new Random().Next(5)), name), // 체인톱 아이템
+                5 => new WeirdGuy(this) { team = name }, // 체인톱 아이템
                 6 => new Bot1(this) { team = name },
                 7 => new Ghost1(this) { team = name },
-                8 => new Human1(this) { team = name },
+                8 => new Boxer(this) { team = name },
                 9 => new Human2(this) { team = name },
                 10 => new Mushroom1(this) { team = name },
                 11 => new FlyingEye1(this) { team = name },
@@ -447,7 +439,15 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void btnGameStart_Click(object sender, EventArgs e)
         {
+            if (isGameRunning) return;
             isGameRunning = true;
+            for (int i = 0; i < 6; i++)
+            {
+                LivingEntity test = CreateEntity((byte)(random.Next(11) + 1), "Enemy");
+                test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
+                addFreshLivingEntity(test);
+                leftCount[1]++;
+            }
         }
     }
 }

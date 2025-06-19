@@ -114,6 +114,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
+                                    if (tickCount % 8 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(1000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
                                     float ydiff = target.y - y;
 
                                     //공격 범위 안에 들어왔는지 확인
@@ -277,6 +286,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
         public override void setDeath(object? sender, EventArgs e)
         {
+            base.setDeath(sender, e);
             width *= 2; height /= 2; Image = (int)direction < 5 ? images[8] : images[9];
         }
     }
