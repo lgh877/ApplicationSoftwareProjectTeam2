@@ -120,12 +120,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer logicTick;
         private Panel panelPlayScreen;
         private Button button1;
         public Label label1;
         private Button btnGameStart;
         public Label label2;
+        public System.Windows.Forms.Timer logicTick;
     }
 }

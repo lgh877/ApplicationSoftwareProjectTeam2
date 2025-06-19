@@ -120,7 +120,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             {
                                 if (hadTarget) hadTarget = false;
 
-                                LivingEntity found = detectTargetManhattan(1000);
+                                LivingEntity found = detectTargetManhattan(2000);
                                 if (found != null)
                                 {
                                     target = found;
@@ -142,9 +142,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 else
                                 {
                                     mana++;
-                                    if (tickCount % 8 == 0)
+                                    if (tickCount % 16 == 0)
                                     {
-                                        LivingEntity found = detectTargetManhattan(1000);
+                                        LivingEntity found = detectTargetManhattan(2000);
                                         if (found != null)
                                         {
                                             target = found;

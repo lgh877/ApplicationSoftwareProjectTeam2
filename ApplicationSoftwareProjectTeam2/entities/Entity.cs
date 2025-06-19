@@ -19,7 +19,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public string team;
         public Image Image;
         public bool shouldRemove = false, hasGravity = true, grabbedByMouse = false, hasAi = true;
-        public byte renderType = 1; // 0: noShadow, 1: default, 2: shadowOnly, 3: grounded
+        public short renderType = 1; // 0: noShadow, 1: default, 2: shadowOnly, 3: grounded
 
 
         public Entity(GamePanel level, float x, float y, float z, Vector3 vec3)

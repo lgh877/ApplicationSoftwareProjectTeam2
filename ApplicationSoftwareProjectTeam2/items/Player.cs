@@ -6,6 +6,6 @@ namespace ApplicationSoftwareProjectTeam2.items
     {
         public LinkedList<LivingEntity> entitiesofplayer = new LinkedList<LivingEntity>();
         public string playerName, actualPlayerName;
-        public int Gold = 250;
+        public int lifeLeft = 4, Gold;
     }
 }

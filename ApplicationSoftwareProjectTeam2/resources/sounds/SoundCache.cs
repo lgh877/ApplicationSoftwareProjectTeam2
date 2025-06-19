@@ -54,5 +54,13 @@ namespace ApplicationSoftwareProjectTeam2.resources.sounds
 
         public static WindowsMediaPlayer ghostTeleport1 = new WindowsMediaPlayer() { URL = "sounds//ghostTeleport1.mp3", settings = { volume = 0 } };
         public static WindowsMediaPlayer ghostTeleport2 = new WindowsMediaPlayer() { URL = "sounds//ghostTeleport2.mp3", settings = { volume = 0 } };
+
+        public static WindowsMediaPlayer sell = new WindowsMediaPlayer() { URL = "sounds//sell.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer purchaseSound = new WindowsMediaPlayer() { URL = "sounds//purchaseSound.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer reroll = new WindowsMediaPlayer() { URL = "sounds//reroll.mp3", settings = { volume = 0 } };
+
+        public static WindowsMediaPlayer gameVictory = new WindowsMediaPlayer() { URL = "sounds//gameVictory.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer gameLost = new WindowsMediaPlayer() { URL = "sounds//gameLost.mp3", settings = { volume = 0 } };
+        public static WindowsMediaPlayer gameOver = new WindowsMediaPlayer() { URL = "sounds//gameOver.mp3", settings = { volume = 0 } };
     }
 }

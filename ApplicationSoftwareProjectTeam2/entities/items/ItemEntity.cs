@@ -39,8 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.items
             #region 판매 부분
             if (x < -470 && z < 70)
             {
-                level.clientPlayer.Gold += cost / 2; // 덱에서 제거될 때 골드 반환
-                level.label1.Text = $"Gold: {level.clientPlayer.Gold}";
+                level.modifyGold(cost / 2); // 덱에서 제거될 때 골드 반환
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화

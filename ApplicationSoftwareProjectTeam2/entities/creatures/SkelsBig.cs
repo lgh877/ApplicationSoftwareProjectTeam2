@@ -95,7 +95,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     hadTarget = false;
                                 }
-                                LivingEntity foundTarget = detectTargetManhattan(1000);
+                                LivingEntity foundTarget = detectTargetManhattan(2000);
                                 if (foundTarget != null)
                                 {
                                     target = foundTarget;
@@ -121,7 +121,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 {
                                     if (tickCount % 8 == 0)
                                     {
-                                        LivingEntity found = detectTargetManhattan(1000);
+                                        LivingEntity found = detectTargetManhattan(2000);
                                         if (found != null)
                                         {
                                             target = found;

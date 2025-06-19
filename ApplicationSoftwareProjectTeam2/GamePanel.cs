@@ -37,8 +37,8 @@ namespace ApplicationSoftwareProjectTeam2
         public LinkedList<Entity?> shopentities = new LinkedList<Entity?>();
         //객체 업데이트 및 렌더링에 사용되는 리스트
         List<Entity?> allentities = new List<Entity?>();
-        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount;
-        public bool handleMouseEvent, grabbed = false, isGameRunning = false;
+        public int currentWidth, currentHeight, mouseX, mouseY, occupiedIndexCount, currentRound = 0;
+        public bool handleMouseEvent, grabbed = false, isGameRunning = false, gameOverDetected = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
         public ulong randomSeed;
@@ -47,6 +47,7 @@ namespace ApplicationSoftwareProjectTeam2
         private Graphics panelGraphics;
         public Player clientPlayer;
         public int[] leftCount = [0, 0];
+        List<LeftLifeEntity> leftlives = new List<LeftLifeEntity>(4);
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
@@ -98,6 +99,13 @@ namespace ApplicationSoftwareProjectTeam2
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
+            modifyGold(16);
+            for (int i = 0; i < 4; i++)
+            {
+                LeftLifeEntity leftLife = new LeftLifeEntity(this, 550 - i * 40);
+                addFreshEntity(leftLife);
+                leftlives.Add(leftLife);
+            }
         }
         public void playSound(WindowsMediaPlayer sound)
         {
@@ -123,8 +131,33 @@ namespace ApplicationSoftwareProjectTeam2
                 {
                     livingentity = null;
                     livingentities.RemoveAt(i);
-                    isGameRunning = leftCount[0] != 0 && leftCount[1] != 0;
-                    label2.Text = $"Left Count: {leftCount[0]} / {leftCount[1]}";
+                    if (isGameRunning && !gameOverDetected && (leftCount[0] == 0 || leftCount[1] == 0))
+                    {
+                        gameOverDetected = true;
+                        addFreshEntity(new backGroundNoiseEntity(this, clientPlayer.lifeLeft != 1 ? 30 : int.MaxValue));
+                        foreach (var entity in livingentities)
+                        {
+                            if (entity.isAlive())
+                            {
+                                if (entity.team.Equals(detectTeam))
+                                {
+                                    modifyGold(8);
+                                    playSound(SoundCache.gameVictory);
+                                    addFreshEntity(new VictoryMessageEntity(this));
+                                }
+                                else
+                                {
+                                    modifyGold(16);
+                                    playSound(SoundCache.gameLost);
+                                    clientPlayer.lifeLeft--;
+                                    leftlives[clientPlayer.lifeLeft].discard();
+                                    leftlives.RemoveAt(clientPlayer.lifeLeft);
+                                    addFreshEntity(new LostMessageEntity(this));
+                                }
+                                break; // 해당 팀의 엔티티를 찾으면 루프 종료
+                            }
+                        }
+                    }
                 }
             }
             var node = entities.First;
@@ -169,8 +202,8 @@ namespace ApplicationSoftwareProjectTeam2
                 if (mouseX > currentWidth - 80 * scale && mouseY > currentHeight - 60 * scale
                     && clientPlayer.Gold >= 1)
                 {
-                    clientPlayer.Gold--;
-                    label1.Text = $"Gold: {clientPlayer.Gold}";
+                    modifyGold(-1);
+                    playSound(SoundCache.reroll);
                     foreach (var entity in shopentities)
                     {
                         entity.discard();
@@ -213,8 +246,19 @@ namespace ApplicationSoftwareProjectTeam2
             renderEntities();
         }
 
-
-
+        public void modifyGold(int amount)
+        {
+            clientPlayer.Gold = int.Min(clientPlayer.Gold + amount, 255);
+            label1.Text = $"Gold: {clientPlayer.Gold}";
+        }
+        /*
+        public void createNumberEntity(int number, int x, int y, int z)
+        {
+            NumberEntity numberEntity = new NumberEntity(this, number);
+            numberEntity.setPosition(x, y, z);
+            addFreshEntity(numberEntity);
+        }
+        */
         private Stopwatch _renderWatch = new Stopwatch();
         private void renderEntities()
         {
@@ -230,7 +274,7 @@ namespace ApplicationSoftwareProjectTeam2
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
-                    if (e.renderType == 0) continue;
+                    if (e.renderType < 1) continue;
                     float x = e.x;
                     float y = e.y;
                     float z = e.z;
@@ -267,6 +311,7 @@ namespace ApplicationSoftwareProjectTeam2
                 for (int i = allentities.Count - 1; i != -1; i--)
                 {
                     Entity e = allentities[i];
+                    if (e.renderType == -1) continue;
                     float x = e.x;
                     float y = e.y;
                     float z = e.z;
@@ -277,18 +322,6 @@ namespace ApplicationSoftwareProjectTeam2
                     int screenY = (int)(currentHeight - z * scale * scale2);
                     int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
                     int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
-                    /*
-                    int shadowSize = (int)(e.width * scale * scale2); // 엔티티 크기 (픽셀)
-                    using (Brush shadowBrush = new SolidBrush(Color.FromArgb((int)(80 * scale3), Color.Black)))
-                    {
-                        int shadowWidth = (int)(shadowSize * 1.2 / scale3);
-                        int shadowHeight = (int)(shadowSize * 0.4 / scale3);
-                        int shadowX = screenX - shadowWidth / 2;
-                        int shadowY = screenY - (int)(shadowHeight * 0.75); // 약간 위로 올림
-
-                        g.FillEllipse(shadowBrush, shadowX, shadowY, shadowWidth, shadowHeight);
-                    }
-                    */
                     screenY -= (int)(y * scale * scale2);
                     g.DrawImage(e.Image,
                         screenX - width / 2, screenY - height,
@@ -439,16 +472,20 @@ namespace ApplicationSoftwareProjectTeam2
         }
         private void btnGameStart_Click(object sender, EventArgs e)
         {
-            if (isGameRunning) return;
-            isGameRunning = true;
-            randomSeed = 0;
-            for (int i = 0; i < 6; i++)
+            if (isGameRunning || leftCount[0] == 0) return;
+            isGameRunning = true; gameOverDetected = false;
+            if (currentRound == 0)
+            {
+                randomSeed = (ulong)(new Random().Next(int.MaxValue));
+            }
+            for (int i = 0; i < 6 + currentRound; i++)
             {
                 LivingEntity test = CreateEntity((byte)(getRandomInteger(11) + 1), "Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
                 leftCount[1]++;
             }
+            currentRound++;
         }
     }
 }

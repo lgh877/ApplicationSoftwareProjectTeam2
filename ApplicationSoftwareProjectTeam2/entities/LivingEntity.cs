@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.entities.eventArgs;
 using ApplicationSoftwareProjectTeam2.items;
+using ApplicationSoftwareProjectTeam2.resources.sounds;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ApplicationSoftwareProjectTeam2.entities
@@ -23,8 +24,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
     {
         public event EventHandler deathEvent;
         public event EventHandler<AttackEventArgs> attackEvent, hurtEvent;
-        public byte entityLevel = 0;
-        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, cost, walkTicks, mana;
+        public byte entityLevel = 0, cost;
+        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, walkTicks, mana;
         public int weatherCode;
         public float attackDamage, currentHealth, maxHealth, currentDamage;
         public float finalAttackDamage, finalMaxHealth;
@@ -151,8 +152,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             #region 판매 부분
             if (x < -470 && z < 70)
             {
-                level.clientPlayer.Gold += cost / 2; // 덱에서 제거될 때 골드 반환
-                level.label1.Text = $"Gold: {level.clientPlayer.Gold}";
+                level.playSound(SoundCache.sell);
+                level.modifyGold(cost / 2);
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
@@ -171,7 +172,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     grabOccurred();
                     item.entityLevel++;
                     item.scaleEntity(1.2f);
-                    item.cost = (int)(item.cost * 1.5);
+                    item.cost = (byte)(item.cost * 1.5);
                     discard();
                     break;
                 }
@@ -197,8 +198,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             else if (level.clientPlayer.Gold >= cost && level.occupiedIndexCount < 14)
             {
                 #region 캐릭터가 구매 시 구입 가능 여부 확인 및 덱 위치 초기화
-                level.clientPlayer.Gold -= cost;
-                level.label1.Text = $"Gold: {level.clientPlayer.Gold}";
+                level.playSound(SoundCache.purchaseSound);
+                level.modifyGold(-cost);
                 isPurchased = true;
                 level.addFreshEntity(this);
                 level.shopentities.Remove(this);
@@ -319,7 +320,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
                     level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
                     hasAi = false;
                     level.leftCount[0]--;
-                    level.label2.Text = $"Left Count: {level.leftCount[0]} / {level.leftCount[1]}";
                 }
             }
             else if (!hasAi && z >= 200)
@@ -331,7 +331,6 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 level.entities.Remove(this);
                 hasAi = true;
                 level.leftCount[0]++;
-                level.label2.Text = $"Left Count: {level.leftCount[0]} / {level.leftCount[1]}";
             }
             if (hasAi && x > 0) setPosition(0, y, z);
         }
