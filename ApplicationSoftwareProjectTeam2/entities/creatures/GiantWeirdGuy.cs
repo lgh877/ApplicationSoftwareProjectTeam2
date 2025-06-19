@@ -31,16 +31,18 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             ImageUtils.FlipImageHorizontally(Properties.Resources.giantWeirdGuyArmRelease),
             ImageUtils.FlipImageHorizontally(Properties.Resources.giantWeirdGuyHeadDeath),
         };
+        private float animFactor = 0; // 애니메이션 프레임 조절 변수
         public List<PartEntity> parts = new List<PartEntity>(7);
         public GiantWeirdGuy(GamePanel level) : base(level)
         {
             this.visualSize = 1.0f;
-            cost = 4;
+            cost = 6;
             this.width = 50;
             this.height = 78;
-            this.weight = 30;
-            maxHealth = 300; currentHealth = 200; finalMaxHealth = maxHealth;
-            this.pushPower = 20; moveSpeed = 3;
+            this.weight = 60;
+            maxHealth = 200; currentHealth = 200; finalMaxHealth = maxHealth;
+            this.pushPower = 60; moveSpeed = 3;
+            attackDamage = 50; finalAttackDamage = attackDamage;
             this.renderType = 2; // default shadow
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
@@ -74,6 +76,19 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         #region 평상시에 아무렇게 걸어다니기 + 타겟 탐색
                         if (level.getRandomInteger(10) == 0)
                         {
+                            if (getTarget() == null)
+                            {
+                                if (hadTarget)
+                                {
+                                    hadTarget = false;
+                                }
+                                LivingEntity foundTarget = detectTargetManhattan(2000);
+                                if (foundTarget != null)
+                                {
+                                    target = foundTarget;
+                                    hadTarget = true;
+                                }
+                            }
                             isMoving = !isMoving || getTarget() != null;
                         }
                         #endregion
@@ -89,8 +104,51 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     dir = dir > 9 ? 0 : dir < 0 ? 9 : dir;
                                     direction = (Direction)dir;
                                 }
-                            }
+                                else
+                                {
+                                    if (tickCount % 16 == 0)
+                                    {
+                                        LivingEntity found = detectTargetManhattan(2000);
+                                        if (found != null)
+                                        {
+                                            target = found;
+                                            hadTarget = true;
+                                        }
+                                    }
+                                    float ydiff = target.y - y;
+                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.4 * (width * width + (target.width + width) * (target.width + width))
+                                        && ydiff < height
+                                        && ydiff > -target.height)
+                                    {
+                                        entityState = 1;
+                                        walkTicks = 0;
+                                        animFactor = 0;
+                                    }
+                                    if (entityState == 0)
+                                    {
+                                        int dir = (int)direction;
+                                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
 
+                                        if (targetVec.X > 0)
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 0;
+                                            else if (targetVec.Z > 0.7071) dir = 1;
+                                            else if (targetVec.Z > -0.7071) dir = 2;
+                                            else if (targetVec.Z > -0.9659) dir = 3;
+                                            else dir = 4;
+                                        }
+                                        else
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 9;
+                                            else if (targetVec.Z > 0.7071) dir = 8;
+                                            else if (targetVec.Z > -0.7071) dir = 7;
+                                            else if (targetVec.Z > -0.9659) dir = 6;
+                                            else dir = 5;
+                                        }
+                                        direction = (Direction)dir;
+                                    }
+                                }
+                            }
                             if (isOnGround()) move(moveSpeed);
                         }
                     }
@@ -299,6 +357,59 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     }
                     #endregion
                     break;
+                case 1:
+                    direction = target.x - x > 0 ? Direction.Right : Direction.Left;
+                    walkTicks++;
+                    if (walkTicks == 2)
+                    {
+                        resetOffset();
+                        parts[3].Image = (int)direction < 5 ? images[6] : images[15];
+                    }
+                    else if (walkTicks < 5)
+                    {
+                        animFactor = level.Lerp(animFactor, 20, 0.7f);
+                        float offset = (int)direction < 5 ? -animFactor : animFactor;
+                        parts[3].offsetX = offset;
+                        parts[0].offsetX = offset * 0.3f;
+                        parts[1].offsetX = offset * 0.3f;
+                        parts[2].offsetX = offset * 0.3f;
+                        parts[4].offsetX = offset * 0.15f;
+                    }
+                    else if (walkTicks == 5)
+                    {
+                        animFactor = 0;
+                        parts[3].Image = (int)direction < 5 ? images[7] : images[16];
+                    }
+                    else if (walkTicks < 11)
+                    {
+                        animFactor = 1 - (walkTicks - 6) * 0.2f;
+                        animFactor = (float) ((animFactor * animFactor * animFactor * animFactor) * Math.PI); // easing function
+                        animFactor = (float) Math.Sin(animFactor) * 75;
+                        float offset = (int)direction < 5 ? animFactor : -animFactor;
+                        parts[3].offsetX = offset;
+                        parts[0].offsetX = offset * 0.4f;
+                        parts[1].offsetX = offset * 0.4f;
+                        parts[2].offsetX = offset * 0.4f;
+                        parts[4].offsetX = offset * 0.2f;
+                        if(walkTicks == 8)
+                        {
+                            level.playSound(Boxer.sounds[level.getRandomInteger(4)]);
+                            if (target != null &&
+                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.4 * (width * width + (target.width + width) * (target.width + width)) &&
+                            target.y - y < height && target.y - y > -target.height)
+                            {
+                                doHurtTarget(target);
+                            }
+                        }
+                    }else if(walkTicks == 11)
+                    {
+                        animFactor = 0;
+                        resetOffset();
+                        parts[3].Image = (int)direction < 5 ? images[3] : images[12];
+                        entityState = 0;
+                        walkTicks = 0;
+                    }
+                    break;
             }
         }
         public override void discard()
@@ -309,6 +420,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 part.discard();
             }
             //parts.Clear();
+        }
+        private void resetOffset()
+        {
+            foreach (PartEntity part in parts)
+            {
+                part.offsetX = 0;
+                part.offsetY = 0;
+                part.offsetZ = 0;
+            }
         }
         public override void scaleEntity(float scale)
         {
