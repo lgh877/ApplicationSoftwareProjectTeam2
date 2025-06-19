@@ -32,6 +32,8 @@
             btnStart = new Button();
             lblInsertName = new Label();
             txtInsertName = new TextBox();
+            ckbClient = new CheckBox();
+            txbIpAddress = new TextBox();
             SuspendLayout();
             // 
             // lblTitle
@@ -61,7 +63,7 @@
             // 
             // lblInsertName
             // 
-            lblInsertName.Location = new Point(213, 273);
+            lblInsertName.Location = new Point(213, 220);
             lblInsertName.Name = "lblInsertName";
             lblInsertName.Size = new Size(155, 32);
             lblInsertName.TabIndex = 2;
@@ -69,10 +71,31 @@
             // 
             // txtInsertName
             // 
-            txtInsertName.Location = new Point(374, 270);
+            txtInsertName.Location = new Point(374, 213);
             txtInsertName.Name = "txtInsertName";
             txtInsertName.Size = new Size(220, 39);
             txtInsertName.TabIndex = 3;
+            // 
+            // ckbClient
+            // 
+            ckbClient.AutoSize = true;
+            ckbClient.Checked = true;
+            ckbClient.CheckState = CheckState.Checked;
+            ckbClient.Location = new Point(213, 267);
+            ckbClient.Name = "ckbClient";
+            ckbClient.Size = new Size(166, 36);
+            ckbClient.TabIndex = 4;
+            ckbClient.Text = "싱글플레이";
+            ckbClient.UseVisualStyleBackColor = true;
+            ckbClient.CheckedChanged += ckbClient_CheckedChanged;
+            // 
+            // txbIpAddress
+            // 
+            txbIpAddress.Enabled = false;
+            txbIpAddress.Location = new Point(394, 267);
+            txbIpAddress.Name = "txbIpAddress";
+            txbIpAddress.Size = new Size(200, 39);
+            txbIpAddress.TabIndex = 5;
             // 
             // GameMenu
             // 
@@ -80,6 +103,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(800, 450);
+            Controls.Add(txbIpAddress);
+            Controls.Add(ckbClient);
             Controls.Add(txtInsertName);
             Controls.Add(lblInsertName);
             Controls.Add(btnStart);
@@ -99,5 +124,7 @@
         private Button btnStart;
         private Label lblInsertName;
         private TextBox txtInsertName;
+        private CheckBox ckbClient;
+        private TextBox txbIpAddress;
     }
 }

@@ -31,6 +31,8 @@ namespace ApplicationSoftwareProjectTeam2
             lblInsertName.Hide();
             btnStart.Hide();
             lblTitle.Hide();
+            txbIpAddress.Hide();
+            ckbClient.Hide();
             Label lblLoading = new Label();
             lblLoading.AutoSize = true;
             lblLoading.BackColor = SystemColors.ActiveCaption;
@@ -56,6 +58,8 @@ namespace ApplicationSoftwareProjectTeam2
             lblInsertName.Show();
             btnStart.Show();
             lblTitle.Show();
+            txbIpAddress.Show();
+            ckbClient.Show();
         }
 
         private void loadResources()
@@ -64,7 +68,7 @@ namespace ApplicationSoftwareProjectTeam2
             SoundCache.bone_crack1 = new WindowsMediaPlayer() { URL = "sounds//bone_crack1.mp3" }; SoundCache.bone_crack1.controls.stop();
             SoundCache.bone_crack2 = new WindowsMediaPlayer() { URL = "sounds//bone_crack2.mp3" }; SoundCache.bone_crack2.controls.stop();
 
-            SoundCache.swosh = new WindowsMediaPlayer() { URL = "sounds//swosh.mp3"}; SoundCache.swosh.controls.stop();
+            SoundCache.swosh = new WindowsMediaPlayer() { URL = "sounds//swosh.mp3" }; SoundCache.swosh.controls.stop();
 
             SoundCache.skulls_bite = new WindowsMediaPlayer() { URL = "sounds//skulls_bite.mp3" }; SoundCache.skulls_bite.controls.stop();
 
@@ -130,6 +134,11 @@ namespace ApplicationSoftwareProjectTeam2
             gamePanel.clientPlayer.playerName = txtInsertName.Text + new Random().NextInt64();
             gamePanel.Show();
             this.Hide();
+        }
+
+        private void ckbClient_CheckedChanged(object sender, EventArgs e)
+        {
+            txbIpAddress.Enabled = !ckbClient.Checked;
         }
     }
 }

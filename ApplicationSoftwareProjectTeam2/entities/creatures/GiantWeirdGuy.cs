@@ -42,7 +42,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             this.weight = 60;
             maxHealth = 200; currentHealth = 200; finalMaxHealth = maxHealth;
             this.pushPower = 60; moveSpeed = 3;
-            attackDamage = 50; finalAttackDamage = attackDamage;
+            attackDamage = 15; finalAttackDamage = attackDamage;
             this.renderType = 2; // default shadow
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
