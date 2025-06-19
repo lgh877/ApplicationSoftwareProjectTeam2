@@ -549,17 +549,19 @@ namespace ApplicationSoftwareProjectTeam2
 
                 //유닛 정보 서버 전송
                 List<SerializedEntity> serialized = new();
-                foreach (var unit in shopentities)
+                foreach (var unit in clientPlayer.entitiesofplayer)
                 {
                     if (unit is LivingEntity le)
                     {
                         serialized.Add(new SerializedEntity
                         {
-                            Id = le.getLivingEntityId().ToString(), // LivingEntity의 고유 ID 사용
-                            Type = le.GetType().Name,               // 클래스 이름 ( Boxer, Ghost1, ...)
-                            HP = (int)le.currentHealth,             // 체력
+                            Id = le.getLivingEntityId(), // LivingEntity의 고유 ID 사용
+                            EntityLevel = le.entityLevel, // LivingEntity의 고유 ID 사용
                             X = (int)le.x,                          // x 좌표
-                            Y = (int)le.y                           // y 좌표
+                            Z = (int)le.z,                           // y 좌표
+                            ItemId1 = le.EquippedItems[0] != null ? (byte) 0 : (byte) le.EquippedItems[0].Id, // y 좌표
+                            ItemId2 = le.EquippedItems[1] != null ? (byte) 0 : (byte) le.EquippedItems[1].Id, // y 좌표
+                            ItemId3 = le.EquippedItems[2] != null ? (byte) 0 : (byte) le.EquippedItems[2].Id // y 좌표
                         });
                     }
                 }
