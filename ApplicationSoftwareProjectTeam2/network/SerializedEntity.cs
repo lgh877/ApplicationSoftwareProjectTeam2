@@ -8,11 +8,13 @@ namespace ApplicationSoftwareProjectTeam2.network
 {
     public class SerializedEntity
     {
-        public string Id { get; set; }
-        public string Type { get; set; }
-        public int HP { get; set; }
+        public byte Id { get; set; }
+        public int Level { get; set; }
         public int X { get; set; }
-        public int Y { get; set; }
+        public int Z { get; set; }
+        public byte ItemId1 { get; set; }
+        public byte ItemId2 { get; set; }
+        public byte ItemId3 { get; set; }
     }
 }
 
