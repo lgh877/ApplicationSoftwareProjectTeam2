@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationSoftwareProjectT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopUI", "ShopUI\ShopUI.csproj", "{B28C6F35-E742-4A2A-8149-CAE10FABE12B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApp(AutoCombatant)", "..\ServerApp(AutoCombatant)\ServerApp(AutoCombatant)\ServerApp(AutoCombatant).csproj", "{83283291-8E7C-48C4-9CEE-CC3B7F045808}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApp(AutoCombatant)", "ServerApp(AutoCombatant)\ServerApp(AutoCombatant)\ServerApp(AutoCombatant).csproj", "{0BCC4DBE-DB68-45D6-94FD-F7974F2D6D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,15 @@ Global
 		{B28C6F35-E742-4A2A-8149-CAE10FABE12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B28C6F35-E742-4A2A-8149-CAE10FABE12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B28C6F35-E742-4A2A-8149-CAE10FABE12B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83283291-8E7C-48C4-9CEE-CC3B7F045808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83283291-8E7C-48C4-9CEE-CC3B7F045808}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83283291-8E7C-48C4-9CEE-CC3B7F045808}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83283291-8E7C-48C4-9CEE-CC3B7F045808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BCC4DBE-DB68-45D6-94FD-F7974F2D6D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCC4DBE-DB68-45D6-94FD-F7974F2D6D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCC4DBE-DB68-45D6-94FD-F7974F2D6D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCC4DBE-DB68-45D6-94FD-F7974F2D6D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B179839F-DE2B-4F68-BA23-92FA63C6FC50}
 	EndGlobalSection
 EndGlobal
