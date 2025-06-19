@@ -10,7 +10,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
     {
         public static List<Image> images = new List<Image>()
         {
-            // idle/walk 공유 (0~3)
+            // idle/walk 공유 (0~15)
             Properties.Resources.sprite_FlyingEye1_idlewalk1,
             Properties.Resources.sprite_FlyingEye1_idlewalk2,
             Properties.Resources.sprite_FlyingEye1_idlewalk3,
@@ -19,20 +19,35 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             Properties.Resources.sprite_FlyingEye1_idlewalk6,
             Properties.Resources.sprite_FlyingEye1_idlewalk7,
             Properties.Resources.sprite_FlyingEye1_idlewalk8,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk3),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk4),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk5),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk6),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk7),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_idlewalk8),
 
-            // attack (8~14)
+            // attack (16 ~ 29)
             Properties.Resources.sprite_FlyingEye1_attack1,
             Properties.Resources.sprite_FlyingEye1_attack2,
             Properties.Resources.sprite_FlyingEye1_attack3,
             Properties.Resources.sprite_FlyingEye1_attack4,
             Properties.Resources.sprite_FlyingEye1_attack5,
             Properties.Resources.sprite_FlyingEye1_attack6,
-            Properties.Resources.sprite_FlyingEye1_attack7
+            Properties.Resources.sprite_FlyingEye1_attack7,
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack1),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack2),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack3),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack4),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack5),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack6),
+            ImageUtils.FlipImageHorizontally(Properties.Resources.sprite_FlyingEye1_attack7),
         };
 
         public FlyingEye1(GamePanel level) : base(level)
         {
-            cost = 2;
+            cost = 3;
             visualSize = 1.4f;
             width = 40;
             height = 40;
@@ -40,10 +55,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             pushPower = 10;
             Image = images[0];
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
-            maxHealth = 80;
-            currentHealth = 80;
+            maxHealth = 60;
+            currentHealth = 60;
             finalMaxHealth = maxHealth;
-            attackDamage = 45;
+            attackDamage = 20;
             finalAttackDamage = attackDamage;
             moveSpeed = 4;
         }
@@ -65,7 +80,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             if (getTarget() == null)
                             {
                                 if (hadTarget) hadTarget = false;
-                                LivingEntity found = detectTargetManhattan(1000);
+                                LivingEntity found = detectTargetManhattan(2000);
                                 if (found != null)
                                 {
                                     target = found;
@@ -88,16 +103,16 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
-                                    if (tickCount % 8 == 0)
+                                    if (tickCount % 16 == 0)
                                     {
-                                        LivingEntity found = detectTargetManhattan(1000);
+                                        LivingEntity found = detectTargetManhattan(2000);
                                         if (found != null)
                                         {
                                             target = found;
                                             hadTarget = true;
                                         }
                                     }
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
+                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 250000)
                                     {
                                         entityState = 1;
                                         walkTicks = 0;
@@ -110,57 +125,58 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     }
 
                     walkTicks++;
-                    Image = images[walkTicks / 4 % 8]; // idle/walk 애니 공유
+                    Image = (int)direction < 5 ? images[walkTicks / 4 % 8] : images[8 + walkTicks / 4 % 8]; // idle/walk 애니 공유
                     break;
 
                 case 1:
                     direction = target.x - x > 0 ? Direction.Right : Direction.Left;
                     walkTicks++;
-
-                    if (walkTicks >= 1 && walkTicks <= 7)
-                        Image = images[7 + walkTicks]; // attack1~7
-
-                    if (walkTicks == 5)
-                    {
-                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, (target.y - y) * 1.5f, target.z - z));
-                        float dist = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z)) * 1.2f;
-
-                        FlyingEyeShot shot = new FlyingEyeShot(level);
-                        shot.Owner = this;
-                        shot.attackDamage = finalAttackDamage;
-                        shot.pushPower = pushPower;
-                        shot.x = x;
-                        shot.y = y + height / 2;
-                        shot.z = z;
-                        shot.deltaMovement = targetVec * dist;
-                        shot.team = team;
-                        for (int j = 0; j < entityLevel; j++) shot.scaleEntity(1.2f);
-                        level.addFreshEntity(shot);
-                    }
-
-                    if (walkTicks > 12)
+                    int atkFrame = walkTicks / 2;
+                    if (atkFrame < 7)
+                        Image = (int)direction < 5 ? images[16 + atkFrame] : images[23 + atkFrame]; // attack1~7
+                    else
                     {
                         walkTicks = 0;
                         entityState = 0;
                     }
-                    break;
-
-                case 2: // 사망
-                    walkTicks++;
-                    if (walkTicks == 3) Image = Properties.Resources.sprite_FlyingEye1_death1;
-                    else if (walkTicks == 6) Image = Properties.Resources.sprite_FlyingEye1_death2;
-                    else if (walkTicks == 9) Image = Properties.Resources.sprite_FlyingEye1_death3;
-                    else if (walkTicks == 12) Image = Properties.Resources.sprite_FlyingEye1_death4;
-                    else if (walkTicks > 15) discard();
+                    if (walkTicks == 10)
+                    {
+                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, target.y + target.height - y - height, target.z - z));
+                        FlyingEyeShot shot = new FlyingEyeShot(level);
+                        shot.Owner = this;
+                        shot.attackDamage = finalAttackDamage * 0.06f;
+                        shot.pushPower = pushPower;
+                        shot.x = x;
+                        shot.y = y + height;
+                        shot.z = z;
+                        shot.deltaMovement = targetVec * 10;
+                        shot.team = team;
+                        shot.scaleEntity((float) Math.Pow(1.2f, entityLevel + 1));
+                        level.addFreshEntity(shot);
+                    }
                     break;
             }
         }
-
-        public override void setDeath(object? sender, EventArgs e)
+        public override void tickDeath()
         {
-            base.setDeath(sender, e);
-            entityState = 2;
-            walkTicks = 0;
+            base.tickDeath();
+            if (deathTime > 9) return;
+            if (deathTime == 0)
+            {
+                Image = Properties.Resources.sprite_FlyingEye1_death1;
+            }
+            else if (deathTime == 3)
+            {
+                Image = Properties.Resources.sprite_FlyingEye1_death2;
+            }
+            else if (deathTime == 6)
+            {
+                Image = Properties.Resources.sprite_FlyingEye1_death3;
+            }
+            else if (deathTime == 9)
+            {
+                Image = Properties.Resources.sprite_FlyingEye1_death4;
+            }
         }
     }
 }

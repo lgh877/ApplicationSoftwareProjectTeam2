@@ -49,6 +49,7 @@ namespace ApplicationSoftwareProjectTeam2
         public Player clientPlayer;
         public int[] leftCount = [0, 0];
         List<LeftLifeEntity> leftlives = new List<LeftLifeEntity>(4);
+        List<NumberEntity> currentGold = new List<NumberEntity>(4);
 
         public List<(int, int, bool)> valueTupleList = new List<(int, int, bool)>()
         {
@@ -100,7 +101,6 @@ namespace ApplicationSoftwareProjectTeam2
             currentWidth = this.Width - 50;
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
-            modifyGold(16);
             for (int i = 0; i < 10; i++)
             {
                 LivingEntity test = CreateEntity((byte)(new Random().Next(10)), clientPlayer.playerName);
@@ -116,12 +116,16 @@ namespace ApplicationSoftwareProjectTeam2
                 addFreshEntity(leftLife);
                 leftlives.Add(leftLife);
             }
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    LeftLifeEntity leftLife = new LeftLifeEntity(this, 550 - i * 40);
-            //    addFreshEntity(leftLife);
-            //    leftlives.Add(leftLife);
-            //}
+            for (int i = 0; i < 3; i++)
+            {
+                NumberEntity number = new NumberEntity(this, -590 + i * 18, 620, 2, 0);
+                addFreshEntity(number);
+                currentGold.Add(number);
+            }
+            NumberEntity number2 = new NumberEntity(this, -590 + 80, 620, 2, 10);
+            addFreshEntity(number2);
+            currentGold.Add(number2);
+            modifyGold(16);
         }
         public void playSound(WindowsMediaPlayer sound)
         {
@@ -272,7 +276,9 @@ namespace ApplicationSoftwareProjectTeam2
         public void modifyGold(int amount)
         {
             clientPlayer.Gold = int.Min(clientPlayer.Gold + amount, 255);
-            label1.Text = $"Gold: {clientPlayer.Gold}";
+            currentGold[0].Image = NumberEntity.images[clientPlayer.Gold / 100];
+            currentGold[1].Image = NumberEntity.images[(clientPlayer.Gold / 10) % 10];
+            currentGold[2].Image = NumberEntity.images[clientPlayer.Gold % 10];
         }
         /*
         public void createNumberEntity(int number, int x, int y, int z)

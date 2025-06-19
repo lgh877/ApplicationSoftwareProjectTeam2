@@ -8,8 +8,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
 {
     public class NumberEntity : Entity
     {
-        static List<Image> images = new List<Image>
+        public static List<Image> images = new List<Image>
         {
+            Properties.Resources.zero,
             Properties.Resources.one,
             Properties.Resources.two,
             Properties.Resources.three,
@@ -19,12 +20,13 @@ namespace ApplicationSoftwareProjectTeam2.entities
             Properties.Resources.seven,
             Properties.Resources.eight,
             Properties.Resources.nine,
+            Properties.Resources.gold,
         };
         public NumberEntity(GamePanel level, int x, int y, int z, byte value) : base(level)
         {
             visualSize = 2f;
             setPosition(x, y, z);
-            Image = images[value - 1];
+            Image = images[value];
             renderType = 0;
         }
         public override void tick()

@@ -31,8 +31,6 @@
             components = new System.ComponentModel.Container();
             logicTick = new System.Windows.Forms.Timer(components);
             panelPlayScreen = new Panel();
-            label2 = new Label();
-            label1 = new Label();
             btnGameStart = new Button();
             button1 = new Button();
             panelPlayScreen.SuspendLayout();
@@ -47,8 +45,6 @@
             // panelPlayScreen
             // 
             panelPlayScreen.BackColor = SystemColors.ButtonShadow;
-            panelPlayScreen.Controls.Add(label2);
-            panelPlayScreen.Controls.Add(label1);
             panelPlayScreen.Controls.Add(btnGameStart);
             panelPlayScreen.Controls.Add(button1);
             panelPlayScreen.Location = new Point(12, 13);
@@ -58,25 +54,6 @@
             panelPlayScreen.TabIndex = 0;
             panelPlayScreen.MouseClick += panelPlayScreen_MouseClick;
             panelPlayScreen.MouseMove += panelPlayScreen_MouseMove;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(0, 44);
-            label2.Name = "label2";
-            label2.Size = new Size(78, 32);
-            label2.TabIndex = 2;
-            label2.Text = "label2";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(0, 0);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 32);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
             // 
             // btnGameStart
             // 
@@ -115,16 +92,13 @@
             Load += Form1_Load;
             Resize += GamePanel_Resize;
             panelPlayScreen.ResumeLayout(false);
-            panelPlayScreen.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
         private Panel panelPlayScreen;
         private Button button1;
-        public Label label1;
         private Button btnGameStart;
-        public Label label2;
         public System.Windows.Forms.Timer logicTick;
     }
 }
