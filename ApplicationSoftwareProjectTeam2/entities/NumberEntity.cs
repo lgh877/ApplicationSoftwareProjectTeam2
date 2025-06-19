@@ -22,7 +22,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             Properties.Resources.nine,
             Properties.Resources.gold,
         };
-        public NumberEntity(GamePanel level, int x, int y, int z, byte value) : base(level)
+        public NumberEntity(GamePanel level, int x, int y, int z, int value) : base(level)
         {
             visualSize = 2f;
             setPosition(x, y, z);

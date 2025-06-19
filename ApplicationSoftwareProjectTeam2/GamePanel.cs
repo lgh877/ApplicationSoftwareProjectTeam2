@@ -147,6 +147,31 @@ namespace ApplicationSoftwareProjectTeam2
         {
             entities.AddFirst(entity);
         }
+        public void createNumberEntity(int number, int x, int y, int z)
+        {
+            number = int.Min(number, 999); // 0~999 범위로 제한
+            if (number < 10)
+            {
+                FloatingNumberEntity numberEntity = new FloatingNumberEntity(this, x, y, z, number);
+                addFreshEntity(numberEntity);
+            }
+            else if(number < 100)
+            {
+                FloatingNumberEntity numberEntity1 = new FloatingNumberEntity(this, x - 9, y, z, (number / 10) % 10);
+                addFreshEntity(numberEntity1);
+                FloatingNumberEntity numberEntity2 = new FloatingNumberEntity(this, x + 9, y, z, number % 10);
+                addFreshEntity(numberEntity2);
+            }
+            else
+            {
+                FloatingNumberEntity numberEntity = new FloatingNumberEntity(this, x - 18, y, z, number / 100);
+                addFreshEntity(numberEntity);
+                FloatingNumberEntity numberEntity1 = new FloatingNumberEntity(this, x, y, z, (number / 10) % 10);
+                addFreshEntity(numberEntity1);
+                FloatingNumberEntity numberEntity2 = new FloatingNumberEntity(this, x + 18, y, z, number % 10);
+                addFreshEntity(numberEntity2);
+            }
+        }
         private void logicTick_Tick(object sender, EventArgs e)
         {
             string detectTeam = clientPlayer.playerName;
@@ -230,6 +255,7 @@ namespace ApplicationSoftwareProjectTeam2
                     && clientPlayer.Gold >= 1)
                 {
                     modifyGold(-1);
+                    createNumberEntity(1, 570, 10, 30);
                     playSound(SoundCache.reroll);
                     foreach (var entity in shopentities)
                     {
