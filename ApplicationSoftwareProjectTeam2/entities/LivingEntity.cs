@@ -162,6 +162,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 level.playSound(SoundCache.sell);
                 level.modifyGold(cost / 2);
+                level.createNumberEntity(cost / 2, (int) x, (int) y + 10, (int) z);
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
@@ -208,6 +209,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
                 #region 캐릭터가 구매 시 구입 가능 여부 확인 및 덱 위치 초기화
                 level.playSound(SoundCache.purchaseSound);
                 level.modifyGold(-cost);
+                level.createNumberEntity(cost, (int)x, (int)y + 10, (int)z);
                 isPurchased = true;
                 level.addFreshEntity(this);
                 level.shopentities.Remove(this);

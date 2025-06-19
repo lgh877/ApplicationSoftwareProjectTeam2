@@ -18,11 +18,19 @@ namespace ApplicationSoftwareProjectTeam2
         public GameMenu()
         {
             InitializeComponent();
+            //Controls.Add(txtInsertName);
+            //Controls.Add(lblInsertName);
+            //Controls.Add(btnStart);
+            //Controls.Add(lblTitle);
             this.Shown += GameMenu_Shown;
         }
         private async void GameMenu_Shown(object sender, EventArgs e)
         {
             // 로딩 레이블 생성 및 추가
+            txtInsertName.Hide();
+            lblInsertName.Hide();
+            btnStart.Hide();
+            lblTitle.Hide();
             Label lblLoading = new Label();
             lblLoading.AutoSize = true;
             lblLoading.BackColor = SystemColors.ActiveCaption;
@@ -44,10 +52,10 @@ namespace ApplicationSoftwareProjectTeam2
             // 로딩이 완료되면 레이블 제거
             Controls.Remove(lblLoading);
 
-            Controls.Add(txtInsertName);
-            Controls.Add(lblInsertName);
-            Controls.Add(btnStart);
-            Controls.Add(lblTitle);
+            txtInsertName.Show();
+            lblInsertName.Show();
+            btnStart.Show();
+            lblTitle.Show();
         }
 
         private void loadResources()

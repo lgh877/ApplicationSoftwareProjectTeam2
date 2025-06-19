@@ -40,6 +40,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.items
             if (x < -470 && z < 70)
             {
                 level.modifyGold(cost / 2); // 덱에서 제거될 때 골드 반환
+                level.createNumberEntity(cost / 2, (int)x, (int)y + 10, (int)z);
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
