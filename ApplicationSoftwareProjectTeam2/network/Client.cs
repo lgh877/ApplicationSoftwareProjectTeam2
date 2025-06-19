@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +13,7 @@ namespace ApplicationSoftwareProjectTeam2.network //TCP 수신 + 저장
         private string playerId;
         private string host;
         private int port;
+        public bool isReady;
 
         public Client(string playerId, string host = "127.0.0.1", int port = 5555)
         {
@@ -27,6 +29,11 @@ namespace ApplicationSoftwareProjectTeam2.network //TCP 수신 + 저장
             string json = JsonSerializer.Serialize(payload);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
+        }
+        public void SendLeave()
+        {
+            var leave = new { type = "PlayerLeave", playerId };
+            Send(leave);
         }
 
         public void SendPing()
@@ -50,6 +57,37 @@ namespace ApplicationSoftwareProjectTeam2.network //TCP 수신 + 저장
                 entities
             };
             Send(pack);
+        }
+
+        public async Task<(List<SerializedEntity> entities, ulong seed)> RequestOpponentEntities() // 수정된 반환 형식
+        {
+            using var client = new TcpClient(host, port);
+            using var stream = client.GetStream();
+
+            // 요청
+            var reqJson = JsonSerializer.Serialize(new
+            {
+                type = "RequestEntities",
+                playerId = this.playerId
+            });
+            var reqBuf = Encoding.UTF8.GetBytes(reqJson);
+            await stream.WriteAsync(reqBuf, 0, reqBuf.Length);
+
+            // 응답
+            var buf = new byte[4096];
+            int n = await stream.ReadAsync(buf, 0, buf.Length);
+            if (n == 0)
+                return (new List<SerializedEntity>(), 0UL);
+
+            var resp = Encoding.UTF8.GetString(buf, 0, n);
+            using var doc = JsonDocument.Parse(resp);
+
+            var seed = doc.RootElement.GetProperty("seed").GetUInt64();
+            var ents = JsonSerializer.Deserialize<List<SerializedEntity>>(
+                doc.RootElement.GetProperty("entities").GetRawText()
+            );
+
+            return (ents ?? new(), seed);
         }
     }
 }

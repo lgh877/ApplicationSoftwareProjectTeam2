@@ -412,6 +412,14 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     break;
             }
         }
+        public override void setDeath(object? sender, EventArgs e)
+        {
+            base.setDeath(sender, e);
+            resetOffset();
+            parts[0].Image = (int)direction < 5 ? images[8] : images[17];
+            parts[2].Image = (int)direction < 5 ? images[6] : images[15];
+            parts[3].Image = (int)direction < 5 ? images[6] : images[15];
+        }
         public override void discard()
         {
             base.discard();
@@ -428,6 +436,68 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 part.offsetX = 0;
                 part.offsetY = 0;
                 part.offsetZ = 0;
+            }
+            if ((int)direction < 5)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    PartEntity pe = parts[i];
+                    switch (i)
+                    {
+                        case 0:
+                            pe.Image = images[0];
+                            break;
+                        case 1:
+                            pe.Image = images[2];
+                            break;
+                        case 2:
+                            pe.Image = images[3];
+                            break;
+                        case 3:
+                            pe.Image = images[3];
+                            break;
+                        case 4:
+                            pe.Image = images[1];
+                            break;
+                        case 5:
+                            pe.Image = images[4];
+                            break;
+                        case 6:
+                            pe.Image = images[5];
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    PartEntity pe = parts[i];
+                    switch (i)
+                    {
+                        case 0:
+                            pe.Image = images[9];
+                            break;
+                        case 1:
+                            pe.Image = images[11];
+                            break;
+                        case 2:
+                            pe.Image = images[12];
+                            break;
+                        case 3:
+                            pe.Image = images[12];
+                            break;
+                        case 4:
+                            pe.Image = images[10];
+                            break;
+                        case 5:
+                            pe.Image = images[13];
+                            break;
+                        case 6:
+                            pe.Image = images[14];
+                            break;
+                    }
+                }
             }
         }
         public override void scaleEntity(float scale)

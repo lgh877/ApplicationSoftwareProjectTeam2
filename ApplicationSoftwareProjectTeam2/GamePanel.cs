@@ -53,7 +53,7 @@ namespace ApplicationSoftwareProjectTeam2
         public Player clientPlayer;
         public int[] leftCount = [0, 0];
 
-        private Client gameClient; //클라이언트
+        public Client gameClient; //클라이언트
         private int pingTick = 0;
 
         List<LeftLifeEntity> leftlives = new List<LeftLifeEntity>(4);
@@ -477,6 +477,8 @@ namespace ApplicationSoftwareProjectTeam2
 
         private void GamePanel_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (gameClient != null)
+                gameClient.SendLeave();
             this.Owner?.Show(); // 부모 폼을 다시 보여줌
         }
 
@@ -531,6 +533,26 @@ namespace ApplicationSoftwareProjectTeam2
                 leftCount[0]++;
             }
         }
+        public void PlaceOpponentEntities(List<SerializedEntity> sentities, string enemy)
+        {
+            foreach (var se in sentities)
+            {
+                LivingEntity? entity = TranslateAndCreateLivingEntity(se.Id, enemy);
+                entity.entityLevel = se.EntityLevel;
+                for (int i = 0; i < entity.entityLevel; i++) entity.scaleEntity(1.2f);
+                entity.setPosition(-se.X, 2, se.Z);
+                if (se.ItemId1 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId1));
+                if (se.ItemId2 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId2));
+                if (se.ItemId3 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId3));
+                entity.isPurchased = true; // 아이템이 장착된 상태로 설정
+                entity.direction = Direction.Right; // 기본 방향 설정
+                //entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
+                //entity.EquippedItems[2] = TranslateAndCreateItem(se.ItemId3);
+                addFreshLivingEntity(entity);
+                clientPlayer.entitiesofplayer.Add(entity);
+                leftCount[1]++;
+            }
+        }
         //서버에서 전송된 캐릭터 타입을 받아서 해당 캐릭터를 생성하는 메서드
         public LivingEntity TranslateAndCreateLivingEntity(byte type, string name)
         {
@@ -548,7 +570,7 @@ namespace ApplicationSoftwareProjectTeam2
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }
-        public Item TranslateAndCreateItem(byte type)
+        public Item? TranslateAndCreateItem(byte type)
         {
             return type switch
             {
@@ -600,11 +622,9 @@ namespace ApplicationSoftwareProjectTeam2
             };
         }
         public List<SerializedEntity> serialized;
-        private void btnGameStart_Click(object sender, EventArgs e)
+        private async void btnGameStart_Click(object sender, EventArgs e)
         {
             if (isGameRunning || leftCount[0] == 0) return;
-            isGameRunning = true; gameOverDetected = false;
-            randomSeed = (ulong)(new Random().Next(int.MaxValue));
             //유닛 정보 서버 전송
             serialized = new List<SerializedEntity>();
             foreach (var unit in clientPlayer.entitiesofplayer)
@@ -632,9 +652,31 @@ namespace ApplicationSoftwareProjectTeam2
             }
             if (gameClient != null)
             {
+                List<SerializedEntity> enemies;
+                ulong seed;
+                gameClient.isReady = true;
+                // 빈 덱·seed=0 반환되면 재요청
                 gameClient.SendEntities(serialized);
+                do
+                {
+                    (enemies, seed) =
+                        await gameClient.RequestOpponentEntities();
+                    if (enemies.Count == 0 || seed == 0UL)
+                        await Task.Delay(200);
+                } while (enemies.Count == 0 || seed == 0UL);
+
+                // 서버가 내려준 seed 사용!
+                randomSeed = seed;
+
+                PlaceOpponentEntities(enemies, "Enemy");
+                isGameRunning = true;
+                gameOverDetected = false;
+
             }
-            else 
+            else
+            {
+                randomSeed = (ulong)(new Random().Next(int.MaxValue));
+                isGameRunning = true; gameOverDetected = false;
                 for (int i = 0; i < 6 + currentRound; i++)
                 {
                     LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");
@@ -642,6 +684,7 @@ namespace ApplicationSoftwareProjectTeam2
                     addFreshLivingEntity(test);
                     leftCount[1]++;
                 }
+            }
             currentRound++;
         }
     }

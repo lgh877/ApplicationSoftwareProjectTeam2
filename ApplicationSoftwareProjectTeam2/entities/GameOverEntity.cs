@@ -21,7 +21,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
             y = level.Lerp(y, 350, 0.03f);
             if (tickCount == 80)
             {
+
                 level.logicTick.Enabled = false;
+                level.Close();
             }
         }
     }
