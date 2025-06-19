@@ -39,7 +39,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             weight = 4;
             pushPower = 10;
             Image = images[0];
-            direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
+            direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 80;
             currentHealth = 80;
             finalMaxHealth = maxHealth;

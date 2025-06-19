@@ -42,7 +42,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 300; currentHealth = 200; finalMaxHealth = maxHealth;
             this.pushPower = 20; moveSpeed = 3;
             this.renderType = 2; // default shadow
-            direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
+            direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
             parts.Add(new PartEntity(level, this, 5, 30, 5) { Image = images[2] }); // Upper Body
             parts.Add(new PartEntity(level, this, -25, 10, 14) { Image = images[3] }); // LeftArm
@@ -313,8 +313,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public override void scaleEntity(float scale)
         {
             base.scaleEntity(scale);
-            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
-            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
             foreach (PartEntity part in parts)
             {
                 part.offsetX *= scale;

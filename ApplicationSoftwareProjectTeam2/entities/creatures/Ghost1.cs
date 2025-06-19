@@ -90,7 +90,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             weight = 8;
             pushPower = 20;
             Image = images[0];
-            direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
+            direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 60;
             currentHealth = 60;
             finalMaxHealth = maxHealth;
@@ -141,7 +141,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                 }
                                 else
                                 {
-                                    mana++;
+                                    mana += level.getRandomInteger(6);
                                     if (tickCount % 16 == 0)
                                     {
                                         LivingEntity found = detectTargetManhattan(2000);
@@ -155,7 +155,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     float dx = target.x - x;
                                     float dz = target.z - z;
                                     float distance = dx * dx + dz * dz;
-                                    if (mana > 10)
+                                    if (mana > 20)
                                     {
                                         mana = 0;
                                         level.playSound(sounds[level.getRandomInteger(2) + 2]);
@@ -168,7 +168,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     {
                                         if (distance < 0.4 * (width * width + (target.width + width) * (target.width + width)))
                                         {
-                                            mana += 5;
                                             level.playSound(sounds[level.getRandomInteger(2)]);
                                             entityState = 1;
                                             walkTicks = 0;

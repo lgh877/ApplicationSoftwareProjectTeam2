@@ -25,6 +25,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             visualSize = 2f;
             setPosition(x, y, z);
             Image = images[value - 1];
+            renderType = 0;
         }
         public override void tick()
         {

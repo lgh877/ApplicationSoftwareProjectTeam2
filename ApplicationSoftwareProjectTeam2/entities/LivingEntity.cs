@@ -44,6 +44,14 @@ namespace ApplicationSoftwareProjectTeam2.entities
 
             weatherCode = 0;
         }
+
+        public override void scaleEntity(float scale)
+        {
+            base.scaleEntity(scale);
+            finalMaxHealth *= scale * 1.4f; currentHealth = finalMaxHealth * 1.4f;
+            attackDamage *= scale * 1.4f; finalAttackDamage = attackDamage;
+            pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+        }
         public virtual EntityTypes getEntityType()
         {
             return EntityTypes.Nothing;

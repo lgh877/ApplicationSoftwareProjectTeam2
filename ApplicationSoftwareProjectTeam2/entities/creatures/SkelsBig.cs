@@ -56,16 +56,10 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             cost = 3;
             visualSize = 3f; width = 42; height = 78; weight = 16; pushPower = 30;
             Image = images[0];
-            direction = level.getRandomInteger(2) == 0 ? Direction.Right : Direction.Left;
+            direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 125; currentHealth = 125; finalMaxHealth = maxHealth;
             attackDamage = 20;finalAttackDamage = attackDamage;
             moveSpeed = 4;
-        }
-        public override void scaleEntity(float scale)
-        {
-            base.scaleEntity(scale);
-            maxHealth *= scale * 1.4f; currentHealth = maxHealth * 1.4f;
-            attackDamage *= scale * 1.4f; pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
         }
         public override EntityTypes getEntityType()
         {

@@ -18,7 +18,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tick()
         {
             tickCount++;
-            y = level.Lerp(y, 200, 0.03f);
+            y = level.Lerp(y, 350, 0.03f);
             if (tickCount == 80)
             {
                 level.logicTick.Enabled = false;

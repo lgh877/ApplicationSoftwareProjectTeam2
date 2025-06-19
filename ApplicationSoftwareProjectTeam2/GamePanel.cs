@@ -41,6 +41,7 @@ namespace ApplicationSoftwareProjectTeam2
         public bool handleMouseEvent, grabbed = false, isGameRunning = false, gameOverDetected = false;
         public const int worldWidth = 1000, worldHeight = 500;
         public CrossPlatformRandom random;
+        public Random usualRandom = new Random();
         public ulong randomSeed;
         private BufferedGraphicsContext bufferContext;
         private BufferedGraphics buffer;
@@ -100,17 +101,39 @@ namespace ApplicationSoftwareProjectTeam2
             this.currentHeight = (int)(currentWidth * 0.55);
             panelPlayScreen.Width = currentWidth; panelPlayScreen.Height = currentHeight;
             modifyGold(16);
+            for (int i = 0; i < 10; i++)
+            {
+                LivingEntity test = CreateEntity((byte)(new Random().Next(10)), clientPlayer.playerName);
+                for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
+                test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
+                test.hasAi = false;
+                //test.deckIndex = 1;
+                shopentities.AddFirst(test);
+            }
             for (int i = 0; i < 4; i++)
             {
                 LeftLifeEntity leftLife = new LeftLifeEntity(this, 550 - i * 40);
                 addFreshEntity(leftLife);
                 leftlives.Add(leftLife);
             }
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    LeftLifeEntity leftLife = new LeftLifeEntity(this, 550 - i * 40);
+            //    addFreshEntity(leftLife);
+            //    leftlives.Add(leftLife);
+            //}
         }
         public void playSound(WindowsMediaPlayer sound)
         {
-            sound.settings.volume = 100; // 볼륨 설정 (0-100)
-            sound.controls.play();
+            try
+            {
+                sound.controls.play();
+            }
+            catch (Exception)
+            {
+                // 예외 발생 시 무시합니다.
+            }
+
         }
         public void addFreshLivingEntity(LivingEntity? entity)
         {
@@ -210,7 +233,7 @@ namespace ApplicationSoftwareProjectTeam2
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        LivingEntity test = CreateEntity((byte)(new Random().Next(12)), clientPlayer.playerName);
+                        LivingEntity test = CreateEntity((byte)(new Random().Next(10)), clientPlayer.playerName);
                         for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
@@ -450,12 +473,10 @@ namespace ApplicationSoftwareProjectTeam2
                 3 => new Skulls(this) { team = name },
                 4 => new GiantWeirdGuy(this) { team = name },
                 5 => new WeirdGuy(this) { team = name }, // 체인톱 아이템
-                6 => new Bot1(this) { team = name },
-                7 => new Ghost1(this) { team = name },
-                8 => new Boxer(this) { team = name },
-                9 => new Human2(this) { team = name },
-                10 => new Mushroom1(this) { team = name },
-                11 => new FlyingEye1(this) { team = name },
+                6 => new Ghost1(this) { team = name },
+                7 => new Boxer(this) { team = name },
+                8 => new Mushroom1(this) { team = name },
+                9 => new FlyingEye1(this) { team = name },
                 _ => throw new ArgumentException("존재하지 않는 캐릭터 타입입니다.")
             };
         }
@@ -480,7 +501,7 @@ namespace ApplicationSoftwareProjectTeam2
             }
             for (int i = 0; i < 6 + currentRound; i++)
             {
-                LivingEntity test = CreateEntity((byte)(getRandomInteger(11) + 1), "Enemy");
+                LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");
                 test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
                 addFreshLivingEntity(test);
                 leftCount[1]++;

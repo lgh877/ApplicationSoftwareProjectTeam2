@@ -80,10 +80,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(800, 450);
-            Controls.Add(txtInsertName);
-            Controls.Add(lblInsertName);
-            Controls.Add(btnStart);
-            Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "GameMenu";
