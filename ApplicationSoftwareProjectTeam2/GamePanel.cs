@@ -12,6 +12,8 @@ using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using WMPLib;
+using ApplicationSoftwareProjectTeam2.network;
+
 
 namespace ApplicationSoftwareProjectTeam2
 {
@@ -48,6 +50,10 @@ namespace ApplicationSoftwareProjectTeam2
         private Graphics panelGraphics;
         public Player clientPlayer;
         public int[] leftCount = [0, 0];
+
+        private Client gameClient; //클라이언트
+        private int pingTick = 0;
+
         List<LeftLifeEntity> leftlives = new List<LeftLifeEntity>(4);
         List<NumberEntity> currentGold = new List<NumberEntity>(4);
 
@@ -126,6 +132,9 @@ namespace ApplicationSoftwareProjectTeam2
             addFreshEntity(number2);
             currentGold.Add(number2);
             modifyGold(16);
+
+            gameClient = new Client(clientPlayer.playerName); //클라이언트 초기화
+
         }
         public void playSound(WindowsMediaPlayer sound)
         {
@@ -297,6 +306,13 @@ namespace ApplicationSoftwareProjectTeam2
                 }
             }
             renderEntities();
+
+            // ping 전송
+            pingTick++;
+            if (pingTick % 50 == 0)
+            {
+                gameClient.SendPing();
+            }
         }
 
         public void modifyGold(int amount)
@@ -530,6 +546,26 @@ namespace ApplicationSoftwareProjectTeam2
             if (currentRound == 0)
             {
                 randomSeed = (ulong)(new Random().Next(int.MaxValue));
+
+                //유닛 정보 서버 전송
+                List<SerializedEntity> serialized = new();
+                foreach (var unit in shopentities)
+                {
+                    if (unit is LivingEntity le)
+                    {
+                        serialized.Add(new SerializedEntity
+                        {
+                            Id = le.getLivingEntityId().ToString(), // LivingEntity의 고유 ID 사용
+                            Type = le.GetType().Name,               // 클래스 이름 ( Boxer, Ghost1, ...)
+                            HP = (int)le.currentHealth,             // 체력
+                            X = (int)le.x,                          // x 좌표
+                            Y = (int)le.y                           // y 좌표
+                        });
+                    }
+                }
+                gameClient.SendEntities(serialized);
+
+
             }
             for (int i = 0; i < 6 + currentRound; i++)
             {
