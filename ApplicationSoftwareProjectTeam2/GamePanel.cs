@@ -202,8 +202,8 @@ namespace ApplicationSoftwareProjectTeam2
                                     modifyGold(16);
                                     playSound(SoundCache.gameLost);
                                     clientPlayer.lifeLeft--;
-                                    leftlives[clientPlayer.lifeLeft].discard();
-                                    leftlives.RemoveAt(clientPlayer.lifeLeft);
+                                    leftlives[0].discard();
+                                    leftlives.RemoveAt(0);
                                     addFreshEntity(new LostMessageEntity(this));
                                 }
                                 break; // 해당 팀의 엔티티를 찾으면 루프 종료
