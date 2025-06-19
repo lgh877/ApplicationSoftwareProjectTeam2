@@ -4,7 +4,7 @@ namespace ApplicationSoftwareProjectTeam2.items
 {
     public class Player
     {
-        public LinkedList<LivingEntity> entitiesofplayer = new LinkedList<LivingEntity>();
+        public List<LivingEntity?> entitiesofplayer = new List<LivingEntity?>();
         public string playerName, actualPlayerName;
         public int lifeLeft = 4, Gold;
     }

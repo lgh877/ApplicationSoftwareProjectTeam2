@@ -63,7 +63,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         #region 캐릭터 아이디 기록
         public override byte getLivingEntityId()
         {
-            return 1;
+            return (byte) 1;
         }
         #endregion
         public override void tickAlive()

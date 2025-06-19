@@ -30,7 +30,6 @@ namespace ApplicationSoftwareProjectTeam2.entities.items
                 landedEvent += detectLivingEntityAndMerge;
                 level.addFreshEntity(this);
                 level.livingentities.Remove(this);
-                level.clientPlayer.entitiesofplayer.Remove(this); // 플레이어의 엔티티 목록에서 제거
                 hasAi = false;
             }
         }

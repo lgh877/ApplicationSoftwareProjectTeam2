@@ -101,7 +101,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         }
 
         public override EntityTypes getEntityType() => EntityTypes.Avengers;
-        public override byte getLivingEntityId() => 22;
+        public override byte getLivingEntityId() => (byte) 22;
 
         public override void tickAlive()
         {

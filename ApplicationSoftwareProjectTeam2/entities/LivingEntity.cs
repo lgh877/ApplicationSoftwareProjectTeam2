@@ -335,9 +335,8 @@ namespace ApplicationSoftwareProjectTeam2.entities
             else if (!hasAi && z >= 200)
             {
                 landedEvent -= detectLivingEntityAndMerge;
-                //z값이 200보다 높다면 해당 객체를 level의 livingentities에서 entities 리스트로 옮기고 hasAi를 true로 해주세요
                 level.addFreshLivingEntity(this);
-                level.clientPlayer.entitiesofplayer.Append(this);
+                level.clientPlayer.entitiesofplayer.Add(this);
                 level.entities.Remove(this);
                 hasAi = true;
                 level.leftCount[0]++;

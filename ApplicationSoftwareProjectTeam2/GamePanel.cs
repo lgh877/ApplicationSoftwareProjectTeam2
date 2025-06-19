@@ -278,7 +278,7 @@ namespace ApplicationSoftwareProjectTeam2
                     for (int i = 0; i < 10; i++)
                     {
                         LivingEntity test = CreateEntity((byte)(new Random().Next(10)), clientPlayer.playerName);
-                        for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
+                        //for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
                         test.setPosition(shopValueTupleList[i].Item1, shopValueTupleList[i].Item2);
                         test.hasAi = false;
                         //test.deckIndex = 1;
@@ -507,22 +507,26 @@ namespace ApplicationSoftwareProjectTeam2
         }
         public void RecoverPlayerEntities()
         {
-            foreach(var entity in livingentities)
+            foreach (var entity in livingentities)
             {
                 entity.discard();
             }
             clientPlayer.entitiesofplayer.Clear();
+            leftCount[0] = 0; leftCount[1] = 0;
             foreach (var se in serialized)
             {
-                LivingEntity entity = TranslateAndCreateLivingEntity(se.Id, clientPlayer.playerName);
+                LivingEntity? entity = TranslateAndCreateLivingEntity(se.Id, clientPlayer.playerName);
                 entity.entityLevel = se.EntityLevel;
                 for (int i = 0; i < entity.entityLevel; i++) entity.scaleEntity(1.2f);
                 entity.setPosition(se.X, 2, se.Z);
-                entity.EquippedItems[0] = TranslateAndCreateItem(se.ItemId1);
-                entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
-                entity.EquippedItems[2] = TranslateAndCreateItem(se.ItemId3);
+                if (se.ItemId1 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId1));
+                if (se.ItemId2 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId2));
+                if (se.ItemId3 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId3));
+                //entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
+                //entity.EquippedItems[2] = TranslateAndCreateItem(se.ItemId3);
                 addFreshLivingEntity(entity);
-                clientPlayer.entitiesofplayer.AddLast(entity);
+                clientPlayer.entitiesofplayer.Add(entity);
+                leftCount[0]++;
             }
         }
         //서버에서 전송된 캐릭터 타입을 받아서 해당 캐릭터를 생성하는 메서드
@@ -593,29 +597,36 @@ namespace ApplicationSoftwareProjectTeam2
                 4 => new FlamingGloveItemEntity(this) { team = name },
             };
         }
-        List<SerializedEntity> serialized;
+        public List<SerializedEntity> serialized;
         private void btnGameStart_Click(object sender, EventArgs e)
         {
             if (isGameRunning || leftCount[0] == 0) return;
             isGameRunning = true; gameOverDetected = false;
             randomSeed = (ulong)(new Random().Next(int.MaxValue));
             //유닛 정보 서버 전송
-            serialized = new();
+            serialized = new List<SerializedEntity>();
             foreach (var unit in clientPlayer.entitiesofplayer)
             {
-                if (unit is LivingEntity le)
+                SerializedEntity se = new SerializedEntity
                 {
-                    serialized.Add(new SerializedEntity
+                    Id = unit.getLivingEntityId(), // LivingEntity의 고유 ID 사용
+                    EntityLevel = unit.entityLevel, // LivingEntity의 고유 ID 사용
+                    X = (int)unit.x,                          // x 좌표
+                    Z = (int)unit.z,                           // y 좌표
+                };
+                for (int i = 0; i < unit.EquippedItems.Count; i++)
+                {
+                    switch(i)
                     {
-                        Id = le.getLivingEntityId(), // LivingEntity의 고유 ID 사용
-                        EntityLevel = le.entityLevel, // LivingEntity의 고유 ID 사용
-                        X = (int)le.x,                          // x 좌표
-                        Z = (int)le.z,                           // y 좌표
-                        ItemId1 = le.EquippedItems[0] != null ? (byte)0 : (byte)le.EquippedItems[0].Id, // y 좌표
-                        ItemId2 = le.EquippedItems[1] != null ? (byte)0 : (byte)le.EquippedItems[1].Id, // y 좌표
-                        ItemId3 = le.EquippedItems[2] != null ? (byte)0 : (byte)le.EquippedItems[2].Id // y 좌표
-                    });
+                        case 0 : 
+                            se.ItemId1 = (byte)unit.EquippedItems[0].Id; break;
+                        case 1:
+                            se.ItemId2 = (byte)unit.EquippedItems[1].Id; break;
+                        case 2:
+                            se.ItemId3 = (byte)unit.EquippedItems[2].Id; break;
+                    }
                 }
+                serialized.Add(se);
             }
             if (gameClient != null)
             {
