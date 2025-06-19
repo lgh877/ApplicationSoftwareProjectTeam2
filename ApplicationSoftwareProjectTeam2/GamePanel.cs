@@ -522,6 +522,8 @@ namespace ApplicationSoftwareProjectTeam2
                 if (se.ItemId1 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId1));
                 if (se.ItemId2 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId2));
                 if (se.ItemId3 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId3));
+                entity.isPurchased = true; // 아이템이 장착된 상태로 설정
+                entity.direction = Direction.Right; // 기본 방향 설정
                 //entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
                 //entity.EquippedItems[2] = TranslateAndCreateItem(se.ItemId3);
                 addFreshLivingEntity(entity);
