@@ -616,25 +616,19 @@ namespace ApplicationSoftwareProjectTeam2
                         ItemId3 = le.EquippedItems[2] != null ? (byte)0 : (byte)le.EquippedItems[2].Id // y ÁÂÇ¥
                     });
                 }
-<<<<<<< HEAD
-=======
-
-                if (gameClient != null)
-                {
-                    gameClient.SendEntities(serialized);
-                }
-
-
->>>>>>> 4b07c33d8c6d9c200df2c988b9bba2ad7e23b9c1
             }
-            gameClient.SendEntities(serialized);
-            for (int i = 0; i < 6 + currentRound; i++)
+            if (gameClient != null)
             {
-                LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");
-                test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
-                addFreshLivingEntity(test);
-                leftCount[1]++;
+                gameClient.SendEntities(serialized);
             }
+            else 
+                for (int i = 0; i < 6 + currentRound; i++)
+                {
+                    LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");
+                    test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
+                    addFreshLivingEntity(test);
+                    leftCount[1]++;
+                }
             currentRound++;
         }
     }
