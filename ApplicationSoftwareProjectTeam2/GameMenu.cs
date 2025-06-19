@@ -132,6 +132,10 @@ namespace ApplicationSoftwareProjectTeam2
             gamePanel.clientPlayer = new items.Player();
             gamePanel.clientPlayer.actualPlayerName = txtInsertName.Text;
             gamePanel.clientPlayer.playerName = txtInsertName.Text + new Random().NextInt64();
+
+            // 싱글플레이 체크 여부를 GamePanel에 전달
+            gamePanel.isMultiplayer = !ckbClient.Checked;
+
             gamePanel.Show();
             this.Hide();
         }
