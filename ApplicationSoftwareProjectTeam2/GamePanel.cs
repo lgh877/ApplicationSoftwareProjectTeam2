@@ -32,6 +32,8 @@ namespace ApplicationSoftwareProjectTeam2
     }
     public partial class GamePanel : Form
     {
+        public bool isMultiplayer = true;// GameMenu에서 전달받음
+
         //캐릭터 객체들을 관리하는 리스트로, 업데이트가 비교적 드물어 그냥 리스트로 선언함
         public List<LivingEntity?> livingentities = new List<LivingEntity?>();
         //투사체, 기술 등에 쓰이는 객체들을 관리하는 리스트로, 리스트에 삽입 / 삭제가 자주 발생하므로 링크드 리스트 사용
@@ -133,7 +135,10 @@ namespace ApplicationSoftwareProjectTeam2
             currentGold.Add(number2);
             modifyGold(16);
 
-            gameClient = new Client(clientPlayer.playerName); //클라이언트 초기화
+            if (isMultiplayer)
+            {
+                gameClient = new Client(clientPlayer.playerName);
+            } //클라이언트 초기화
 
         }
         public void playSound(WindowsMediaPlayer sound)
@@ -307,9 +312,9 @@ namespace ApplicationSoftwareProjectTeam2
             }
             renderEntities();
 
-            // ping 전송
+            // ping 전송 (멀티플레이일 때만)
             pingTick++;
-            if (pingTick % 50 == 0)
+            if (gameClient != null && pingTick % 50 == 0)
             {
                 gameClient.SendPing();
             }
@@ -611,6 +616,16 @@ namespace ApplicationSoftwareProjectTeam2
                         ItemId3 = le.EquippedItems[2] != null ? (byte)0 : (byte)le.EquippedItems[2].Id // y 좌표
                     });
                 }
+<<<<<<< HEAD
+=======
+
+                if (gameClient != null)
+                {
+                    gameClient.SendEntities(serialized);
+                }
+
+
+>>>>>>> 4b07c33d8c6d9c200df2c988b9bba2ad7e23b9c1
             }
             gameClient.SendEntities(serialized);
             for (int i = 0; i < 6 + currentRound; i++)
