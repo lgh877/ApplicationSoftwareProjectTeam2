@@ -54,9 +54,18 @@ namespace ApplicationSoftwareProjectTeam2.entities.items
                 if (!item.Equals(this) && item.getEntityType() != EntityTypes.Items && item.EquippedItems.Count < 3
                     && 40 > Math.Abs(item.x - x) + Math.Abs(item.z - z))
                 {
+                    bool canMerge = true;
+                    foreach (var equippedItem in item.EquippedItems)
+                    {
+                        if (equippedItem.Id == mainItem.Id)
+                        {
+                            canMerge = false; // 이미 같은 아이템이 장착되어 있으면 조합 불가
+                            break;
+                        }
+                    }
+                    if (!canMerge) continue;
                     grabOccurred();
                     mainItem.ApplyTo(item);
-                    item.EquippedItems.Add(mainItem);
                     discard();
                     break;
                 }

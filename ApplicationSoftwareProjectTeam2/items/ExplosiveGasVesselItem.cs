@@ -17,6 +17,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         }
         public override void ApplyTo(LivingEntity unit)
         {
+            base.ApplyTo(unit);
             unit.deathEvent += deathOccur;
             unit.hurtEvent += hurtOccur;
             // Implement the logic for applying this item to a living entity
@@ -30,6 +31,7 @@ namespace ApplicationSoftwareProjectTeam2.items
             GroundExplosion exp = new GroundExplosion(level);
             exp.Owner = entity; exp.attackDamage = entity.maxHealth / 2;
             exp.x = entity.x; exp.y = entity.y; exp.z = entity.z - 32;
+            exp.scaleEntity((float) Math.Pow(1.2, (entity.entityLevel)));
             exp.team = entity.team;
             level.addFreshEntity(exp);
             exp.checkCollisionsLiving();

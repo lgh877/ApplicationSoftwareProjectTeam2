@@ -12,7 +12,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
     public class Entity
     {
         public event EventHandler landedEvent, collisionEvent, grabbedEvent;
-        public int tickCount, sharedFlags, width = 40, height = 40, weight = 1, pushPower = 2;
+        public int tickCount, sharedFlags, width = 40, height = 40, weight = 1, pushPower = 2, desiredAngle;
         public float x, y, z, visualSize, elasticForce = -0.1f, groundFraction = 0.7f, airFraction = 0.1f, gravity = 2.0f;
         public Vector3 deltaMovement;
         public GamePanel level;
@@ -189,15 +189,15 @@ namespace ApplicationSoftwareProjectTeam2.entities
         }
         public virtual void applyCollisionLiving(LivingEntity entity)
         {
-            if(entity.x == x && entity.y == y && entity.z == z)
+            if(entity.x == x && entity.z == z)
             {
                 return; // 충돌이 발생하지 않도록 동일한 위치에 있는 경우 무시
             }
             Vector3 direction = Vector3.Normalize(new Vector3(entity.x - x, entity.y - y, entity.z - z));
             float powerFactor = weight / entity.weight;
-            entity.push(direction.X * 2 * powerFactor,
+            entity.push(direction.X * powerFactor,
                 0,//direction.Y * 2 * powerFactor,
-                direction.Z * 2 * powerFactor);
+                direction.Z * powerFactor);
             //push(direction.X * -2, direction.Y * -2, direction.Z * -2);
         }
 

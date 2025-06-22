@@ -166,7 +166,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     }
                                     else
                                     {
-                                        if (distance < 0.4 * (width * width + (target.width + width) * (target.width + width)))
+                                        if (distance < 0.5 * (width * width + (target.width + width) * (target.width + width)))
                                         {
                                             level.playSound(sounds[level.getRandomInteger(2)]);
                                             entityState = 1;
@@ -233,7 +233,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         Image = direction == Direction.Right ? images[20 + atkFrame] : images[27 + atkFrame];
 
                         if (atkFrame == 4 && target != null &&
-                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 2500 &&
+                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.6 * (width * width + (target.width + width) * (target.width + width)) &&
                             target.y - y < height && target.y - y > -target.height)
                         {
                             doHurtTarget(target);

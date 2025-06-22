@@ -30,13 +30,7 @@ namespace ApplicationSoftwareProjectTeam2.items
 
         public virtual void ApplyTo(LivingEntity unit)
         {
-            unit.finalAttackDamage += AttackBonus;
-            //unit.Defense += DefenseBonus;
-            unit.moveSpeed += SpeedBonus;
-            unit.finalMaxHealth += HealthBonus;
-            unit.pushPower += KnockbackPowerBonus;
-            unit.weight += WeightBonus;
-            unit.elasticForce += ElasticityBonus;
+            unit.EquippedItems.Add(this);
         }
         public override string ToString()
         {

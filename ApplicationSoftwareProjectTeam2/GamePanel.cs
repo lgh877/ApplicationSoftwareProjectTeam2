@@ -145,6 +145,7 @@ namespace ApplicationSoftwareProjectTeam2
         {
             try
             {
+                sound.settings.volume = 33;
                 sound.controls.play();
             }
             catch (Exception)
@@ -186,6 +187,38 @@ namespace ApplicationSoftwareProjectTeam2
                 addFreshEntity(numberEntity2);
             }
         }
+        public void createNumberEntity(int number, int x, int y, int z, float scalefactor)
+        {
+            float scale = (float)Math.Sqrt(scalefactor);
+            number = int.Min(number, 999); // 0~999 범위로 제한
+            if (number < 10)
+            {
+                FloatingNumberEntity numberEntity = new FloatingNumberEntity(this, x, y, z, number);
+                numberEntity.visualSize = scalefactor;
+                addFreshEntity(numberEntity);
+            }
+            else if (number < 100)
+            {
+                FloatingNumberEntity numberEntity1 = new FloatingNumberEntity(this, (int)(x - 9 * scale), y, z, (number / 10) % 10);
+                numberEntity1.visualSize = scalefactor;
+                addFreshEntity(numberEntity1);
+                FloatingNumberEntity numberEntity2 = new FloatingNumberEntity(this, (int)(x + 9 * scale), y, z, number % 10);
+                numberEntity2.visualSize = scalefactor;
+                addFreshEntity(numberEntity2);
+            }
+            else
+            {
+                FloatingNumberEntity numberEntity = new FloatingNumberEntity(this, (int)(x - 18 * scale), y, z, number / 100);
+                numberEntity.visualSize = scalefactor;
+                addFreshEntity(numberEntity);
+                FloatingNumberEntity numberEntity1 = new FloatingNumberEntity(this, x, y, z, (number / 10) % 10);
+                numberEntity1.visualSize = scalefactor;
+                addFreshEntity(numberEntity1);
+                FloatingNumberEntity numberEntity2 = new FloatingNumberEntity(this, (int)(x + 18 * scale), y, z, number % 10);
+                numberEntity2.visualSize = scalefactor;
+                addFreshEntity(numberEntity2);
+            }
+        }
         private void logicTick_Tick(object sender, EventArgs e)
         {
             string detectTeam = clientPlayer.playerName;
@@ -200,19 +233,20 @@ namespace ApplicationSoftwareProjectTeam2
                     if (isGameRunning && !gameOverDetected && (leftCount[0] == 0 || leftCount[1] == 0))
                     {
                         gameOverDetected = true;
-                        addFreshEntity(new backGroundNoiseEntity(this, clientPlayer.lifeLeft != 1 ? 30 : int.MaxValue));
                         foreach (var entity in livingentities)
                         {
                             if (entity.isAlive())
                             {
                                 if (entity.team.Equals(detectTeam))
                                 {
+                                    addFreshEntity(new backGroundNoiseEntity(this, 30));
                                     modifyGold(8);
                                     playSound(SoundCache.gameVictory);
                                     addFreshEntity(new VictoryMessageEntity(this));
                                 }
                                 else
                                 {
+                                    addFreshEntity(new backGroundNoiseEntity(this, clientPlayer.lifeLeft != 1 ? 30 : int.MaxValue));
                                     modifyGold(16);
                                     playSound(SoundCache.gameLost);
                                     clientPlayer.lifeLeft--;
@@ -388,6 +422,7 @@ namespace ApplicationSoftwareProjectTeam2
                 {
                     Entity e = allentities[i];
                     if (e.renderType == -1) continue;
+                    float angle = e.desiredAngle;
                     float x = e.x;
                     float y = e.y;
                     float z = e.z;
@@ -399,9 +434,18 @@ namespace ApplicationSoftwareProjectTeam2
                     int width = (int)(e.Image.Width * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
                     int height = (int)(e.Image.Height * e.visualSize * scale * scale2); // 엔티티 크기 (픽셀)
                     screenY -= (int)(y * scale * scale2);
-                    g.DrawImage(e.Image,
-                        screenX - width / 2, screenY - height,
-                        width, height);
+                    if (angle == 0)
+                        g.DrawImage(e.Image,
+                            screenX - width / 2, screenY - height,
+                            width, height);
+                    else
+                    {
+                        // 회전된 이미지를 그리기 위해 Graphics 객체를 사용
+                        g.TranslateTransform(screenX, screenY);
+                        g.RotateTransform(angle);
+                        g.DrawImage(e.Image, -width / 2, -height, width, height);
+                        g.ResetTransform(); // 변환을 초기화하여 다음 이미지에 영향을 주지 않도록 함
+                    }
                 }
             }
             buffer.Render(panelGraphics);
@@ -521,9 +565,21 @@ namespace ApplicationSoftwareProjectTeam2
                 entity.entityLevel = se.EntityLevel;
                 for (int i = 0; i < entity.entityLevel; i++) entity.scaleEntity(1.2f);
                 entity.setPosition(se.X, 2, se.Z);
-                if (se.ItemId1 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId1));
-                if (se.ItemId2 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId2));
-                if (se.ItemId3 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId3));
+                if (se.ItemId1 != 0)
+                {
+                    Item? item1 = TranslateAndCreateItem(se.ItemId1);
+                    item1.ApplyTo(entity);
+                }
+                if (se.ItemId2 != 0)
+                {
+                    Item? item2 = TranslateAndCreateItem(se.ItemId2);
+                    item2.ApplyTo(entity);
+                }
+                if (se.ItemId3 != 0)
+                {
+                    Item? item3 = TranslateAndCreateItem(se.ItemId3);
+                    item3.ApplyTo(entity);
+                }
                 entity.isPurchased = true; // 아이템이 장착된 상태로 설정
                 entity.direction = Direction.Right; // 기본 방향 설정
                 //entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
@@ -541,9 +597,21 @@ namespace ApplicationSoftwareProjectTeam2
                 entity.entityLevel = se.EntityLevel;
                 for (int i = 0; i < entity.entityLevel; i++) entity.scaleEntity(1.2f);
                 entity.setPosition(-se.X, 2, se.Z);
-                if (se.ItemId1 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId1));
-                if (se.ItemId2 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId2));
-                if (se.ItemId3 != 0) entity.EquippedItems.Add(TranslateAndCreateItem(se.ItemId3));
+                if (se.ItemId1 != 0)
+                {
+                    Item? item1 = TranslateAndCreateItem(se.ItemId1);
+                    item1.ApplyTo(entity);
+                }
+                if (se.ItemId2 != 0)
+                {
+                    Item? item2 = TranslateAndCreateItem(se.ItemId2);
+                    item2.ApplyTo(entity);
+                }
+                if (se.ItemId3 != 0)
+                {
+                    Item? item3 = TranslateAndCreateItem(se.ItemId3);
+                    item3.ApplyTo(entity);
+                }
                 entity.isPurchased = true; // 아이템이 장착된 상태로 설정
                 entity.direction = Direction.Right; // 기본 방향 설정
                 //entity.EquippedItems[1] = TranslateAndCreateItem(se.ItemId2);
@@ -677,15 +745,39 @@ namespace ApplicationSoftwareProjectTeam2
             {
                 randomSeed = (ulong)(new Random().Next(int.MaxValue));
                 isGameRunning = true; gameOverDetected = false;
-                for (int i = 0; i < 6 + currentRound; i++)
+                int factor1 = (int)Math.Cbrt(currentRound), factor2 = currentRound / 4, factor3 = (int) Math.Log(currentRound, 3);
+                for (int i = 0; i < 3 + factor2; i++)
                 {
                     LivingEntity test = CreateEntity((byte)(getRandomInteger(9) + 1), "Enemy");
                     test.setPosition(getRandomInteger(500), getRandomInteger(450) + 200);
+                    if (currentRound > 0 && getRandomInteger(10 + factor1) < factor1)
+                    {
+                        test.entityLevel = (byte)(int.Min(getRandomInteger(1 + factor3) + 1, 255));
+                        for (int j = 0; j < test.entityLevel; j++) test.scaleEntity(1.2f);
+                    }
+                    if (getRandomInteger(100 + currentRound) < currentRound)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            Item item = TranslateAndCreateItem((byte)(getRandomInteger(5) + 1));
+                            bool canMerge = true;
+                            foreach (var equippedItem in test.EquippedItems)
+                            {
+                                if (equippedItem.Id == item.Id)
+                                {
+                                    canMerge = false; // 이미 같은 아이템이 장착되어 있으면 조합 불가
+                                    break;
+                                }
+                            }
+                            if (canMerge) item.ApplyTo(test);
+                        }
+                    }
                     addFreshLivingEntity(test);
                     leftCount[1]++;
                 }
             }
             currentRound++;
+            createNumberEntity(currentRound, 0, 575, 1, 3);
         }
     }
 }

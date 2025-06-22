@@ -20,7 +20,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public override void tick()
         {
             tickCount++;
-            float sizeFactor = (float) Math.Cbrt(visualSize);
+            float sizeFactor = visualSize;
             float bx = baseX;
             if ((int)Owner.direction < 5)
             {

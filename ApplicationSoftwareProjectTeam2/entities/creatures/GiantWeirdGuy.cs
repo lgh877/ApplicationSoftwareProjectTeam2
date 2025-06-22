@@ -36,22 +36,22 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public GiantWeirdGuy(GamePanel level) : base(level)
         {
             this.visualSize = 1.0f;
-            cost = 6;
+            cost = 8;
             this.width = 50;
-            this.height = 78;
+            this.height = 85;
             this.weight = 60;
-            maxHealth = 200; currentHealth = 200; finalMaxHealth = maxHealth;
-            this.pushPower = 60; moveSpeed = 3;
+            maxHealth = 250; currentHealth = 250; finalMaxHealth = maxHealth;
+            this.pushPower = 60; moveSpeed = 2;
             attackDamage = 15; finalAttackDamage = attackDamage;
             this.renderType = 2; // default shadow
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
-            parts.Add(new PartEntity(level, this, -21, 44, 3) { Image = images[0] }); // Head
-            parts.Add(new PartEntity(level, this, 5, 30, 5) { Image = images[2] }); // Upper Body
-            parts.Add(new PartEntity(level, this, -25, 10, 14) { Image = images[3] }); // LeftArm
-            parts.Add(new PartEntity(level, this, 21, 10, 0) { Image = images[3] }); // RightArm
-            parts.Add(new PartEntity(level, this, 5, 18, 6) { Image = images[1] }); // Lower Body
-            parts.Add(new PartEntity(level, this, -19, 0, 12) { Image = images[4] }); // Left Leg
-            parts.Add(new PartEntity(level, this, 15, 0, 2) { Image = images[5] }); // Right Leg
+            parts.Add(new PartEntity(level, this, -18, 37, 3) { Image = images[0] }); // Head
+            parts.Add(new PartEntity(level, this, 4, 28, 4) { Image = images[2] }); // Upper Body
+            parts.Add(new PartEntity(level, this, -20, 8, 11) { Image = images[3] }); // LeftArm
+            parts.Add(new PartEntity(level, this, 18, 8, 0) { Image = images[3] }); // RightArm
+            parts.Add(new PartEntity(level, this, 4, 15, 6) { Image = images[1] }); // Lower Body
+            parts.Add(new PartEntity(level, this, -15, 0, 10) { Image = images[4] }); // Left Leg
+            parts.Add(new PartEntity(level, this, 12, 0, 2) { Image = images[5] }); // Right Leg
             foreach (PartEntity part in parts)
             {
                 level.addFreshEntity(part);
@@ -158,9 +158,9 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         walkTicks++;
                         isActuallyMoving = true;
 
-                        float f = (float)Math.Sin((double)tickCount * 0.5);
-                        float f3 = (float)Math.Cos((double)tickCount * 0.5);
-                        float f2 = (float)Math.Sin((double)tickCount);
+                        float f = (float)Math.Sin((double)tickCount * 0.17 * moveSpeed);
+                        float f3 = (float)Math.Cos((double)tickCount * 0.17 * moveSpeed);
+                        float f2 = (float)Math.Sin((double)tickCount * 0.34 * moveSpeed);
                         if ((int)direction < 5)
                         {
                             for (int i = 0; i < parts.Count; i++)
@@ -180,13 +180,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                         break;
                                     case 2:
                                         pe.Image = images[3];
-                                        pe.offsetX = f * 4f;
+                                        pe.offsetX = f * 12f;
                                         pe.offsetY = f3 * 1.5f;
+                                        pe.desiredAngle = (int)(-f * 15);
                                         break;
                                     case 3:
                                         pe.Image = images[3];
-                                        pe.offsetX = -f * 4f;
+                                        pe.offsetX = -f * 12f;
                                         pe.offsetY = -f3 * 1.5f;
+                                        pe.desiredAngle = (int)(f * 15);
                                         break;
                                     case 4:
                                         pe.Image = images[1];
@@ -226,13 +228,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                         break;
                                     case 2:
                                         pe.Image = images[12];
-                                        pe.offsetX = f * 4f;
+                                        pe.offsetX = f * 12f;
                                         pe.offsetY = f3 * 1.5f;
+                                        pe.desiredAngle = (int)(-f * 15);
                                         break;
                                     case 3:
                                         pe.Image = images[12];
-                                        pe.offsetX = - f * 4f;
+                                        pe.offsetX = - f * 12f;
                                         pe.offsetY = -f3 * 1.5f;
+                                        pe.desiredAngle = (int)(f * 15);
                                         break;
                                     case 4:
                                         pe.Image = images[10];
@@ -260,7 +264,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         if (isActuallyMoving)
                         {
                             isActuallyMoving = false;
-                            Image = (int)direction < 5 ? images[0] : images[2];
+                            resetOffset();
                         }
                         float f = (float)Math.Sin((double)tickCount * 0.5);
                         if ((int)direction < 5)
@@ -358,34 +362,154 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     #endregion
                     break;
                 case 1:
-                    direction = target.x - x > 0 ? Direction.Right : Direction.Left;
                     walkTicks++;
                     if (walkTicks == 2)
                     {
                         resetOffset();
-                        parts[3].Image = (int)direction < 5 ? images[6] : images[15];
                     }
-                    else if (walkTicks < 5)
+                    else if (walkTicks < 6)
                     {
+                        direction = target.x - x > 0 ? Direction.Right : Direction.Left;
+                        bool isright = (int)this.direction < 5;
+                        if (isright)
+                        {
+                            for (int i = 0; i < 7; i++)
+                            {
+                                PartEntity pe = parts[i];
+                                switch (i)
+                                {
+                                    case 0:
+                                        pe.Image = images[0];
+                                        break;
+                                    case 1:
+                                        pe.Image = images[2];
+                                        break;
+                                    case 2:
+                                        pe.Image = images[3];
+                                        break;
+                                    case 3:
+                                        pe.Image = images[6];
+                                        break;
+                                    case 4:
+                                        pe.Image = images[1];
+                                        break;
+                                    case 5:
+                                        pe.Image = images[4];
+                                        break;
+                                    case 6:
+                                        pe.Image = images[5];
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 7; i++)
+                            {
+                                PartEntity pe = parts[i];
+                                switch (i)
+                                {
+                                    case 0:
+                                        pe.Image = images[9];
+                                        break;
+                                    case 1:
+                                        pe.Image = images[11];
+                                        break;
+                                    case 2:
+                                        pe.Image = images[12];
+                                        break;
+                                    case 3:
+                                        pe.Image = images[15];
+                                        break;
+                                    case 4:
+                                        pe.Image = images[10];
+                                        break;
+                                    case 5:
+                                        pe.Image = images[13];
+                                        break;
+                                    case 6:
+                                        pe.Image = images[14];
+                                        break;
+                                }
+                            }
+                        }
                         animFactor = level.Lerp(animFactor, 20, 0.7f);
-                        float offset = (int)direction < 5 ? -animFactor : animFactor;
+                        float offset = isright ? -animFactor : animFactor;
                         parts[3].offsetX = offset;
                         parts[0].offsetX = offset * 0.3f;
                         parts[1].offsetX = offset * 0.3f;
                         parts[2].offsetX = offset * 0.3f;
                         parts[4].offsetX = offset * 0.15f;
                     }
-                    else if (walkTicks == 5)
+                    else if (walkTicks < 16)
                     {
-                        animFactor = 0;
-                        parts[3].Image = (int)direction < 5 ? images[7] : images[16];
-                    }
-                    else if (walkTicks < 11)
-                    {
-                        animFactor = 1 - (walkTicks - 6) * 0.2f;
-                        animFactor = (float) ((animFactor * animFactor * animFactor * animFactor) * Math.PI); // easing function
+                        bool isright = (int)this.direction < 5;
+                        if (isright)
+                        {
+                            for (int i = 0; i < 7; i++)
+                            {
+                                PartEntity pe = parts[i];
+                                switch (i)
+                                {
+                                    case 0:
+                                        pe.Image = images[0];
+                                        break;
+                                    case 1:
+                                        pe.Image = images[2];
+                                        break;
+                                    case 2:
+                                        pe.Image = images[3];
+                                        break;
+                                    case 3:
+                                        pe.Image = images[7];
+                                        break;
+                                    case 4:
+                                        pe.Image = images[1];
+                                        break;
+                                    case 5:
+                                        pe.Image = images[4];
+                                        break;
+                                    case 6:
+                                        pe.Image = images[5];
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 7; i++)
+                            {
+                                PartEntity pe = parts[i];
+                                switch (i)
+                                {
+                                    case 0:
+                                        pe.Image = images[9];
+                                        break;
+                                    case 1:
+                                        pe.Image = images[11];
+                                        break;
+                                    case 2:
+                                        pe.Image = images[12];
+                                        break;
+                                    case 3:
+                                        pe.Image = images[16];
+                                        break;
+                                    case 4:
+                                        pe.Image = images[10];
+                                        break;
+                                    case 5:
+                                        pe.Image = images[13];
+                                        break;
+                                    case 6:
+                                        pe.Image = images[14];
+                                        break;
+                                }
+                            }
+                        }
+                        animFactor = 1 - (walkTicks - 6) * 0.1f;
+                        animFactor = (float) (Math.Pow(animFactor, 8) * Math.PI); // easing function
                         animFactor = (float) Math.Sin(animFactor) * 75;
-                        float offset = (int)direction < 5 ? animFactor : -animFactor;
+                        float offset = isright ? animFactor : -animFactor;
                         parts[3].offsetX = offset;
                         parts[0].offsetX = offset * 0.4f;
                         parts[1].offsetX = offset * 0.4f;
@@ -395,17 +519,19 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         {
                             level.playSound(Boxer.sounds[level.getRandomInteger(4)]);
                             if (target != null &&
-                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.4 * (width * width + (target.width + width) * (target.width + width)) &&
+                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width)) &&
                             target.y - y < height && target.y - y > -target.height)
                             {
                                 doHurtTarget(target);
                             }
                         }
-                    }else if(walkTicks == 11)
+                        else if(walkTicks < 8) direction = target.x - x > 0 ? Direction.Right : Direction.Left;
+                    }
+                    else if(walkTicks == 16)
                     {
                         animFactor = 0;
                         resetOffset();
-                        parts[3].Image = (int)direction < 5 ? images[3] : images[12];
+                        resetImages();
                         entityState = 0;
                         walkTicks = 0;
                     }
@@ -436,7 +562,11 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                 part.offsetX = 0;
                 part.offsetY = 0;
                 part.offsetZ = 0;
+                part.desiredAngle = 0;
             }
+        }
+        private void resetImages()
+        {
             if ((int)direction < 5)
             {
                 for (int i = 0; i < 7; i++)

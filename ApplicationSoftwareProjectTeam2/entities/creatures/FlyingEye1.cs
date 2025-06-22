@@ -47,12 +47,12 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 
         public FlyingEye1(GamePanel level) : base(level)
         {
-            cost = 3;
+            cost = 4;
             visualSize = 1.4f;
             width = 40;
             height = 40;
             weight = 4;
-            pushPower = 10;
+            pushPower = 20;
             Image = images[0];
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 60;
@@ -112,10 +112,33 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                             hadTarget = true;
                                         }
                                     }
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 250000)
+                                    if (level.getRandomInteger(3) == 0 && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 250000)
                                     {
                                         entityState = 1;
                                         walkTicks = 0;
+                                    }
+                                    if(entityState == 0)
+                                    {
+                                        int dir = (int)direction;
+                                            Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
+                                        if (targetVec.X > 0 ^ (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 250000)
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 0;
+                                            else if (targetVec.Z > 0.7071) dir = 1;
+                                            else if (targetVec.Z > -0.7071) dir = 2;
+                                            else if (targetVec.Z > -0.9659) dir = 3;
+                                            else dir = 4;
+                                        }
+                                        else
+                                        {
+                                            if (targetVec.Z > 0.9659) dir = 9;
+                                            else if (targetVec.Z > 0.7071) dir = 8;
+                                            else if (targetVec.Z > -0.7071) dir = 7;
+                                            else if (targetVec.Z > -0.9659) dir = 6;
+                                            else dir = 5;
+                                        }
+                                        direction = (Direction)dir;
+                                        
                                     }
                                 }
                             }
@@ -141,7 +164,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                     }
                     if (walkTicks == 10)
                     {
-                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, target.y + target.height - y - height, target.z - z));
+                        Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, target.y - y - height, target.z - z));
                         FlyingEyeShot shot = new FlyingEyeShot(level);
                         shot.Owner = this;
                         shot.attackDamage = finalAttackDamage * 0.06f;

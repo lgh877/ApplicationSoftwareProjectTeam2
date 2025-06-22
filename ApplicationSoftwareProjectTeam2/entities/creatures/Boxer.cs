@@ -59,7 +59,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
             maxHealth = 90;
             currentHealth = 90;
             finalMaxHealth = maxHealth;
-            attackDamage = 25;
+            attackDamage = 30;
             finalAttackDamage = attackDamage;
             moveSpeed = 3;
         }
@@ -186,7 +186,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                         {
                             level.playSound(sounds[level.getRandomInteger(4)]);
                             if (target != null &&
-                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.4 * (width * width + (target.width + width) * (target.width + width)) &&
+                            (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 0.5 * (width * width + (target.width + width) * (target.width + width)) &&
                             target.y - y < height && target.y - y > -target.height)
                             {
                                 doHurtTarget(target);

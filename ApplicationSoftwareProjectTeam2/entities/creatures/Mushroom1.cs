@@ -65,7 +65,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
 
         public Mushroom1(GamePanel level) : base(level)
         {
-            cost = 2;
+            cost = 3;
             visualSize = 2f;
             width = 40;
             height = 52;
@@ -214,7 +214,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             spore.z = z;
                             spore.deltaMovement = targetVec * distance;
                             spore.team = team;
-                            spore.scaleEntity((float) Math.Pow(1.2f,entityLevel));
+                            spore.scaleEntity((float)Math.Pow(1.2f, entityLevel));
                             level.addFreshEntity(spore);
                         }
                     }

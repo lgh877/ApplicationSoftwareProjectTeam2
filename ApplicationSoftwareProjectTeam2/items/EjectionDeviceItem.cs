@@ -22,6 +22,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         }
         public override void ApplyTo(LivingEntity unit)
         {
+            base.ApplyTo(unit);
             unit.hurtEvent += hurtOccur;
         }
         private void hurtOccur(object attacker, AttackEventArgs attackEventArgs)

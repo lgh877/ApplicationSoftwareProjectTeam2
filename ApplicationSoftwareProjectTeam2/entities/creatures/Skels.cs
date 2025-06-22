@@ -44,7 +44,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         public Skels(GamePanel level) : base(level)
         {
             cost = 2;
-            visualSize = 2f; width = 46; height = 54; weight = 8; pushPower = 10;
+            visualSize = 2f; width = 36; height = 54; weight = 8; pushPower = 10;
             Image = images[0];
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
             maxHealth = 75; currentHealth = 75; finalMaxHealth = maxHealth;
@@ -112,7 +112,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                             hadTarget = true;
                                         }
                                     }
-                                    if ((target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
+                                    if (level.getRandomInteger(2) == 0 && (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 160000)
                                     {
                                         entityState = 1;
                                         walkTicks = 0;
@@ -121,7 +121,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                                     {
                                         int dir = (int)direction;
                                         Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x, 0, target.z - z));
-                                        if (targetVec.X > 0)
+                                        if (targetVec.X > 0 ^ (target.x - x) * (target.x - x) + (target.z - z) * (target.z - z) < 90000)
                                         {
                                             if (targetVec.Z > 0.9659) dir = 0;
                                             else if (targetVec.Z > 0.7071) dir = 1;
@@ -189,14 +189,15 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
                             Image = (int)direction < 5 ? images[11] : images[16];
                             level.playSound(sounds[2]);
                             Vector3 targetVec = Vector3.Normalize(new Vector3(target.x - x,
-                                                                                (target.y - y) * 2f,
+                                                                                (target.y + target.height - y - height),
                                                                                 target.z - z));
-                            float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.y - y) * (target.y - y) + (target.z - z) * (target.z - z)) * 1.5f;
+                            float distance = (float)Math.Cbrt((target.x - x) * (target.x - x) + (target.y + target.height - y - height) * (target.y + target.height - y - height) + (target.z - z) * (target.z - z)) * 1.5f;
                             SkelsBone bone = new SkelsBone(level);
                             bone.Owner = this;
                             bone.attackDamage = finalAttackDamage; bone.pushPower = pushPower;
                             bone.x = x; bone.y = y + height; bone.z = z;
                             bone.deltaMovement = targetVec * distance;
+                            bone.deltaMovement.Y += distance * 0.05f;
                             bone.team = team;
                             bone.scaleEntity((float)Math.Pow(1.2f, entityLevel));
                             level.addFreshEntity(bone);

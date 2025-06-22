@@ -17,6 +17,7 @@ namespace ApplicationSoftwareProjectTeam2.items
         }
         public override void ApplyTo(LivingEntity unit)
         {
+            base.ApplyTo(unit);
             unit.attackEvent += attackOccur;
         }
         private void attackOccur(object attacker, AttackEventArgs attackEventArgs)
@@ -24,9 +25,10 @@ namespace ApplicationSoftwareProjectTeam2.items
             LivingEntity entity = (LivingEntity)attacker;
             GamePanel level = entity.level;
             if(level.getRandomInteger(4) != 0) return;
+            level.playSound(Explosion.sounds[level.getRandomInteger(2)]);
             Explosion exp = new Explosion(level);
-            exp.scaleEntity((entity.entityLevel + 1) * 0.33f);
-            exp.Owner = entity; exp.attackDamage = entity.finalAttackDamage;
+            exp.scaleEntity((entity.entityLevel + 1) * 0.5f);
+            exp.Owner = entity; exp.attackDamage = entity.finalAttackDamage * 1.2f;
             exp.x = attackEventArgs.Target.x; exp.y = attackEventArgs.Target.y; exp.z = attackEventArgs.Target.z - (float) Math.Cbrt(exp.width * 0.25f);
             exp.team = entity.team;
             level.addFreshEntity(exp);

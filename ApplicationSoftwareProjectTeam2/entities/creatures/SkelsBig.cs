@@ -53,13 +53,13 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         };
         public SkelsBig(GamePanel level) : base(level)
         {
-            cost = 3;
+            cost = 2;
             visualSize = 3f; width = 42; height = 78; weight = 16; pushPower = 30;
             Image = images[0];
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
-            maxHealth = 125; currentHealth = 125; finalMaxHealth = maxHealth;
+            maxHealth = 150; currentHealth = 150; finalMaxHealth = maxHealth;
             attackDamage = 20;finalAttackDamage = attackDamage;
-            moveSpeed = 4;
+            moveSpeed = 2;
         }
         public override EntityTypes getEntityType()
         {

@@ -22,12 +22,16 @@ namespace ApplicationSoftwareProjectTeam2.items
         }
         public override void ApplyTo(LivingEntity unit)
         {
-            unit.elasticForce *= 4;
+            base.ApplyTo(unit);
+            unit.elasticForce = Math.Max(unit.elasticForce * 6, -0.6f);
             unit.hurtEvent += hurtOccur;
             unit.landedEvent += (sender, e) =>
             {
-                GamePanel level = ((LivingEntity)sender).level;
-                level.playSound(sounds[level.getRandomInteger(3)]);
+                if (((LivingEntity)sender).deltaMovement.Y < -10)
+                {
+                    GamePanel level = ((LivingEntity)sender).level;
+                    level.playSound(sounds[level.getRandomInteger(3)]);
+                }
             };
         }
         private void hurtOccur(object attacker, AttackEventArgs attackEventArgs)

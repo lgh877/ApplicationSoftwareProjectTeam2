@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationSoftwareProjectTeam2.entities.eventArgs;
+using ApplicationSoftwareProjectTeam2.entities.items;
 using ApplicationSoftwareProjectTeam2.items;
 using ApplicationSoftwareProjectTeam2.resources.sounds;
 using static System.Net.Mime.MediaTypeNames;
@@ -25,9 +26,9 @@ namespace ApplicationSoftwareProjectTeam2.entities
         public event EventHandler deathEvent;
         public event EventHandler<AttackEventArgs> attackEvent, hurtEvent;
         public byte entityLevel = 0, cost;
-        public int deathTime = 0, maxDeathTime = 30, moveSpeed, entityState = 0, deckIndex, walkTicks, mana;
+        public int deathTime = 0, maxDeathTime = 30, entityState = 0, deckIndex, walkTicks, mana;
         public int weatherCode;
-        public float attackDamage, currentHealth, maxHealth, currentDamage;
+        public float attackDamage, currentHealth, maxHealth, currentDamage, moveSpeed;
         public float finalAttackDamage, finalMaxHealth;
         public Direction direction = Direction.Right;
         public bool hadTarget, isMoving, isActuallyMoving, hasLife, isPurchased, canBeDamaged = true;
@@ -49,15 +50,16 @@ namespace ApplicationSoftwareProjectTeam2.entities
         {
             base.scaleEntity(scale);
             finalMaxHealth *= scale * 1.4f; currentHealth = finalMaxHealth * 1.4f;
+            weight = (int)(weight * scale);
             attackDamage *= scale * 1.4f; finalAttackDamage = attackDamage;
-            pushPower = (int)(pushPower * scale); moveSpeed = (int)(moveSpeed * Math.Sqrt(scale));
+            pushPower = (int)(pushPower * scale); moveSpeed = (float)(moveSpeed * Math.Sqrt(scale));
         }
         public virtual EntityTypes getEntityType()
         {
             return EntityTypes.Nothing;
         }
 
-        public void move(int speed)
+        public void move(float speed)
         {
             switch (direction)
             {
@@ -162,7 +164,7 @@ namespace ApplicationSoftwareProjectTeam2.entities
             {
                 level.playSound(SoundCache.sell);
                 level.modifyGold(cost / 2);
-                level.createNumberEntity(cost / 2, (int) x, (int) y + 10, (int) z);
+                level.createNumberEntity(cost / 2, (int)x, (int)y + 10, (int)z);
                 level.valueTupleList[deckIndex] = level.valueTupleList[deckIndex] with { Item3 = false };
                 level.occupiedIndexCount--;
                 deckIndex = -1; // 인덱스 초기화
@@ -172,20 +174,20 @@ namespace ApplicationSoftwareProjectTeam2.entities
             }
             #endregion
             #region 조합 부분
-            if(entityLevel < 3)
+            if (entityLevel < 5)
                 foreach (var item in level.getAllEntities<LivingEntity>())
-            {
-                if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
-                    && 40 > Math.Abs(item.x - x) + Math.Abs(item.z - z))
                 {
-                    grabOccurred();
-                    item.entityLevel++;
-                    item.scaleEntity(1.2f);
-                    item.cost = (byte)(item.cost * 1.5);
-                    discard();
-                    break;
-                }
-            };
+                    if (!item.Equals(this) && getLivingEntityId() == item.getLivingEntityId() && entityLevel == item.entityLevel
+                        && 40 > Math.Abs(item.x - x) + Math.Abs(item.z - z))
+                    {
+                        grabOccurred();
+                        item.entityLevel++;
+                        item.scaleEntity(1.2f);
+                        item.cost = (byte)(item.cost * 1.5);
+                        discard();
+                        break;
+                    }
+                };
             #endregion
         }
         public void resetDeck(Object? sender, EventArgs e)

@@ -51,7 +51,7 @@ namespace ApplicationSoftwareProjectTeam2.entities.creatures
         };
         public Skulls(GamePanel level) : base(level)
         {
-            cost = 4;
+            cost = 3;
             visualSize = 2.5f; width = 57; height = 80; weight = 55; pushPower = 50;
             Image = images[0];
             direction = level.usualRandom.Next(2) == 0 ? Direction.Right : Direction.Left;
